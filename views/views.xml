@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="totem_proyect.list">
+      <field name="name">totem_proyect list</field>
+      <field name="model">totem_proyect.totem_proyect</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="totem_proyect.action_window">
+      <field name="name">totem_proyect window</field>
+      <field name="res_model">totem_proyect.totem_proyect</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="totem_proyect.action_server">
+      <field name="name">totem_proyect server</field>
+      <field name="model_id" ref="model_totem_proyect_totem_proyect"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="totem_proyect" id="totem_proyect.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="totem_proyect.menu_1" parent="totem_proyect.menu_root"/>
+    <menuitem name="Menu 2" id="totem_proyect.menu_2" parent="totem_proyect.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="totem_proyect.menu_1_list" parent="totem_proyect.menu_1"
+              action="totem_proyect.action_window"/>
+    <menuitem name="Server to list" id="totem_proyect" parent="totem_proyect.menu_2"
+              action="totem_proyect.action_server"/>
+    -->
+  </data>
+</odoo>
