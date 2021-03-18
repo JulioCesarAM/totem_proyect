@@ -1,0 +1,59 @@
+<odoo>
+
+    <!-- vista arbol eventos -->
+    <record model="ir.ui.view" id="view_id_tree">
+        <field name="name">event.totem.tree</field>
+        <field name="model">event.totem</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <tree string="event list">
+                <field name="name"/>
+
+
+            </tree>
+        </field>
+    </record>
+    <!-- vista formulario eventos -->
+    <record model="ir.ui.view" id="view_id_form">
+        <field name="name">event.totem.form</field>
+        <field name="model">event.totem</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <form string="event form">
+                <group colspan="4">
+
+                    <group colspan="2" col="2">
+                        <separator string="informacion personal" colspan="2"/>
+                        <field name="name" required="1"/>
+                        <field name="title" required="1"/>
+                        <field name="bannerImg" />
+                        <field name="footer" required="1" />
+                        <field name="qr"/>
+
+                    </group>
+
+                    <notebook colspan="4">
+                        <page name="Descripcion" string="Description">
+                            <field name="description" required="1"/>
+                        </page>
+                        <page name="image list" string="Imagenes slider">
+                            <field name="sliderImg" />
+
+                        </page>
+                    </notebook>
+
+
+                </group>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_events_totem">
+        <field name="name">events</field>
+        <field name="res_model">event.totem</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="test_one" name="eventList" parent="container" action="action_events_totem" />
+
+</odoo>

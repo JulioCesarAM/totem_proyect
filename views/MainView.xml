@@ -1,0 +1,8 @@
+<odoo>
+  <data>
+
+    <menuitem id="mainMenu" name="Insertar Evento" />
+    <menuitem id="container" name="List" parent="mainMenu" />
+
+  </data>
+</odoo>

@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_totem_proyect_totem_proyect,totem_proyect.totem_proyect,model_totem_proyect_totem_proyect,,1,0,0,0
+access_events_totem,totem_proyect,model_event_totem,,1,1,1,1
+access_slider_images_totem,slider,model_slider_totem,,1,1,1,1
