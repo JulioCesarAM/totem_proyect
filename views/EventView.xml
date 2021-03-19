@@ -13,6 +13,7 @@
             </tree>
         </field>
     </record>
+    
     <!-- vista formulario eventos -->
     <record model="ir.ui.view" id="view_id_form">
         <field name="name">event.totem.form</field>
