@@ -26,7 +26,7 @@
     'data': [
          'security/ir.model.access.csv',
         'views/MainView.xml',
-        'views/ClientView.xml',
+        'static/src/xml/ClientView.xml',
         'views/EventView.xml',
         'views/SliderView.xml'
         

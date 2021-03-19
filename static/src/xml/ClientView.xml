@@ -1,0 +1,17 @@
+<odoo>
+    <template id="eventView">
+    <script type="text/javascript" src="/totem_proyect/static/src/js/text.js"/>
+        <ul>
+            <li t-foreach="objects" t-as="object"> 
+            <t t-raw="object"/> 
+            </li> 
+            <button id="btn_id" >incremento</button> 
+            <div id="texto"></div>
+        </ul> 
+    </template> 
+    
+
+
+</odoo>
+        
+
