@@ -8,9 +8,13 @@ class TotemProyect(http.Controller):
 
      @http.route('/totem_proyect/totem_proyect/objects/', auth='public')
      def list(self, **kw):
-         return http.request.render('totem_proyect.listing', {
+
+
+         return http.request.render('totem_proyect.EventView', {
              'root': '/totem_proyect/totem_proyect',
-             'objects': http.request.env['totem_proyect.totem_proyect'].search([]),
+             'objects': http.request.env['totem_proyect.event.totem'].search([]),
+
+
          })
 
      @http.route('/totem_proyect/totem_proyect/objects/<model("totem_proyect.totem_proyect"):obj>/', auth='public')
