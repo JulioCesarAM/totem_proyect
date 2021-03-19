@@ -11,5 +11,7 @@ class Event(models.Model):
      description = fields.Text(string=_(''))
      footer = fields.Text(string=_(''))
      qr = fields.Text()
+
+     #https://www.odoo.com/documentation/14.0/reference/qweb.html
     
 

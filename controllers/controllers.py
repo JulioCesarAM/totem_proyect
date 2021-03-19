@@ -1,24 +1,22 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*- 
 from odoo import http
 
+
 class TotemProyect(http.Controller):
-     @http.route('/totem_proyect/totem_proyect/', auth='public')
-     def index(self, **kw):
-         return "primer test"
+    @http.route('/totem_proyect/totem_proyect/', auth='public')
+    def index(self, **kw):
+        return "primer test"
 
-     @http.route('/totem_proyect/totem_proyect/objects/', auth='public')
-     def list(self, **kw):
+    @http.route('/totem_proyect/totem_proyect/objects/', auth='public')
+    def list(self, **kw):
 
+        return http.request.render('totem_proyect.eventView', {
+            'root': '/totem_proyect/totem_proyect',
+            'objects': http.request.env['event.totem'].search_read([]),
+       })
 
-         return http.request.render('totem_proyect.EventView', {
-             'root': '/totem_proyect/totem_proyect',
-             'objects': http.request.env['totem_proyect.event.totem'].search([]),
-
-
-         })
-
-     @http.route('/totem_proyect/totem_proyect/objects/<model("totem_proyect.totem_proyect"):obj>/', auth='public')
-     def object(self, obj, **kw):
-         return http.request.render('totem_proyect.object', {
-             'object': obj
-         })
+    @http.route('/totem_proyect/totem_proyect/objects/<model("totem_proyect.totem_proyect"):obj>/', auth='public')
+    def object(self, obj, **kw):
+        return http.request.render('totem_proyect.object', {
+            'object': obj
+        })
