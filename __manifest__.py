@@ -26,13 +26,18 @@
     'data': [
         'security/ir.model.access.csv',
         'views/MainView.xml',
-        'static/src/xml/ClientView.xml',
         'views/EventView.xml',
-        'views/SliderView.xml'
-        
+        'views/SliderView.xml',
+        'views/MainClientView.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
+    'installable': True,
+    'auto_install': False,
+    'qweb': [
+        "static/src/xml/clientView.xml",
+    ],
+    'application': True,
 }
