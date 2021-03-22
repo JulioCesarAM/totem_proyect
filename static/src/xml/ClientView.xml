@@ -1,17 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <template id="eventView">
-    <script type="text/javascript" src="/totem_proyect/static/src/js/text.js"/>
-        <ul>
-            <li t-foreach="objects" t-as="object"> 
-            <t t-raw="object"/> 
-            </li> 
-            <button id="btn_id" >incremento</button> 
-            <div id="texto"></div>
-        </ul> 
-    </template> 
-    
+    <template id="assets" name="web_widget_assets" inherit_id="web.assets_frontend">
+		<xpath expr="." position="inside">
+		    <script type="text/javascript" src="/totem_proyect/static/src/js/boot.js"></script>
+		</xpath>
+	</template>
 
-
+    <template id="eventView" name="web_widget_assets">
+        <t t-call="web.layout"> 
+            <p>Prueba</p>
+        </t>
+    </template>
 </odoo>
         
 
