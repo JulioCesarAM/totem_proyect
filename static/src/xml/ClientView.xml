@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <template id="assets" name="web_widget_assets" inherit_id="web.assets_frontend">
-		<xpath expr="." position="inside">
-		    <script type="text/javascript" src="/totem_proyect/static/src/js/boot.js"></script>
-		</xpath>
-	</template>
-
-    <template id="eventView" name="web_widget_assets">
-        <t t-call="web.layout"> 
-            <p>Prueba</p>
-        </t>
-    </template>
-</odoo>
-        
-
+<template xml:space="preserve">
+    <t t-name="EventView">
+        <div>
+            <p><t t-esc="widget.event.name"/></p>
+            <p><t t-esc="widget.event.title"/></p>
+            <img src="/web/image/event.totem/2/bannerImg/"/>
+            <p/>
+            <t t-foreach="widget.event.sliderImg" t-as="i">
+                <t t-set="a" t-value="/web/image/event.totem/+', #'+i+', #'+/sliderImg/"/>
+                <t t-esc="a"/>
+            </t>
+            <p><t t-esc="widget.event.description"/></p>
+            <p><t t-esc="widget.event.footer"/></p>
+            <p><t t-esc="widget.event.qr"/></p>
+        </div>
+    </t>
+</template>

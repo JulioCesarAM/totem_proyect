@@ -4,6 +4,9 @@ odoo.define('totem_proyect.prueba', function (require) {
     var AbstractAction = require('web.AbstractAction');
     var core = require('web.core');
 
+    var QWeb = core.qweb;
+    var _t = core._t;
+
     var banners = AbstractAction.extend({
         events:{},
 
@@ -13,15 +16,19 @@ odoo.define('totem_proyect.prueba', function (require) {
             var def = this._rpc({
                 model: 'event.totem',
                 method: 'search_read',
-                args: [[],['description']],
             })
-            .then(res => {
+            .then(function (res) {
                 self.event = res[0];
-                self.$el.html(QWeb.render("eventView", {widget: self}))
+                console.log("objeto", self.event)
+                self.$el.html(QWeb.render("EventView", {widget: self}));
             });
-        }
+
+            return $.when(def, this._super.apply(this, arguments));
+        },
     });
 
-    core.action_registry.add('eventview', banners);
+    console.log("Fuera");
+
+    core.action_registry.add('event_view', banners);
     return banners;
 });
