@@ -12,6 +12,13 @@ class Event(models.Model):
     description = fields.Text(string=_(''))
     footer = fields.Text(string=_(''))
     qr = fields.Text()
+    #sliderImgTimer = fields.Integer(string='')
+    sliderImgTimer = fields.Float(compute='_compute_sliderImgTimer', string='')
+    
+    @api.depends('')
+    def _compute_sliderImgTimer(self):
+        self.sliderImgTimer=self.env['ir.config_parameter'].sudo().get_param('totem_proyect.totem_proyect_img_slider_control')
+        pass
 
 
 

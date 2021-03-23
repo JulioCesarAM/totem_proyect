@@ -3,3 +3,4 @@
 from . import Events
 from . import SliderImages
 from . import Themes
+from . import totem_project_res_config
