@@ -5,5 +5,3 @@ class image_slider(models.Model):
     name = fields.Text(string=_(''))
     image_rute = fields.Binary()
     event_id_fk = fields.Many2one(comodel_name='event.totem', string=_('Anuncio'))
-    
-    

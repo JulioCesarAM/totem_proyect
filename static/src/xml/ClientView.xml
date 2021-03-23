@@ -4,15 +4,16 @@
         <div>
             <p><t t-esc="widget.event.name"/></p>
             <p><t t-esc="widget.event.title"/></p>
-            <img src="/web/image/event.totem/2/bannerImg/"/>
+            <img t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/bannerImg/'}}"/>
             <p/>
-            <t t-foreach="widget.event.sliderImg" t-as="i">
-                <t t-set="a" t-value="/web/image/event.totem/+', #'+i+', #'+/sliderImg/"/>
-                <t t-esc="a"/>
-            </t>
+            <div id="slideshow">
+                <t t-foreach="widget.event.sliderImg" t-as="i">
+                    <img t-attf-src="{{'/web/image/slider.totem/' + i + '/image_rute'}}" style="width:300px;height:300px"/>
+                </t>
+            </div>
             <p><t t-esc="widget.event.description"/></p>
             <p><t t-esc="widget.event.footer"/></p>
-            <p><t t-esc="widget.event.qr"/></p>
+            <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.qr + '&amp;width=300&amp;height=300'}}"/>
         </div>
     </t>
 </template>
