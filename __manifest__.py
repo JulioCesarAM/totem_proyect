@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','website'],
+    'depends': ['base','base_setup','website'],
 
     # always loaded
     'data': [
@@ -29,6 +29,7 @@
         'views/EventView.xml',
         'views/SliderView.xml',
         'views/web_assets_backend.xml',
+        'views/ResConfigView.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
