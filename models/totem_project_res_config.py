@@ -1,21 +1,22 @@
-from odoo import fields,models,_,api
+from odoo import fields,models,_,api,exceptions
 class TotemConfigSettings(models.TransientModel):
     _inherit='res.config.settings'
-    #totem_proyect_img_slider_control = fields.Float(string=_(''), related="Event.sliderImgTimer")
-    totem_proyect_img_slider_control = fields.Float(string=_(''))
-    principal_slider_timer = fields.Float(string=_(''))
-    def set_values(self):
-        res = super(TotemConfigSettings,self).set_values()
-        self.env['ir.config_parameter'].set_param('totem_proyect.totem_proyect_img_slider_control',self.totem_proyect_img_slider_control)
-        return res
-    
-    @api.model
-    def get_values(self):
-        res = super(TotemConfigSettings,self).set_values()
-        ICPSudo = self.env['ir.config_parameter'].sudo()
-        controls=ICPSudo.get_param('totem_proyect.totem_proyect_img_slider_control')
-        res.update(
-            totem_proyect_img_slider_control=controls
-        )
-        return res
+    main_slider_control = fields.Float(string=_('main slider control'),related="company_id.mainSlider")
+    secundary_slider_control=fields.Float(string=_(''),related="company_id.secundarySlider")
+    description = fields.Text(string=_(''),related="company_id.description")
+    companyQr = fields.Text(string=_(''),related="company_id.companyQr")
+    @api.constrains('main_slider_control')
+    def _constrains_main_slider_control(self):
+        if self.main_slider_control<1:
+            raise ValidationError(_("el valor debe ser superior a uno"))
+        pass
 
+    @api.constrains('secundary_slider_control')
+    def _constrains_secundary_slider_control(self):
+        if self.secundary_slider_control<1:
+            raise ValidationError(_("el valor debe ser superior a uno"))
+        pass
+    
+   
+    
+   
