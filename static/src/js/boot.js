@@ -7,10 +7,26 @@ odoo.define('totem_proyect.prueba', function (require) {
     var QWeb = core.qweb;
     var _t = core._t;
 
-    var carrousel
 
     var banners = AbstractAction.extend({
-        events:{},
+        carrousel: null,
+        eventimeout: null,
+        i: 0,
+        allevents: {},
+        slideIndex: 0,
+        events:{
+            "click #siguiente": _.debounce(function() {
+                clearTimeout(this.carrousel);
+                clearTimeout(this.eventimeout);
+                this.next();
+            }, 200, true),
+
+            "click #atras": _.debounce(function() {
+                clearTimeout(this.carrousel);
+                clearTimeout(this.eventimeout);
+                this.back();
+            }, 200, true),
+        },
 
         start: function(){
             var self = this;
@@ -20,36 +36,59 @@ odoo.define('totem_proyect.prueba', function (require) {
                 method: 'search_read',
             })
             .then(function (res) {
-                var i = 0;
-                setInterval(function(){
-                    self.event = res[i];
-                    self.$el.html(QWeb.render("EventView", {widget: self}));
-                    self.intervals();
-                    i++;
-                    if(i>=res.length)
-                        i=0;
-                    setTimeout(function(){
-                        clearInterval(carrousel);
-                    },  12000);
-                },  12000);
+                self.i = 0;
+                self.allevents = res;
+                self.event = res[self.i];
+                self.$el.html(QWeb.render("EventView", {widget: self}));
+                setTimeout(() => {self.showslider();},0);
+                self.eventimeout = setTimeout(function(){
+                    clearTimeout(self.carrousel);
+                    self.next();
+                },  10000);
             });
 
             return $.when(def, this._super.apply(this, arguments));
         },
 
-        intervals: function(){
-            setTimeout(function(){
-                $("#slideshow img:gt(0)").hide();
-            }, 0);
-            carrousel = setInterval(function() {
-                $('#slideshow :first-child')
-                .fadeOut(0)
-                .next('img')
-                .fadeIn(1000)
-                .end()
-                .appendTo('#slideshow');
-            }, 3000);
-        }
+        showslider: function(){
+            var self = this;
+            var slides = $(".mySlides");
+            for (let iterator = 0; iterator < slides.length; iterator++)
+                slides[iterator].style.display = "none";
+            if (self.slideIndex >= slides.length) 
+                self.slideIndex = 0;
+            slides[self.slideIndex].style.display = "block";
+            self.slideIndex++;
+            self.carrousel = setTimeout(() => {self.showslider()}, 2000);
+        },
+
+        next: function(){
+            var self = this;
+            self.i++;
+            if(self.i >= self.allevents.length)
+                self.i=0;
+            self.event = self.allevents[self.i];
+            self.$el.html(QWeb.render("EventView", {widget: self}));
+            setTimeout(() => {self.showslider();},0);
+            self.eventimeout = setTimeout(function(){
+                clearTimeout(self.carrousel);
+                self.next();
+            },  10000);
+        },
+
+        back: function(){
+            var self = this;
+            self.i--;
+            if(self.i < 0)
+               self.i=self.allevents.length-1;
+            self.event = self.allevents[self.i];
+            self.$el.html(QWeb.render("EventView", {widget: self}));
+            setTimeout(() => {self.showslider();},0);
+            self.eventimeout = setTimeout(function(){
+                clearTimeout(self.carrousel);
+                self.next();
+            },  10000);
+        },
     });
 
     core.action_registry.add('event_view', banners);

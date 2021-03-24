@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template xml:space="preserve">
     <t t-name="EventView">
-        <div>
-            <p><t t-esc="widget.event.name"/></p>
-            <p><t t-esc="widget.event.title"/></p>
-            <img t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/bannerImg/300x300'}}"/>
-            <p/>
-            <div id="slideshow">
-                <t t-foreach="widget.event.sliderImg" t-as="i">
-                    <img t-attf-src="{{'/web/image/slider.totem/' + i + '/image_rute'}}" style="width:300px;height:300px"/>
-                </t>
+        <div id="bodyPage">
+            <div id="atras" class="column"></div>
+            <div id="content" class="column">
+                <div id="titulo"><t t-esc="widget.event.title"/></div>
+                <div id="banner">
+                    <img id="imgbanner" t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/bannerImg/300x300'}}"/>
+                    <img id="eventBarcode" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.qr + '&amp;width=120&amp;height=120'}}"/>
+                </div>
+                <div id="resto">
+                    <div id="description"><t t-esc="widget.event.description"/></div>
+                    <div class="slideshow-container">
+                        <t t-foreach="widget.event.sliderImg" t-as="i">
+                            <div class="mySlides">
+                                <img t-attf-src="{{'/web/image/slider.totem/' + i + '/image_rute'}}" style="width:300px;height:300px"/>
+                            </div>
+                        </t>
+                    </div>
+                    <p><t t-esc="widget.event.footer"/></p>
+                </div>
             </div>
-            <p><t t-esc="widget.event.description"/></p>
-            <p><t t-esc="widget.event.footer"/></p>
-            <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.qr + '&amp;width=300&amp;height=300'}}"/>
+            <div id="siguiente" class="column"></div>
         </div>
     </t>
 </template>
