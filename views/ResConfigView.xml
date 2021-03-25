@@ -10,9 +10,9 @@
             <div class="app_settings_block" data-string="Totem_proyect" string="Totem" data-key="totem_proyect">
                 <div class="col-12 col-lg-6 o_setting_box">
                     <div class="o_setting_right_pane">
-                        <span class="o_form_label">main slider view</span>
+                        <span class="o_form_label">Control Eventos</span>
                         <div class="text-muted">
-                           		configure main slider
+                           		tiempo que tarda en cambiar los eventos en segundos 
                         </div>
                     </div>
                     <div class="o_setting_left_pane">
@@ -23,9 +23,9 @@
 
                 <div class="col-12 col-lg-6 o_setting_box">
                     <div class="o_setting_right_pane">
-                        <span class="o_form_label">secundary slider view</span>
+                        <span class="o_form_label">Control slider imagenes</span>
                         <div class="text-muted">
-                           		configure second slider
+                           		introducir valor en segundos de la velocidad del slider
                         </div>
                     </div>
                     <div class="o_setting_left_pane">
@@ -36,9 +36,9 @@
 
                 <div class="col-12 col-lg-6 o_setting_box" title="Set GPS required for check.">
                     <div class="o_setting_right_pane">
-                        <span class="o_form_label">Description</span>
+                        <span class="o_form_label">Descripcion</span>
                         <div class="text-muted">
-                                the description of the company
+                                Descripcion de la compañia...
                         </div>
                     </div>
                     <div class="o_setting_left_pane">
@@ -51,7 +51,7 @@
                     <div class="o_setting_right_pane">
                         <span class="o_form_label">QR</span>
                         <div class="text-muted">
-                                qr direction
+                                enlace para generar direccion qr
                         </div>
                     </div>
                     <div class="o_setting_left_pane">
@@ -74,5 +74,5 @@
 </record>
 
 
-<menuitem id="config_settings" name="Configuration" parent="container" action="action_totem_settings"/>
+<menuitem id="config_settings" name="Configuration" parent="mainMenu" action="action_totem_settings"/>
 </odoo>
