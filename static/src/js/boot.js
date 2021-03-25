@@ -14,6 +14,7 @@ odoo.define('totem_proyect.prueba', function (require) {
         i: 0,
         allevents: {},
         slideIndex: 0,
+        configuration: {},
         events:{
             "click #siguiente": _.debounce(function() {
                 clearTimeout(this.carrousel);
@@ -39,15 +40,22 @@ odoo.define('totem_proyect.prueba', function (require) {
                 self.i = 0;
                 self.allevents = res;
                 self.event = res[self.i];
+                var dur = self._rpc({
+                    model: 'res.company',
+                    method: 'search_read',
+                    args: [[],['mainSlider', 'secundarySlider', 'description', 'companyQr']],
+                })
+                return dur
+            })
+            .then(function (res){
+                self.configuration = res[0];
                 self.$el.html(QWeb.render("EventView", {widget: self}));
                 setTimeout(() => {self.showslider();},0);
                 self.eventimeout = setTimeout(function(){
                     clearTimeout(self.carrousel);
                     self.next();
-                },  10000);
+                },  Number(self.configuration.mainSlider*1000));
             });
-
-            return $.when(def, this._super.apply(this, arguments));
         },
 
         showslider: function(){
@@ -59,7 +67,7 @@ odoo.define('totem_proyect.prueba', function (require) {
                 self.slideIndex = 0;
             slides[self.slideIndex].style.display = "block";
             self.slideIndex++;
-            self.carrousel = setTimeout(() => {self.showslider()}, 2000);
+            self.carrousel = setTimeout(() => {self.showslider()}, Number(self.configuration.secundarySlider*1000));
         },
 
         next: function(){
@@ -73,7 +81,7 @@ odoo.define('totem_proyect.prueba', function (require) {
             self.eventimeout = setTimeout(function(){
                 clearTimeout(self.carrousel);
                 self.next();
-            },  10000);
+            },  Number(self.configuration.mainSlider*1000));
         },
 
         back: function(){
@@ -87,7 +95,7 @@ odoo.define('totem_proyect.prueba', function (require) {
             self.eventimeout = setTimeout(function(){
                 clearTimeout(self.carrousel);
                 self.next();
-            },  10000);
+            },  Number(self.configuration.mainSlider*1000));
         },
     });
 
