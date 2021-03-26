@@ -1,0 +1,24 @@
+model update:
+ 1 usuario muchos eventos
+ 1 evento muchos usuarios
+
+ campos extra eventos:
+	fecha-inicio
+	fecha-fin
+	hora inicio*
+	hora fin*
+	enum-tipo-banner-pricipal(img,video,rss) !audio
+
+	@write@search?
+	(
+		video ?
+		imagen?
+		rss?
+	)
+
+ campos extra configuracion:
+	tiempo-refresco
+
+ campos usuario
+	id de usuario
+	lista de eventos que pertenecen al usuario
