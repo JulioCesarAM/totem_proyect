@@ -5,7 +5,7 @@ class TotemConfigSettings(models.TransientModel):
     secundary_slider_control=fields.Float(string=_(''),related="company_id.secundarySlider",readonly=False)
     description = fields.Text(string=_(''),related="company_id.description",readonly=False)
     companyQr = fields.Text(string=_(''),related="company_id.companyQr",readonly=False)
-    prueba = fields.Integer(string='',related="company_id.prueba",readonly=False)
+    refreshTime = fields.Integer(string='',related="company_id.refreshTime",readonly=False)
     @api.constrains('main_slider_control')  
     def _constrains_main_slider_control(self):
         if self.main_slider_control<1:

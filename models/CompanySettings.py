@@ -5,7 +5,7 @@ class mainConfigValues(models.Model):
     secundarySlider = fields.Float()
     description = fields.Text()
     companyQr = fields.Text()
-    prueba = fields.Integer(string='')
+    refreshTime = fields.Integer(string='')
 
 
 
