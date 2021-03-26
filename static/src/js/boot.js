@@ -60,14 +60,21 @@ odoo.define('totem_proyect.prueba', function (require) {
 
         showslider: function(){
             var self = this;
-            var slides = $(".mySlides");
-            for (let iterator = 0; iterator < slides.length; iterator++)
+            let car = $(".mySlides")
+            if(car.length > 1){
+                for( let iterator=1; iterator<car.length; iterator++)
+                    car[iterator].classList.remove("active");
+                self.carrousel = $(".slideshow-container").carousel({
+                    interval:Number(self.configuration.secundarySlider*1000)
+                });
+            }
+            /*for (let iterator = 0; iterator < slides.length; iterator++)
                 slides[iterator].style.display = "none";
             if (self.slideIndex >= slides.length) 
                 self.slideIndex = 0;
             slides[self.slideIndex].style.display = "block";
             self.slideIndex++;
-            self.carrousel = setTimeout(() => {self.showslider()}, Number(self.configuration.secundarySlider*1000));
+            self.carrousel = setTimeout(() => {self.showslider()}, Number(self.configuration.secundarySlider*1000));*/
         },
 
         next: function(){
