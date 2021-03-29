@@ -61,6 +61,9 @@
     
     <menuitem id="descriptionTest" name="Visualizar" parent="mainMenu" action="abrir_description"/>
 
+     
+
     <menuitem id="eventList" name="Insertar Eventos" parent="mainMenu" action="action_events_totem" />
+   
 
 </odoo>

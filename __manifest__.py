@@ -29,7 +29,8 @@
         'views/EventView.xml',
         'views/SliderView.xml',
         'views/web_assets_backend.xml',
-        'views/ResConfigView.xml'
+        'views/ResConfigView.xml',
+        
     ],
     # only loaded in demonstration mode
     'demo': [
@@ -38,7 +39,7 @@
     'installable': True,
     'auto_install': False,
     'qweb': [
-        "static/src/xml/ClientView.xml",
+        'static/src/xml/ClientView.xml',  
     ],
     'application': True,
 }

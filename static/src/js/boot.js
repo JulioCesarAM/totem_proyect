@@ -37,6 +37,7 @@ odoo.define('totem_proyect.prueba', function (require) {
                 method: 'search_read',
             })
             .then(function (res) {
+                console.log("rpc principal"+res)
                 self.i = 0;
                 self.allevents = res;
                 self.event = res[self.i];
@@ -48,6 +49,7 @@ odoo.define('totem_proyect.prueba', function (require) {
                 return dur
             })
             .then(function (res){
+                console.log(res)
                 self.configuration = res[0];
                 self.$el.html(QWeb.render("EventView", {widget: self}));
                 setTimeout(() => {self.showslider();},0);
