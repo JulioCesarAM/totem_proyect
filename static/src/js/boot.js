@@ -33,11 +33,10 @@ odoo.define('totem_proyect.prueba', function (require) {
             var self = this;
 
             var def = this._rpc({
-                model: 'event.totem',
+                model: 'event.t',
                 method: 'search_read',
             })
             .then(function (res) {
-                console.log("rpc principal"+res)
                 self.i = 0;
                 self.allevents = res;
                 self.event = res[self.i];
@@ -46,17 +45,25 @@ odoo.define('totem_proyect.prueba', function (require) {
                     method: 'search_read',
                     args: [[],['mainSlider', 'secundarySlider', 'description', 'companyQr']],
                 })
-                return dur
+                if(res == null)
+                    return "No hay eventos";
+                else
+                    return dur
             })
             .then(function (res){
-                console.log(res)
-                self.configuration = res[0];
-                self.$el.html(QWeb.render("EventView", {widget: self}));
-                setTimeout(() => {self.showslider();},0);
-                self.eventimeout = setTimeout(function(){
-                    clearTimeout(self.carrousel);
-                    self.next();
-                },  Number(self.configuration.mainSlider*1000));
+                if(res != "No hay eventos"){
+                    console.log("Entró");
+                    self.configuration = res[0];
+                    self.$el.html(QWeb.render("EventView", {widget: self}));
+                    setTimeout(() => {self.showslider();},0);
+                    self.eventimeout = setTimeout(function(){
+                        clearTimeout(self.carrousel);
+                        self.next();
+                    },  Number(self.configuration.mainSlider*1000));
+                }
+                else{
+                    alert(res);
+                }
             });
         },
 
