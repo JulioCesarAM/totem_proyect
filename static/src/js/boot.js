@@ -33,7 +33,7 @@ odoo.define('totem_proyect.prueba', function (require) {
             var self = this;
 
             var def = this._rpc({
-                model: 'event.t',
+                model: 'event.totem',
                 method: 'search_read',
             })
             .then(function (res) {
