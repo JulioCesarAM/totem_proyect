@@ -9,14 +9,20 @@ class TotemConfigSettings(models.TransientModel):
     @api.constrains('main_slider_control')  
     def _constrains_main_slider_control(self):
         if self.main_slider_control<1:
-            raise ValidationError(_("el valor debe ser superior a uno"))
+            raise exceptions.ValidationError(_("el valor debe ser superior a uno"))
         pass
 
     @api.constrains('secundary_slider_control')
     def _constrains_secundary_slider_control(self):
         if self.secundary_slider_control<1:
-            raise ValidationError(_("el valor debe ser superior a uno"))
+            raise exceptions.ValidationError(_("el valor debe ser superior a uno"))
         pass
+    @api.constrains('description')
+    def _constrains_description(self):
+        if len(self.description) > 118:
+            raise exceptions.ValidationError(_("limite de caracteres 118")) 
+        pass
+       
     
    
     
