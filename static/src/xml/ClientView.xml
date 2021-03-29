@@ -7,7 +7,7 @@
             </div>
             <div id="content" class="column">
                 <div id="banner">
-                    <img id="imgbanner" t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/bannerImg/864x864'}}"/>
+                    <img id="imgbanner" t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/bannerImg'}}" style="width:864px;height:864px"/>
                     <img id="eventBarcode" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.qr + '&amp;width=120&amp;height=120'}}"/>
                 </div>
                 <div id="resto">

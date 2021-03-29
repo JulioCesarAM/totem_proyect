@@ -37,15 +37,18 @@ odoo.define('totem_proyect.prueba', function (require) {
                 method: 'search_read',
             })
             .then(function (res) {
-                self.i = 0;
+                clearTimeout(self.carrousel);
+                clearTimeout(self.eventimeout);
                 self.allevents = res;
+                if(self.i > res.length-1) // i = 0 si sobrepasa el numero de anuncios por eliminación
+                    self.i = 0;
                 self.event = res[self.i];
                 var dur = self._rpc({
                     model: 'res.company',
                     method: 'search_read',
-                    args: [[],['mainSlider', 'secundarySlider', 'description', 'companyQr']],
+                    args: [[],['mainSlider', 'secundarySlider', 'description', 'companyQr', 'refreshTime']],
                 })
-                if(self.event == undefined)
+                if(res.length == 0)
                     return "No hay eventos";
                 else
                     return dur
@@ -54,6 +57,7 @@ odoo.define('totem_proyect.prueba', function (require) {
                 if(res != "No hay eventos"){
                     self.configuration = res[0];
                     self.$el.html(QWeb.render("EventView", {widget: self}));
+                    console.log(self.i)
                     setTimeout(() => {self.showslider();},0);
                     self.eventimeout = setTimeout(function(){
                         clearTimeout(self.carrousel);
@@ -63,6 +67,7 @@ odoo.define('totem_proyect.prueba', function (require) {
                 else{
                     alert(res);
                 }
+                self.backup(Number(self.configuration.refreshTime*60*1000))
             });
         },
 
@@ -76,20 +81,14 @@ odoo.define('totem_proyect.prueba', function (require) {
                     interval:Number(self.configuration.secundarySlider*1000)
                 });
             }
-            /*for (let iterator = 0; iterator < slides.length; iterator++)
-                slides[iterator].style.display = "none";
-            if (self.slideIndex >= slides.length) 
-                self.slideIndex = 0;
-            slides[self.slideIndex].style.display = "block";
-            self.slideIndex++;
-            self.carrousel = setTimeout(() => {self.showslider()}, Number(self.configuration.secundarySlider*1000));*/
         },
 
         next: function(){
             var self = this;
             self.i++;
             if(self.i >= self.allevents.length)
-                self.i=0;
+            self.i=0;
+            console.log(self.i)
             self.event = self.allevents[self.i];
             self.$el.html(QWeb.render("EventView", {widget: self}));
             setTimeout(() => {self.showslider();},0);
@@ -111,6 +110,11 @@ odoo.define('totem_proyect.prueba', function (require) {
                 clearTimeout(self.carrousel);
                 self.next();
             },  Number(self.configuration.mainSlider*1000));
+        },
+
+        backup: function(tasa_refresco){
+            var self = this;
+            setTimeout(() => {self.start()}, tasa_refresco);
         },
     });
 
