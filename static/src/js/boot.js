@@ -45,14 +45,13 @@ odoo.define('totem_proyect.prueba', function (require) {
                     method: 'search_read',
                     args: [[],['mainSlider', 'secundarySlider', 'description', 'companyQr']],
                 })
-                if(res == null)
+                if(self.event == undefined)
                     return "No hay eventos";
                 else
                     return dur
             })
             .then(function (res){
                 if(res != "No hay eventos"){
-                    console.log("Entró");
                     self.configuration = res[0];
                     self.$el.html(QWeb.render("EventView", {widget: self}));
                     setTimeout(() => {self.showslider();},0);
