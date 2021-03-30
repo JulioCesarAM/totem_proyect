@@ -24,18 +24,22 @@
                 <group colspan="4">
 
                     <group colspan="2" col="2">
-                        <separator string="informacion personal" colspan="2"/>
-                        <field name="title" required="1"/>
-                        <field name="bannerImg" required="1" />
-                        <field name="qr" required="1"/>
+                        <separator string="Informacion del producto/evento" colspan="2"/>
+                        <field name="title" required="1" string="Titulo"/>
+                        <field name="bannerPrincipalSelector" required="1" string="Selector contenido del banner principal"/>
+                        <t t-esc="bannerPrincipalSelector"/>
+                        <field name="bannerImg"  attrs="{'invisible':[('bannerPrincipalSelector','!=','img')]}" string="Insertar imagen"/>
+                        <field name="videoField"  attrs="{'invisible':[('bannerPrincipalSelector','!=','vid')]}" string="Insertar video"/>
+                        <field name="urlVid"  attrs="{'invisible':[('bannerPrincipalSelector','!=','lvid')]}" string="Insertar url video"/>
+                        <field name="qr" required="1" string = "Codigo QR"/>
 
                     </group>
 
                     <notebook colspan="4">
-                        <page name="Descripcion" string="Description" required="1">
+                        <page name="Descripcion" string="Descripcion" required="1">
                             <field name="description" required="1"/>
                         </page>
-                        <page name="image list" string="Imagenes slider" required="1">
+                        <page name="image list" string="Slider de imagenes" required="1">
                             <field name="sliderImg" />
 
                         </page>
