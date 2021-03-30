@@ -57,7 +57,6 @@ odoo.define('totem_proyect.prueba', function (require) {
                 if(res != "No hay eventos"){
                     self.configuration = res[0];
                     self.$el.html(QWeb.render("EventView", {widget: self}));
-                    console.log(self.i)
                     setTimeout(() => {self.showslider();},0);
                     self.eventimeout = setTimeout(function(){
                         clearTimeout(self.carrousel);
@@ -87,9 +86,9 @@ odoo.define('totem_proyect.prueba', function (require) {
             var self = this;
             self.i++;
             if(self.i >= self.allevents.length)
-            self.i=0;
-            console.log(self.i)
+                self.i=0;
             self.event = self.allevents[self.i];
+            self.comprobarEvento(true)
             self.$el.html(QWeb.render("EventView", {widget: self}));
             setTimeout(() => {self.showslider();},0);
             self.eventimeout = setTimeout(function(){
@@ -104,12 +103,30 @@ odoo.define('totem_proyect.prueba', function (require) {
             if(self.i < 0)
                self.i=self.allevents.length-1;
             self.event = self.allevents[self.i];
+            self.comprobarEvento(false)
             self.$el.html(QWeb.render("EventView", {widget: self}));
             setTimeout(() => {self.showslider();},0);
             self.eventimeout = setTimeout(function(){
                 clearTimeout(self.carrousel);
                 self.next();
-            },  Number(self.configuration.mainSlider*1000));
+            },  Number(self.configuration.mainSlider*1000))
+        },
+
+        comprobarEvento: function(nb){ // Elimina evento del array allevents
+            var self = this;
+            fetch(`/web/image/event.totem/${self.event.id}/bannerImg`)
+                .then(response => {
+                    if(!response.ok){
+                        if(nb){
+                            self.allevents.splice(self.allevents.indexOf(self.event), 1);
+                            self.next();
+                        }
+                        else{
+                            self.allevents.splice(self.allevents.indexOf(self.event), 1);
+                            self.back();
+                        }
+                    }
+                });
         },
 
         backup: function(tasa_refresco){
