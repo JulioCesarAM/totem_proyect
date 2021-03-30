@@ -10,6 +10,26 @@ class Event(models.Model):
     sliderImg = fields.One2many('slider.totem', 'event_id_fk', string=_(''))
     description = fields.Text(string=_(''))
     qr = fields.Text()
+    bannerPrincipalSelector = fields.Selection([
+        ('imagen', 'img'),
+        ('video', 'vid')
+        #('rss_video', 'rssv'),
+        #('rss_datos', 'rssd'),
+    ], string=_(''))
+    audioField = fields.Binary(string='')
+    videoField = fields.Binary(string='')
+    #RSS video
+    #RSS datos
+    @api.multi
+    def write(self, vals):
+        if self.bannerPrincipalSelector=='img':
+            self.videoField = False
+        elif self.bannerPrincipalSelector=="vid":
+            self.bannerImg = False
+         
+        return super().write(vals)
+  
+
     @api.constrains('description')
     def _constrains_description(self):
         if len(self.description) > 461:
