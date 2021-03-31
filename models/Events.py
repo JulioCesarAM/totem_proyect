@@ -21,45 +21,24 @@ class Event(models.Model):
     audioField = fields.Binary(string=_(''))
     videoField = fields.Binary(string=_(''))
     urlVid = fields.Text(string=_(''))
+    fechaInicio = fields.Datetime(string=_(''))
+    fechaFin = fields.Datetime(string=_(''))
     #RSS video
     #RSS datos
+
+    @api.multi
     def write(self, vals):
-        #records = self.env['event.totem'].write({
-         #   'description' : 'holita'
-
-        #})
-        #_logger.info("500 self = :" + str(self.description))
-        _logger.info("%s 500",vals)
-    
-        #self.write({
-        #    'description' : 'hola'
-        #})
-      
-        if vals['bannerPrincipalSelector']=='img':
-            vals['description']="imagen"
-        else
-            vals['description']="nada"
-
-        record = super(Event,self).write(vals)
-        _logger.info("500 " + str(vals))
-        #_logger.info("%s 500",record)
-        #return record
-        # va 
-        return record
-
-        #if record['bannerPrincipalSelector']=='img':
-            #record['videoField']=False
-            #record['urlVid']=False
-        #elif record['bannerPrincipalSelector']=="vid":
-            #record['bannerImg']=False
-            #record['urlVid']=False
-        #elif record['bannerPrincipalSelector']=="lvid":
-            #record['bannerImg']=False
-            #record['videoField']=False
-        #print("entro")
-
-
-  
+        if 'bannerPrincipalSelector' in vals.keys():
+            if vals['bannerPrincipalSelector']=='img':
+                vals['videoField']=False
+                vals['urlVid']=False
+            elif vals['bannerPrincipalSelector']=="vid":
+                vals['bannerImg']=False
+                vals['urlVid']=False
+            elif vals['bannerPrincipalSelector']=="lvid":
+                vals['bannerImg']=False
+                vals['videoField']=False
+        return super(Event,self).write(vals)
 
     @api.constrains('description')
     def _constrains_description(self):

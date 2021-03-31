@@ -13,7 +13,7 @@
             </tree>
         </field>
     </record>
-    
+
     <!-- vista formulario eventos -->
     <record model="ir.ui.view" id="view_id_form">
         <field name="name">event.totem.form</field>
@@ -23,15 +23,16 @@
             <form string="event form">
                 <group colspan="4">
 
-                    <group colspan="2" col="2">
+                    <group colspan="4" col="2">
                         <separator string="Informacion del producto/evento" colspan="2"/>
                         <field name="title" required="1" string="Titulo"/>
                         <field name="bannerPrincipalSelector" required="1" string="Selector contenido del banner principal"/>
-                        <t t-esc="bannerPrincipalSelector"/>
-                        <field name="bannerImg"  attrs="{'invisible':[('bannerPrincipalSelector','!=','img')]}" string="Insertar imagen"/>
-                        <field name="videoField"  attrs="{'invisible':[('bannerPrincipalSelector','!=','vid')]}" string="Insertar video"/>
-                        <field name="urlVid"  attrs="{'invisible':[('bannerPrincipalSelector','!=','lvid')]}" string="Insertar url video"/>
+                        <field name="bannerImg" attrs="{'invisible':[('bannerPrincipalSelector','!=','img')]}" string="Insertar imagen"/>
+                        <field name="videoField" attrs="{'invisible':[('bannerPrincipalSelector','!=','vid')]}" string="Insertar video"/>
+                        <field name="urlVid" attrs="{'invisible':[('bannerPrincipalSelector','!=','lvid')]}" string="Insertar url video"/>
                         <field name="qr" required="1" string = "Codigo QR"/>
+                        <field name="fechaInicio" string='Fecha inicio' />
+                        <field name="fechaFin" string='Fecha inicio'  />
 
                     </group>
 
@@ -62,12 +63,12 @@
         <field name="tag">event_view</field>
         <field name="target">fullscreen</field>
     </record>
-    
+
     <menuitem id="descriptionTest" name="Visualizar" parent="mainMenu" action="abrir_description"/>
 
-     
+
 
     <menuitem id="eventList" name="Insertar Eventos" parent="mainMenu" action="action_events_totem" />
-   
+
 
 </odoo>
