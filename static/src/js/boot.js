@@ -41,8 +41,9 @@ odoo.define('totem_proyect.prueba', function (require) {
                 clearTimeout(self.eventimeout);
                 self.allevents = res;
                 if(self.i > res.length-1) // i = 0 si sobrepasa el numero de anuncios por eliminación
-                    self.i = 0;
+                self.i = 0;
                 self.event = res[self.i];
+                console.log(self.event);
                 var dur = self._rpc({
                     model: 'res.company',
                     method: 'search_read',
