@@ -31,9 +31,9 @@ class Event(models.Model):
     def _onchange_(self):
         if not re.search('/embed/',self.urlVid):
             self.urlVid = self.urlVid[:24] + 'embed/' + self.urlVid[24:]
+        if re.search('/watch\?v\=',self.urlVid):
+            self.urlVid = self.urlVid.replace("/watch?v=","/")
         self.urlVidId = self.urlVid[30:]
-        _logger.info('500: ' + str(self.urlVidId))
-        _logger.info('500: ' + str(self.urlVid))
         pass
 
     @api.multi
