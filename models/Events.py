@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, _,exceptions
-import logging
+import logging, re
 
 _logger=logging.getLogger(__name__)
 class Event(models.Model):
@@ -25,6 +25,16 @@ class Event(models.Model):
     fechaFin = fields.Datetime(string=_(''))
     #RSS video
     #RSS datos
+    urlVidId = fields.Text(string=_(''))
+
+    @api.onchange('urlVid', 'urlVidId')
+    def _onchange_(self):
+        if not re.search('/embed/',self.urlVid):
+            self.urlVid = self.urlVid[:24] + 'embed/' + self.urlVid[24:]
+        self.urlVidId = self.urlVid[30:]
+        _logger.info('500: ' + str(self.urlVidId))
+        _logger.info('500: ' + str(self.urlVid))
+        pass
 
     @api.multi
     def write(self, vals):

@@ -32,7 +32,8 @@
                         <field name="urlVid" attrs="{'invisible':[('bannerPrincipalSelector','!=','lvid')]}" string="Insertar url video"/>
                         <field name="qr" required="1" string = "Codigo QR"/>
                         <field name="fechaInicio" string='Fecha inicio' />
-                        <field name="fechaFin" string='Fecha inicio'  />
+                        <field name="fechaFin" string='Fecha inicio' />
+                        <field name="urlVidId" attrs="{'invisible':[('bannerPrincipalSelector','!=','Nunca existira')]}"/>
 
                     </group>
 
