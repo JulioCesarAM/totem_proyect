@@ -1,0 +1,20 @@
+<odoo>
+    <record model="ir.ui.view" id="view_id_tree_pantalla">
+        <field name="name">pantallas.totem.tree</field>
+        <field name="model">pantallas.totem</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <tree string="event list">
+                <field name="name"/>
+                
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_events_pantalla">
+        <field name="name">ipantallas.totem.img</field>
+        <field name="res_model">pantallas.totem</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="test_three" name="pantalla" parent="mainMenu" action="action_events_pantalla" />
+</odoo>

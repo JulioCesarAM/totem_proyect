@@ -23,6 +23,9 @@ class Event(models.Model):
     urlVid = fields.Text(string=_(''))
     fechaInicio = fields.Datetime(string=_(''))
     fechaFin = fields.Datetime(string=_(''))
+    urlWeb = fields.Text(string='')
+   
+    
     #RSS video
     #RSS datos
     urlVidId = fields.Text(string=_(''))
