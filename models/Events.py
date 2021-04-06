@@ -23,9 +23,7 @@ class Event(models.Model):
     urlVid = fields.Text(string=_(''))
     fechaInicio = fields.Datetime(string=_(''))
     fechaFin = fields.Datetime(string=_(''))
-    urlWeb = fields.Text(string='')
-   
-    
+    urlWeb = fields.Text(string=_(''))
     #RSS video
     #RSS datos
     urlVidId = fields.Text(string=_(''))
@@ -51,6 +49,9 @@ class Event(models.Model):
             elif vals['bannerPrincipalSelector']=="lvid":
                 vals['bannerImg']=False
                 vals['videoField']=False
+
+            if vals['qr'] in vals.keys() and vals['urlWeb'] not in vals.keys():
+                vals['urlWeb']=vals['qr']
         return super(Event,self).write(vals)
 
     @api.constrains('description')
