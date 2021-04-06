@@ -15,6 +15,7 @@ odoo.define('totem_proyect.prueba', function (require) {
         allevents: {},
         slideIndex: 0,
         configuration: {},
+        event: null,
         events:{
             "click #siguiente": _.debounce(function() {
                 clearTimeout(this.carrousel);
@@ -26,6 +27,15 @@ odoo.define('totem_proyect.prueba', function (require) {
                 clearTimeout(this.carrousel);
                 clearTimeout(this.eventimeout);
                 this.back();
+            }, 200, true),
+
+            "click #banner": _.debounce(function() {
+                var newWindow = open("https://www.youtube.com/", "Enlace", "width=100%,height=100%")
+                newWindow.resizeTo(1080,1920)
+                newWindow.focus();
+                setTimeout( function() {
+                    newWindow.close();
+                }, 10*1000);
             }, 200, true),
         },
 

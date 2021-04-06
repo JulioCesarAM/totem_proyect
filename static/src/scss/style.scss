@@ -56,6 +56,10 @@
     height: 864px;
 }
 
+#videobanner {
+    pointer-events: none;
+}
+
 #imgbanner{
     width: 100%;
     position: absolute;
