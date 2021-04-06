@@ -6,6 +6,7 @@ class mainConfigValues(models.Model):
     description = fields.Text()
     companyQr = fields.Text()
     refreshTime = fields.Integer(string='')
+    redirectionTime = fields.Integer(string='')
 
 
 
