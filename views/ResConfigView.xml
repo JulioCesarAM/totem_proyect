@@ -59,6 +59,7 @@
                         </div>
 
                     </div>
+
                     <div class="col-12 col-lg-6 o_setting_box" title="Set Temperature required for check.">
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">Tiempo de Refresco</span>
@@ -69,8 +70,38 @@
                         <div class="o_setting_left_pane">
                             <field name="refreshTime"/>
                         </div>
-
                     </div>
+
+
+
+                    <div class="col-12 col-lg-6 o_setting_box" title="Set Temperature required for check.">
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Redirection time</span>
+                            <div class="text-muted">
+                                 the url will remain open the amout of specific time
+                            </div>
+                        </div>
+                        <div class="o_setting_left_pane">
+                            <field name="redirectionTime"/>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
             </xpath>
         </field>

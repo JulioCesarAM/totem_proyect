@@ -28,6 +28,8 @@
         'views/MainView.xml',
         'views/EventView.xml',
         'views/SliderView.xml',
+        'views/UsersView.xml',
+        'views/ScreenView.xml',
         'views/web_assets_backend.xml',
         'views/ResConfigView.xml',
         
