@@ -30,12 +30,12 @@ odoo.define('totem_proyect.prueba', function (require) {
             }, 200, true),
 
             "click #banner": _.debounce(function() {
-                var newWindow = open("https://www.youtube.com/", "Enlace", "width=100%,height=100%")
-                newWindow.resizeTo(1080,1920)
+                var newWindow = open("", "Enlace", "width=50%,height=50%");
+                newWindow.resizeTo(1080,1920);
                 newWindow.focus();
                 setTimeout( function() {
                     newWindow.close();
-                }, 10*1000);
+                }, Number(this.configuration.redirectionTime*1000));
             }, 200, true),
         },
 
@@ -57,7 +57,7 @@ odoo.define('totem_proyect.prueba', function (require) {
                 var dur = self._rpc({
                     model: 'res.company',
                     method: 'search_read',
-                    args: [[],['mainSlider', 'secundarySlider', 'description', 'companyQr', 'refreshTime']],
+                    args: [[],['mainSlider', 'secundarySlider', 'description', 'companyQr', 'refreshTime', 'redirectionTime']],
                 })
                 if(res.length == 0)
                     return "No hay eventos";
