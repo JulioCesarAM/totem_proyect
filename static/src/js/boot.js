@@ -16,26 +16,45 @@ odoo.define('totem_proyect.prueba', function (require) {
         slideIndex: 0,
         configuration: {},
         event: null,
+        modalBool: false,
+        modalTimer: null,
         events:{
             "click #siguiente": _.debounce(function() {
                 clearTimeout(this.carrousel);
-                clearTimeout(this.eventimeout);
+                this.eventimeout.clearTimeout();
                 this.next();
             }, 200, true),
 
             "click #atras": _.debounce(function() {
                 clearTimeout(this.carrousel);
-                clearTimeout(this.eventimeout);
+                this.eventimeout.clearTimeout();
                 this.back();
             }, 200, true),
-
+            
             "click #banner": _.debounce(function() {
-                var newWindow = open("", "Enlace", "width=50%,height=50%");
-                newWindow.resizeTo(1080,1920);
-                newWindow.focus();
-                setTimeout( function() {
-                    newWindow.close();
-                }, Number(this.configuration.redirectionTime*1000));
+                var self = this;
+                setTimeout(function(){self.modalBool = true;},0);
+                console.log("1");
+                self.eventimeout.pause();
+                $("#mymodal").modal({show: true});
+                self.modalTimer = setTimeout(function(){
+                    if(self.modalBool){
+                        $("#mymodal").modal('hide');
+                        self.eventimeout.resume();
+                        self.modalBool = false;
+                    }
+                }, self.configuration.redirectionTime * 1000)
+            }, 200, true),
+            
+            "click #bodyPage #mymodal": _.debounce(function() {
+                var self = this;
+                if(self.modalBool){
+                    console.log("2");
+                    $("#mymodal").modal('hide');
+                    self.eventimeout.resume();
+                    clearTimeout(self.modalTimer);
+                    self.modalBool = false;
+                }
             }, 200, true),
         },
 
@@ -48,7 +67,6 @@ odoo.define('totem_proyect.prueba', function (require) {
             })
             .then(function (res) {
                 clearTimeout(self.carrousel);
-                clearTimeout(self.eventimeout);
                 self.allevents = res;
                 if(self.i > res.length-1) // i = 0 si sobrepasa el numero de anuncios por eliminación
                     self.i = 0;
@@ -69,7 +87,7 @@ odoo.define('totem_proyect.prueba', function (require) {
                     self.configuration = res[0];
                     self.$el.html(QWeb.render("EventView", {widget: self}));
                     setTimeout(() => {self.showslider();},0);
-                    self.eventimeout = setTimeout(function(){
+                    self.eventimeout = new Timer(function(){
                         clearTimeout(self.carrousel);
                         self.next();
                     },  Number(self.configuration.mainSlider*1000));
@@ -102,7 +120,7 @@ odoo.define('totem_proyect.prueba', function (require) {
             self.comprobarEvento(true)
             self.$el.html(QWeb.render("EventView", {widget: self}));
             setTimeout(() => {self.showslider();},0);
-            self.eventimeout = setTimeout(function(){
+            self.eventimeout = new Timer(function(){
                 clearTimeout(self.carrousel);
                 self.next();
             },  Number(self.configuration.mainSlider*1000));
@@ -117,7 +135,7 @@ odoo.define('totem_proyect.prueba', function (require) {
             self.comprobarEvento(false)
             self.$el.html(QWeb.render("EventView", {widget: self}));
             setTimeout(() => {self.showslider();},0);
-            self.eventimeout = setTimeout(function(){
+            self.eventimeout = new Timer(function(){
                 clearTimeout(self.carrousel);
                 self.next();
             },  Number(self.configuration.mainSlider*1000))
@@ -142,9 +160,35 @@ odoo.define('totem_proyect.prueba', function (require) {
 
         backup: function(tasa_refresco){
             var self = this;
-            setTimeout(() => {self.start()}, tasa_refresco);
+            setTimeout(() => {
+                $("#mymodal").modal('hide');
+                if(self.eventimeout!=null)
+                    self.eventimeout.clearTimeout();
+                setTimeout(function(){self.start()}, 1000);
+            }, tasa_refresco - 1000);
         },
     });
+
+    function Timer(callback, delay) {
+        var timerId, start, remaining = delay;
+    
+        this.pause = function() {
+            window.clearTimeout(timerId);
+            remaining -= new Date() - start;
+        };
+    
+        this.resume = function() {
+            start = new Date();
+            window.clearTimeout(timerId);
+            timerId = window.setTimeout(callback, remaining);
+        };
+
+        this.clearTimeout = function() {
+            window.clearTimeout(timerId);
+        }
+    
+        this.resume();
+    }
 
     core.action_registry.add('event_view', banners);
     return banners;

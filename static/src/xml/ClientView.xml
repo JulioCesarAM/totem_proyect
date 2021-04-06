@@ -20,6 +20,28 @@
                     </t>
                     <img id="eventBarcode" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.qr + '&amp;width=120&amp;height=120'}}"/>
                 </div>
+
+                <!-- MODAL -->
+
+                
+                <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CIERRE DEL MODAL -->
+
                 <div id="resto">
                     <h1 id="titulo"><t t-esc="widget.event.title"/></h1>
                     <div id="description"><t t-esc="widget.event.description"/></div>
