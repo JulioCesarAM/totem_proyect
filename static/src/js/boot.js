@@ -40,7 +40,7 @@ odoo.define('totem_proyect.prueba', function (require) {
                 self.modalTimer = setTimeout(function(){
                     if(self.modalBool){
                         $("#mymodal").modal('hide');
-                        self.eventimeout.resume();
+                        self.eventimeout.resume()
                         self.modalBool = false;
                     }
                 }, self.configuration.redirectionTime * 1000)
@@ -51,7 +51,7 @@ odoo.define('totem_proyect.prueba', function (require) {
                 if(self.modalBool){
                     console.log("2");
                     $("#mymodal").modal('hide');
-                    self.eventimeout.resume();
+                    self.eventimeout.resume()
                     clearTimeout(self.modalTimer);
                     self.modalBool = false;
                 }
@@ -164,8 +164,10 @@ odoo.define('totem_proyect.prueba', function (require) {
                 $("#mymodal").modal('hide');
                 if(self.eventimeout!=null)
                     self.eventimeout.clearTimeout();
-                setTimeout(function(){self.start()}, 1000);
-            }, tasa_refresco - 1000);
+                clearTimeout(self.modalTimer);
+                self.modalBool = false;
+                setTimeout(function(){self.start()}, 1500);
+            }, tasa_refresco - 1500);
         },
     });
 
@@ -186,6 +188,8 @@ odoo.define('totem_proyect.prueba', function (require) {
         this.clearTimeout = function() {
             window.clearTimeout(timerId);
         }
+
+        //get_remainingTime()
     
         this.resume();
     }
