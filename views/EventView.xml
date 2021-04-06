@@ -33,6 +33,7 @@
                         <field name="qr" required="1" string = "Codigo QR"/>
                         <field name="fechaInicio" string='Fecha inicio' />
                         <field name="fechaFin" string='Fecha inicio' />
+                        <field name="urlWeb" string='Código QR extra' />
                         <field name="urlVidId" attrs="{'invisible':[('bannerPrincipalSelector','!=','Nunca_existira')]}"/>
                         
 

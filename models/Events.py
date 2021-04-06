@@ -30,11 +30,18 @@ class Event(models.Model):
 
     @api.onchange('urlVid', 'urlVidId')
     def _onchange_(self):
-        if not re.search('/embed/',self.urlVid):
-            self.urlVid = self.urlVid[:24] + 'embed/' + self.urlVid[24:]
-        if re.search('/watch\?v\=',self.urlVid):
-            self.urlVid = self.urlVid.replace("/watch?v=","/")
-        self.urlVidId = self.urlVid[30:]
+        if self.urlVid is not False:
+            if not re.search('/embed/',self.urlVid):
+                self.urlVid = self.urlVid[:24] + 'embed/' + self.urlVid[24:]
+            if re.search('/watch\?v\=',self.urlVid):
+                self.urlVid = self.urlVid.replace("/watch?v=","/")
+            self.urlVidId = self.urlVid[30:]
+        pass
+
+    @api.onchange('qr')
+    def _onchange_qr(self):
+        if self.urlWeb is False:
+            self.urlWeb = self.qr
         pass
 
     @api.multi
@@ -50,8 +57,9 @@ class Event(models.Model):
                 vals['bannerImg']=False
                 vals['videoField']=False
 
-            if vals['qr'] in vals.keys() and vals['urlWeb'] not in vals.keys():
-                vals['urlWeb']=vals['qr']
+        #if 'qr' in vals.keys() and 'urlWeb' not in vals.keys():
+        #    vals['urlWeb'] = vals['qr']
+
         return super(Event,self).write(vals)
 
     @api.constrains('description')
