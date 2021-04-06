@@ -5,5 +5,4 @@ from . import SliderImages
 from . import Themes
 from . import totem_project_res_config
 from . import CompanySettings
-from . import Users
-from . import Pantallas
+from . import Controllers

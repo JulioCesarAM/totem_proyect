@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record model="ir.ui.view" id="view_id_tree_controller">
+        <field name="name">totem.controllers.tree</field>
+        <field name="model">totem.controllers</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <tree string="Controlador eventos">
+                <field name="name">
+                </field>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_events_controller">
+        <field name="name">totem.controllers</field>
+        <field name="res_model">totem.controllers</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="controladorPantalla" name="Controlador Pantalla" parent="mainMenu" action="action_events_controller" />
+</odoo>
+
+
+<!--
+<odoo>
 
     <record id="screen_view_form" model="ir.ui.view">
         <field name="name">res.users.view.form.inherit.totem.proyect</field>
@@ -30,3 +53,4 @@
     
     
 </odoo>
+-->
