@@ -51,9 +51,11 @@ odoo.define('totem_proyect.prueba', function (require) {
                 var self = this;
                 if(self.modalBool){
                     $("#mymodal").modal('hide');
-                    self.eventimeout.resume()
-                    clearTimeout(self.modalTimer);
-                    self.modalBool = false;
+                    $("#mymodal").on('hidden.bs.modal', function(e){
+                        self.eventimeout.resume()
+                        clearTimeout(self.modalTimer);
+                        self.modalBool = false;
+                    });
                 }
             }, 200, true),
         },

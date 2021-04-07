@@ -24,7 +24,7 @@
                 <!-- MODAL -->
 
                 
-                <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="width:100%">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -34,8 +34,7 @@
                                 </h3>
                             </div>
                             <div class="modal-body" style="display:table;">
-                                <div style="font-size:180%;text-align:justify;"><t t-esc="widget.event.descriptionPopUp"/></div>
-                                <p/>
+                                <p style="font-size:180%;text-align:justify;"><t t-esc="widget.event.descriptionPopUp"/></p>
                                 <img t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/popUpImg'}}" style="width:100%;height:300px;"/>
                             </div>
                             <div class="modal-footer" style="position:relative;height:120px">
