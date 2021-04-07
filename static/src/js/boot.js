@@ -31,10 +31,9 @@ odoo.define('totem_proyect.prueba', function (require) {
                 this.back();
             }, 200, true),
             
-            "click #banner": _.debounce(function() {
+            "click #content": _.debounce(function() {
                 var self = this;
                 setTimeout(function(){self.modalBool = true;},0);
-                console.log("1");
                 self.eventimeout.pause();
                 $("#mymodal").modal({show: true});
                 self.modalTimer = setTimeout(function(){
@@ -51,7 +50,6 @@ odoo.define('totem_proyect.prueba', function (require) {
             "click #bodyPage #mymodal": _.debounce(function() {
                 var self = this;
                 if(self.modalBool){
-                    console.log("2");
                     $("#mymodal").modal('hide');
                     self.eventimeout.resume()
                     clearTimeout(self.modalTimer);
