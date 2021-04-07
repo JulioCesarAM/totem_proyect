@@ -37,11 +37,11 @@ class Event(models.Model):
         self, domain=None, fields=None, offset=0,
         limit=None, order=None):
 
-    res = super(Event, self).search_read(
+        res = super(Event, self).search_read(
         domain, fields, offset, limit, order)
         _logger.info(str(res)+ " 500" )
 
-    return res
+        return res
 
     @api.onchange('urlVid', 'urlVidId')
     def _onchange_(self):

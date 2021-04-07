@@ -21,31 +21,6 @@
                     <img id="eventBarcode" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.qr + '&amp;width=120&amp;height=120'}}"/>
                 </div>
 
-                <!-- MODAL -->
-
-                
-                <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="width:100%">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h3 class="modal-title" id="exampleModalLongTitle">
-                                    <img t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/logo'}}" style="width:40px;height:40px;margin-right:10px;"/>
-                                    <t t-esc="widget.event.titlePopUp"/>
-                                </h3>
-                            </div>
-                            <div class="modal-body" style="display:table;">
-                                <p style="font-size:180%;text-align:justify;"><t t-esc="widget.event.descriptionPopUp"/></p>
-                                <img t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/popUpImg'}}" style="width:100%;height:300px;"/>
-                            </div>
-                            <div class="modal-footer" style="position:relative;height:120px">
-                                <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.urlWeb + '&amp;width=100&amp;height=100'}}" style="left:20px;position:absolute"/>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CIERRE DEL MODAL -->
 
                 <div id="resto">
                     <h1 id="titulo"><t t-esc="widget.event.title"/></h1>
@@ -69,6 +44,31 @@
             <div id="atras" class="column slideIcon">
                 <h1 class="prueba">&#10095;</h1>
             </div>
+
+                <!-- MODAL -->
+                
+                <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="exampleModalLongTitle">
+                                    <img t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/logo'}}" style="width:40px;height:40px;margin-right:10px;"/>
+                                    <t t-esc="widget.event.titlePopUp"/>
+                                </h3>
+                            </div>
+                            <div class="modal-body" style="display:table;">
+                                <p style="font-size:180%;text-align:justify;"><t t-esc="widget.event.descriptionPopUp"/></p>
+                                <img t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/popUpImg'}}" style="width:100%;height:300px;"/>
+                            </div>
+                            <div class="modal-footer" style="position:relative;height:120px">
+                                <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.urlWeb + '&amp;width=100&amp;height=100'}}" style="left:20px;position:absolute"/>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CIERRE DEL MODAL -->
         </div>
     </t>
 </template>

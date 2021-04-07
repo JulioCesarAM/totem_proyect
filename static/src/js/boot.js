@@ -51,7 +51,7 @@ odoo.define('totem_proyect.prueba', function (require) {
                 var self = this;
                 if(self.modalBool){
                     $("#mymodal").modal('hide');
-                    $("#mymodal").on('hidden.bs.modal', function(e){
+                        $("#mymodal").on('hidden.bs.modal', function(e){
                         self.eventimeout.resume()
                         clearTimeout(self.modalTimer);
                         self.modalBool = false;
