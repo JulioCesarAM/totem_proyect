@@ -40,8 +40,10 @@ odoo.define('totem_proyect.prueba', function (require) {
                 self.modalTimer = setTimeout(function(){
                     if(self.modalBool){
                         $("#mymodal").modal('hide');
-                        self.eventimeout.resume()
-                        self.modalBool = false;
+                        $("#mymodal").on('hidden.bs.modal', function(e){
+                            self.eventimeout.resume()
+                            self.modalBool = false;
+                        });
                     }
                 }, self.configuration.redirectionTime * 1000)
             }, 200, true),
@@ -162,11 +164,13 @@ odoo.define('totem_proyect.prueba', function (require) {
             var self = this;
             setTimeout(() => {
                 $("#mymodal").modal('hide');
-                if(self.eventimeout!=null)
-                    self.eventimeout.clearTimeout();
-                clearTimeout(self.modalTimer);
-                self.modalBool = false;
-                setTimeout(function(){self.start()}, 1500);
+                $("#mymodal").on('hidden.bs.modal', function(e){
+                    if(self.eventimeout!=null)
+                        self.eventimeout.clearTimeout();
+                    clearTimeout(self.modalTimer);
+                    self.modalBool = false;
+                    self.start();
+                });
             }, tasa_refresco - 1500);
         },
     });
