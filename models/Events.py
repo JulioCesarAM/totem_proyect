@@ -31,6 +31,17 @@ class Event(models.Model):
     descriptionPopUp = fields.Text(string=_(''))
     titlePopUp = fields.Text(string=_(''))
     popUpImg = fields.Binary(string='')
+    
+    @api.model
+    def search_read(
+        self, domain=None, fields=None, offset=0,
+        limit=None, order=None):
+
+    res = super(Event, self).search_read(
+        domain, fields, offset, limit, order)
+        _logger.info(str(res)+ " 500" )
+
+    return res
 
     @api.onchange('urlVid', 'urlVidId')
     def _onchange_(self):
