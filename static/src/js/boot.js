@@ -63,9 +63,11 @@ odoo.define('totem_proyect.prueba', function (require) {
         start: function(){
             var self = this;
 
+            console.log(this.getSession().uid);
             var def = this._rpc({
                 model: 'event.totem',
-                method: 'search_read',
+                method: 'get_events',
+                args: [this.getSession().uid, ],
             })
             .then(function (res) {
                 clearTimeout(self.carrousel);
