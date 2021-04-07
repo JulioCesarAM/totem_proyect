@@ -26,25 +26,32 @@
                     <group colspan="4" col="2">
                         <separator string="Informacion del producto/evento" colspan="2"/>
                         <field name="title" required="1" string="Titulo"/>
+                        <field name="description" required="1"/>
                         <field name="bannerPrincipalSelector" required="1" string="Selector contenido del banner principal"/>
                         <field name="bannerImg" attrs="{'invisible':[('bannerPrincipalSelector','!=','img')]}" string="Insertar imagen"/>
                         <field name="videoField" attrs="{'invisible':[('bannerPrincipalSelector','!=','vid')]}" string="Insertar video"/>
                         <field name="urlVid" attrs="{'invisible':[('bannerPrincipalSelector','!=','lvid')]}" string="Insertar url video"/>
                         <field name="qr" required="1" string = "Codigo QR"/>
                         <field name="fechaInicio" string='Fecha inicio' />
-                        <field name="fechaFin" string='Fecha inicio' />
-                        <field name="urlWeb" string='Código QR extra' />
-                        <field name="descriptionPopUp" />
-                        <field name="logo" />
+                        <field name="fechaFin" string='Fecha fin' />
                         <field name="urlVidId" attrs="{'invisible':[('bannerPrincipalSelector','!=','Nunca_existira')]}"/>
-                        
+
 
                     </group>
 
-                    <notebook colspan="4">
-                        <page name="Descripcion" string="Descripcion" required="1">
-                            <field name="description" required="1"/>
+                    <notebook colspan="4" col="2">
+
+                        <page name="PopUp" string="Pop Up">
+                            <group colspan="4" col="2">
+                                <field name="titlePopUp" string="Titulo pop up"/>
+                                <field name="urlWeb" string='Código QR pop up' />
+                                <field name="descriptionPopUp" string="Descripcion del pop up"/>
+                                <field name="logo" string="logo"/>
+                                <field name="popUpImg" string="Imagen Pop Up"/>
+                            </group>
                         </page>
+
+
                         <page name="image list" string="Slider de imagenes" required="1">
                             <field name="sliderImg" />
 
