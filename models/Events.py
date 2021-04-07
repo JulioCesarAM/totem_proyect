@@ -28,7 +28,9 @@ class Event(models.Model):
     #RSS datos
     urlVidId = fields.Text(string=_(''))
     logo = fields.Binary(string=_(''))
-    descriptionPopUp = fields.Text(string='')
+    descriptionPopUp = fields.Text(string=_(''))
+    titlePopUp = fields.Text(string=_(''))
+    popUpImg = fields.Binary(string='')
 
     @api.onchange('urlVid', 'urlVidId')
     def _onchange_(self):
