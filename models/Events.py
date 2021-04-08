@@ -25,8 +25,8 @@ class Event(models.Model):
     audioField = fields.Binary(string=_(''))
     videoField = fields.Binary(string=_(''))
     urlVid = fields.Text(string=_(''))
-    horaInicio = fields.Float(string=_(''))
-    horaFin = fields.Float(string=_(''))
+    horaInicio = fields.Float(string=_(''),digits=(12,2))
+    horaFin = fields.Float(string=_(''),digits=(12,2))
     urlWeb = fields.Text(string=_(''))
     fechaInicio = fields.Date(string=_(''))
     fechaFin = fields.Date(string=_(''))
@@ -47,27 +47,25 @@ class Event(models.Model):
             'bannerPrincipalSelector','urlVid','horaInicio'
             ,'horaFin','fechaInicio','fechaFin','urlWeb'
             ,'urlVidId','descriptionPopUp','titlePopUp'])
-        #events[0]['title']=self.timeToMiliCovnerter(events[0]['fechaInicio'])
+
+        for i in events:
+            i['horaInicio']=self.hourConverterToSeconds(events[0]['horaInicio'])
+            i['horaFin']=self.hourConverterToSeconds(events[0]['horaFin'])
 
     
-      
-
-
-
-
-        _logger.info(str(events[0]['fechaInicio'])+" 500")
-        #aux = self.env['event.totem'].search_read(['id','in',auxId])
-        #2021 |- 04 | - 06
         return events
     
-    #def timeToMiliCovnerter(self,date):
-       # dayString=date.rsplit('-',1)[0]
-       # dayInteger=int(dayString)
-        #dayInteger+=self.leapYear(dayInteger)
-    
-        #aux=date.fromisoformat(str(date))
-        #return aux.timestamp()*1000
-       # pass
+    def hourConverterToSeconds(self,time):
+        timeHour=str(time).rsplit('.',1)[0]
+        timeMin=str(time).rsplit('.',1)[1]
+        if len(timeMin)<=1:
+            timeMin=str(timeMin)+"0"
+        minToMilSec=int(timeMin)*60*1000
+        hourToMilSec=int(timeHour)*60*60*1000
+        _logger.info(str(time)+" 500")
+        _logger.info(str(timeMin)+" 500")
+        return hourToMilSec+minToMilSec
+        pass
 
     #def leapYear(self,date):
      #   FINAL_DATE=1972
