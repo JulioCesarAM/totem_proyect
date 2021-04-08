@@ -49,8 +49,8 @@ class Event(models.Model):
             ,'urlVidId','descriptionPopUp','titlePopUp'])
 
         for i in events:
-            i['horaInicio']=self.hourConverterToSeconds(events[0]['horaInicio'])
-            i['horaFin']=self.hourConverterToSeconds(events[0]['horaFin'])
+            i['horaInicio']=self.hourConverterToSeconds(i['horaInicio'])
+            i['horaFin']=self.hourConverterToSeconds(i['horaFin'])
 
     
         return events

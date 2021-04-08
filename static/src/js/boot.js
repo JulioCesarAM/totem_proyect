@@ -77,8 +77,10 @@ odoo.define('totem_proyect.prueba', function (require) {
                 var eventsInTime = []
                 for(let iterator=0; iterator<res.length; iterator++)
                     if(Date.parse(res[iterator].fechaInicio)<=Date.now() && Date.now()<Date.parse(res[iterator].fechaFin)){
-                        console.log(Date.parse("1970-01-01 11:03:00"))
-                        eventsInTime.push(res[iterator]);
+                        let todayTime = new Date(Date.now());
+                        todayTime = todayTime.getHours()*60*60*1000+todayTime.getMinutes()*60*1000;
+                        if(res[iterator].horaInicio<=todayTime && todayTime<res[iterator].horaFin)
+                            eventsInTime.push(res[iterator]);
                     }
                 
 
@@ -178,15 +180,26 @@ odoo.define('totem_proyect.prueba', function (require) {
         backup: function(tasa_refresco){
             var self = this;
             setTimeout(() => {
-                $("#mymodal").modal('hide');
-                $("#mymodal").on('hidden.bs.modal', function(e){
+                if(self.modalBool){
+                    $("#mymodal").modal('hide');
+                    $("#mymodal").on('hidden.bs.modal', function(e){
+                        console.log("Refresco");
+                        if(self.eventimeout!=null)
+                            self.eventimeout.clearTimeout();
+                        clearTimeout(self.modalTimer);
+                        self.modalBool = false;
+                        self.start();
+                    });
+                }
+                else {
+                    console.log("Refresco");
                     if(self.eventimeout!=null)
                         self.eventimeout.clearTimeout();
                     clearTimeout(self.modalTimer);
                     self.modalBool = false;
                     self.start();
-                });
-            }, tasa_refresco - 1500);
+                }
+            }, tasa_refresco);
         },
     });
 
