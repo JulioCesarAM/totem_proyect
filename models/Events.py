@@ -34,18 +34,12 @@ class Event(models.Model):
     descriptionPopUp = fields.Text(string=_(''))
     titlePopUp = fields.Text(string=_(''))
     popUpImg = fields.Binary(string='')
-
+    #metodo diseñado para devolver todos los eventos que peternecen al usuario que los controla
     @api.model
     def get_events(self, uid):
-        #uid = 2
-        _logger.info(str(uid)+" 500")
+        #fix events_ids [0] no existe
         events_ids = self.env['totem.controllers'].search_read([('admin','=',uid)])
-        _logger.info(str(events_ids)+" 500")
         events = self.env['event.totem'].search_read([('id','in',events_ids[0]['events'])],['title','sliderImg','description','qr','bannerPrincipalSelector','urlVid','fechaInicio','fechaFin','urlWeb','urlVidId','descriptionPopUp','titlePopUp'])
-
-        #aux = self.env['event.totem'].search_read(['id','in',auxId])
-        _logger.info(str(events)+" 500")
-
         return events
 
     @api.onchange('urlVid', 'urlVidId')
