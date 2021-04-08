@@ -37,14 +37,11 @@ class Event(models.Model):
 
     @api.model
     def get_events(self, uid):
-        #uid = 2
-        _logger.info(str(uid)+" 500")
+        
         events_ids = self.env['totem.controllers'].search_read([('admin','=',uid)])
-        _logger.info(str(events_ids)+" 500")
         events = self.env['event.totem'].search_read([('id','in',events_ids[0]['events'])],['title','sliderImg','description','qr','bannerPrincipalSelector','urlVid','fechaInicio','fechaFin','urlWeb','urlVidId','descriptionPopUp','titlePopUp'])
 
         #aux = self.env['event.totem'].search_read(['id','in',auxId])
-        _logger.info(str(events)+" 500")
 
         return events
 
