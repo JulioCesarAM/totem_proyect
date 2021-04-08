@@ -32,8 +32,10 @@
                         <field name="videoField" attrs="{'invisible':[('bannerPrincipalSelector','!=','vid')]}" string="Insertar video"/>
                         <field name="urlVid" attrs="{'invisible':[('bannerPrincipalSelector','!=','lvid')]}" string="Insertar url video"/>
                         <field name="qr" required="1" string = "Codigo QR"/>
-                        <field name="fechaInicio" string='Fecha inicio' />
-                        <field name="fechaFin" string='Fecha fin' />
+                        <field name="fechaInicio" string='Fecha inicial' />
+                        <field name="fechaFin" string='Fecha final' />
+                        <field name="horaInicio" string='Hora inicio' />
+                        <field name="horaFin" string='Hora Fin' />
                         <field name="urlVidId" attrs="{'invisible':[('bannerPrincipalSelector','!=','Nunca_existira')]}"/>
 
 
