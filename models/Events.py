@@ -34,7 +34,7 @@ class Event(models.Model):
     descriptionPopUp = fields.Text(string=_(''))
     titlePopUp = fields.Text(string=_(''))
     popUpImg = fields.Binary(string='')
-
+    #metodo diseñado para devolver todos los eventos que peternecen al usuario que los controla
     @api.model
     def get_events(self, uid):
         
