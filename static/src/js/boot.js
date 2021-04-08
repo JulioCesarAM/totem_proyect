@@ -63,25 +63,38 @@ odoo.define('totem_proyect.prueba', function (require) {
         start: function(){
             var self = this;
 
-            console.log(this.getSession().uid);
             var def = this._rpc({
                 model: 'event.totem',
                 method: 'get_events',
                 args: [this.getSession().uid, ],
             })
             .then(function (res) {
+                
                 clearTimeout(self.carrousel);
-                self.allevents = res;
-                if(self.i > res.length-1) // i = 0 si sobrepasa el numero de anuncios por eliminación
+
+                ////////////////////
+
+                var eventsInTime = []
+                for(let iterator=0; iterator<res.length; iterator++)
+                    if(Date.parse(res[iterator].fechaInicio)<=Date.now() && Date.now()<Date.parse(res[iterator].fechaFin)){
+                        console.log(Date.parse("1970-01-01 11:03:00"))
+                        eventsInTime.push(res[iterator]);
+                    }
+                
+
+                ////////////////////
+
+                self.allevents = eventsInTime;
+                if(self.i > self.allevents.length-1) // i = 0 si sobrepasa el numero de anuncios por eliminación
                     self.i = 0;
-                self.event = res[self.i];
+                self.event = self.allevents[self.i];
                 console.log(self.event);
                 var dur = self._rpc({
                     model: 'res.company',
                     method: 'search_read',
                     args: [[],['mainSlider', 'secundarySlider', 'description', 'companyQr', 'refreshTime', 'redirectionTime']],
                 })
-                if(res.length == 0)
+                if(eventsInTime.length == 0)
                     return "No hay eventos";
                 else
                     return dur
