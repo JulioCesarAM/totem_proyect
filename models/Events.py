@@ -4,6 +4,8 @@ from odoo import models, fields, api, _, exceptions
 import logging
 import re
 from datetime import *
+from urllib.request import urlopen
+from xml.etree.ElementTree import *
 
 _logger = logging.getLogger(__name__)
 
@@ -18,8 +20,8 @@ class Event(models.Model):
     bannerPrincipalSelector = fields.Selection([
         ('img', 'Imagen'),
         ('vid', 'Subir video'),
-        ('lvid', 'Url video')
-        #('rss_video', 'rssv'),
+        ('lvid', 'Url video'),
+        ('rssVideo', 'rssv')
         #('rss_datos', 'rssd'),
     ], string=_(''), default='img')
     audioField = fields.Binary(string=_(''))
@@ -30,7 +32,7 @@ class Event(models.Model):
     urlWeb = fields.Text(string=_(''))
     fechaInicio = fields.Date(string=_(''))
     fechaFin = fields.Date(string=_(''))
-    # RSS video
+    rssVideo = fields.Text(string=_(''))
     # RSS datos
     urlVidId = fields.Text(string=_(''))
     logo = fields.Binary(string=_(''))
@@ -46,13 +48,16 @@ class Event(models.Model):
             'title','sliderImg','description','qr',
             'bannerPrincipalSelector','urlVid','horaInicio'
             ,'horaFin','fechaInicio','fechaFin','urlWeb'
-            ,'urlVidId','descriptionPopUp','titlePopUp'])
+            ,'urlVidId','descriptionPopUp','titlePopUp','rssVideo'])
+
 
         for i in events:
+            if i['bannerPrincipalSelector']=='rssVideo':
+                i['rssVideo']=self.getXmlData(i['rssVideo'])
+            
             i['horaInicio']=self.hourConverterToSeconds(i['horaInicio'])
             i['horaFin']=self.hourConverterToSeconds(i['horaFin'])
 
-    
         return events
     
     def hourConverterToSeconds(self,time):
@@ -62,15 +67,41 @@ class Event(models.Model):
             timeMin=str(timeMin)+"0"
         minToMilSec=int(timeMin)*60*1000
         hourToMilSec=int(timeHour)*60*60*1000
-        _logger.info(str(time)+" 500")
-        _logger.info(str(timeMin)+" 500")
+ 
         return hourToMilSec+minToMilSec
         pass
 
-    #def leapYear(self,date):
-     #   FINAL_DATE=1972
-      #  return int(((date-FINAL_DATE)/4)+1)
-       # pass
+    def getXmlData(self,url):
+        getXmlFromUrl=urlopen(url)
+        dataFromXml=parse(getXmlFromUrl)
+        return self.processXml(dataFromXml)
+        pass
+    def processXml(self,xml):
+        container=[]
+        enlaceCompleto="https://www.youtube.com/embed/"
+        root=xml.getroot()
+        for entry in root:
+            if entry.tag.rsplit('}',1)[1]=='entry':
+                for media in entry:
+                    if media.tag.rsplit('}',1)[1]=='group':
+                        for content in media:
+                            if content.tag.rsplit('}',1)[1]=='content':
+                                container.append(self.filter(content.attrib['url']))
+                                #_logger.info(str(content.attrib['url'])+" 500")
+        
+        enlaceCompleto += container[0] + "?autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist="
+
+        for urlId in container:
+            enlaceCompleto+=urlId+","
+        return enlaceCompleto
+
+        #_logger.info(str(enlaceCompleto)+ " 500")
+        pass
+
+    def filter(self,url):
+        #_logger.info(str(url.rsplit('/v/',1)[1].rsplit('?',1)[0])+" 500")
+        return url.rsplit('/v/',1)[1].rsplit('?',1)[0]
+        pass
 
     @api.onchange('urlVid', 'urlVidId')
     def _onchange_(self):

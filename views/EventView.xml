@@ -31,6 +31,7 @@
                         <field name="bannerImg" attrs="{'invisible':[('bannerPrincipalSelector','!=','img')]}" string="Insertar imagen"/>
                         <field name="videoField" attrs="{'invisible':[('bannerPrincipalSelector','!=','vid')]}" string="Insertar video"/>
                         <field name="urlVid" attrs="{'invisible':[('bannerPrincipalSelector','!=','lvid')]}" string="Insertar url video"/>
+                        <field name="rssVideo" attrs="{'invisible':[('bannerPrincipalSelector','!=','rssVideo')]}" string="Insertar url de Rss"/>
                         <field name="qr" required="1" string = "Codigo QR"/>
                         <field name="fechaInicio" string='Fecha inicial' />
                         <field name="fechaFin" string='Fecha final' />
