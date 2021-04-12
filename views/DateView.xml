@@ -1,0 +1,21 @@
+<odoo>
+    <record model="ir.ui.view" id="view_id_tree_pantalla">
+        <field name="name">event.date.tree</field>
+        <field name="model">event.date</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <tree string="Fechas">
+                <field name="name" />
+                <field name="fecha"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_events_date">
+        <field name="name">event.date.img</field>
+        <field name="res_model">event.date</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="event_view_date" name="Fechas" parent="mainMenu" action="action_events_date" />
+</odoo>

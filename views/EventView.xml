@@ -33,10 +33,11 @@
                         <field name="urlVid" attrs="{'invisible':[('bannerPrincipalSelector','!=','lvid')]}" string="Insertar url video"/>
                         <field name="rssVideo" attrs="{'invisible':[('bannerPrincipalSelector','!=','rssVideo')]}" string="Insertar url de Rss"/>
                         <field name="qr" required="1" string = "Codigo QR"/>
-                        <field name="fechaInicio" string='Fecha inicial' />
+                        <!-- <field name="fechaInicio" string='Fecha inicial' />
                         <field name="fechaFin" string='Fecha final' />
                         <field name="horaInicio" string='Hora inicio' />
                         <field name="horaFin" string='Hora Fin' />
+                        -->
                         <field name="urlVidId" attrs="{'invisible':[('bannerPrincipalSelector','!=','Nunca_existira')]}"/>
 
 
@@ -58,6 +59,11 @@
                         <page name="image list" string="Slider de imagenes" required="1">
                             <field name="sliderImg" />
 
+                        </page>
+
+                        <page name="Configuracion fechas" string="configuracion de fechas" required="1">
+                             <field name="fechas" />  
+                            
                         </page>
                     </notebook>
 

@@ -5,6 +5,6 @@ class mainConfigValues(models.Model):
     secundarySlider = fields.Float()
     description = fields.Text()
     companyQr = fields.Text()
-    refreshTime = fields.Integer(string='')
-    redirectionTime = fields.Integer(string='')
+    refreshTime = fields.Integer(string=_(''))
+    redirectionTime = fields.Integer(string=_(''))
     backGroundImg = fields.Binary(string=_(''))

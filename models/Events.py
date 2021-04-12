@@ -19,19 +19,19 @@ class Event(models.Model):
     qr = fields.Text()
     bannerPrincipalSelector = fields.Selection([
         ('img', 'Imagen'),
-        ('vid', 'Subir video'),# eliminar lvid
+        #('vid', 'Subir video'),# eliminar lvid
         ('lvid', 'Url video'),
-        ('rssVideo', 'rssv') #renombrar eso
+        ('rssVideo', 'RSS video') #renombrar eso
         #('rss_datos', 'rssd'),
     ], string=_(''), default='img')
     audioField = fields.Binary(string=_(''))
     videoField = fields.Binary(string=_(''))
     urlVid = fields.Text(string=_(''))
-    horaInicio = fields.Float(string=_(''),digits=(12,2))
-    horaFin = fields.Float(string=_(''),digits=(12,2))
+    #horaInicio = fields.Float(string=_(''),digits=(12,2))
+    #horaFin = fields.Float(string=_(''),digits=(12,2))
     urlWeb = fields.Text(string=_(''))
-    fechaInicio = fields.Date(string=_(''))
-    fechaFin = fields.Date(string=_(''))
+    #fechaInicio = fields.Date(string=_(''))
+    #fechaFin = fields.Date(string=_(''))
     rssVideo = fields.Text(string=_(''))
     # RSS datos
     urlVidId = fields.Text(string=_(''))
@@ -39,25 +39,48 @@ class Event(models.Model):
     descriptionPopUp = fields.Text(string=_(''))
     titlePopUp = fields.Text(string=_(''))
     popUpImg = fields.Binary(string=_(''))
+    fechas = fields.One2many('event.date', 'name', string=_(''))
     #metodo diseñado para devolver todos los eventos que peternecen al usuario que los controla
     @api.model
     def get_events(self, uid):
         events_ids = self.env['totem.controllers'].search_read([('admin','=',uid)])
+        events = []
         if len(events_ids)>0:
             events = self.env['event.totem'].search_read([('id','in',events_ids[0]['events'])],[
                 'title','sliderImg','description','qr',
-                'bannerPrincipalSelector','urlVid','horaInicio'
-                ,'horaFin','fechaInicio','fechaFin','urlWeb'
+                'bannerPrincipalSelector','urlVid','fechas','urlWeb'
                 ,'urlVidId','descriptionPopUp','titlePopUp','rssVideo'])
             for i in events:
                 if i['bannerPrincipalSelector']=='rssVideo':
                     i['rssVideo']=self.getXmlData(i['rssVideo'])
-                i['horaInicio']=self.hourConverterToSeconds(i['horaInicio'])
-                i['horaFin']=self.hourConverterToSeconds(i['horaFin'])
-            return events
-        else:
-            return []
+                if i['bannerPrincipalSelector']=='lvid':
+                    i['urlVid']=self.urlVidProcessor(i['urlVid'])
+                _logger.info("antes de la funcion "+ " 500")
+                if i['fechas']!='':
+                    dateWithTime=''
+                    fechas=self.env['event.date'].search_read([('id','in',i['fechas'])],['fecha','rangoHoras'])
+                    for fecha in fechas:
+                        dateWithTime+=str(fecha['fecha'])
+                        timeInDate=self.env['event.time'].search_read([('id','in',fecha['rangoHoras'])],['horaInicial','horaFinal'])
 
+                        for time in timeInDate:
+                            dateWithTime+=str(time['horaInicial'])
+                            dateWithTime+=str(time['horaFinal'])
+                            #_logger.info(str(time)+ " 500"+ "bucle tiempo")
+
+                        #dateWithTime+="},"
+                        #falta darle formato json
+                    _logger.info(str(dateWithTime)+ " 500")
+
+
+                #i['horaInicio']=self.hourConverterToSeconds(i['horaInicio'])
+                #i['horaFin']=self.hourConverterToSeconds(i['horaFin'])      
+        return events
+        pass
+
+    def dateTimeFormatter(self,date):
+        return  "{"+date+"}"
+        pass
 
 
         #upgrades
@@ -67,7 +90,10 @@ class Event(models.Model):
 
 
         
-    
+    def urlVidProcessor(self,url):
+        idFromVid=url.rsplit('/embed/',1)[1]
+        return url + "?autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist="+idFromVid
+        pass
     def hourConverterToSeconds(self,time):
         timeHour=str(time).rsplit('.',1)[0]
         timeMin=str(time).rsplit('.',1)[1]
@@ -99,12 +125,10 @@ class Event(models.Model):
                                 #posible implementacion de expresiones regulares stby
         
         enlaceCompleto += container[0] + "?autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist="
-
         #mejorar
         for urlId in container:
             enlaceCompleto+=urlId+","
         return enlaceCompleto
-
         #_logger.info(str(enlaceCompleto)+ " 500")
         pass
 

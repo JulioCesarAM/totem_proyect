@@ -28,6 +28,8 @@
         'views/MainView.xml',
         'views/EventView.xml',
         #'views/SliderView.xml',
+        'views/DateView.xml',
+        'views/TimeView.xml',
         'views/ControllerView.xml',
         #'views/ScreenView.xml',
         'views/web_assets_backend.xml',

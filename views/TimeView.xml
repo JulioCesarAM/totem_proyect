@@ -1,0 +1,22 @@
+<odoo>
+    <record model="ir.ui.view" id="view_id_tree_pantalla">
+        <field name="name">event.time.time</field>
+        <field name="model">event.time</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <tree string="rango horas">
+                <field name="name" />
+                <field name="horaInicial"/>
+                <field name="horaFinal"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_events_time">
+        <field name="name">event.time.launch</field>
+        <field name="res_model">event.time</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="event_view_time" name="Rango horarios" parent="mainMenu" action="action_events_time" />
+</odoo>

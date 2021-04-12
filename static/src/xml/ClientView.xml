@@ -11,7 +11,7 @@
                         <img id="imgbanner" t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/bannerImg'}}" style="width:1026px;height:864px"/>
                     </t>
                     <t t-if="widget.event.bannerPrincipalSelector=='lvid'">
-                        <iframe id="videobanner" t-attf-src="{{widget.event.urlVid + '?autoplay=1&amp;mute=1&amp;controls=0&amp;rel=0&amp;loop=1&amp;playlist=' + widget.event.urlVidId}}" style="width:1026px;height:864px"></iframe>
+                        <iframe id="videobanner" t-attf-src="{{widget.event.urlVid}}" style="width:1026px;height:864px"></iframe>
                     </t>
                     <t t-if="widget.event.bannerPrincipalSelector=='rssVideo'">
                         <iframe id="videobanner" t-attf-src="{{widget.event.rssVideo}}" style="width:1026px;height:864px"></iframe>
