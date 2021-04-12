@@ -1,3 +1,5 @@
+<!--
+    implementacion removida por peticion del cliente
 <odoo>
     <record model="ir.ui.view" id="view_id_tree_slider">
         <field name="name">slider.totem.tree</field>
@@ -19,3 +21,5 @@
     </record>
     <menuitem id="test_two" name="Lista de imagenes" parent="mainMenu" action="action_events_slider" />
 </odoo>
+
+-->

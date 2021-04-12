@@ -19,9 +19,9 @@ class Event(models.Model):
     qr = fields.Text()
     bannerPrincipalSelector = fields.Selection([
         ('img', 'Imagen'),
-        ('vid', 'Subir video'),
+        ('vid', 'Subir video'),# eliminar lvid
         ('lvid', 'Url video'),
-        ('rssVideo', 'rssv')
+        ('rssVideo', 'rssv') #renombrar eso
         #('rss_datos', 'rssd'),
     ], string=_(''), default='img')
     audioField = fields.Binary(string=_(''))
@@ -38,7 +38,7 @@ class Event(models.Model):
     logo = fields.Binary(string=_(''))
     descriptionPopUp = fields.Text(string=_(''))
     titlePopUp = fields.Text(string=_(''))
-    popUpImg = fields.Binary(string='')
+    popUpImg = fields.Binary(string=_(''))
     #metodo diseñado para devolver todos los eventos que peternecen al usuario que los controla
     @api.model
     def get_events(self, uid):
@@ -50,6 +50,11 @@ class Event(models.Model):
             ,'horaFin','fechaInicio','fechaFin','urlWeb'
             ,'urlVidId','descriptionPopUp','titlePopUp','rssVideo'])
 
+
+        #upgrades
+            #implementar que se envie el enlace completo del video modo url vid
+            #eliminar valores que no son necesarios del campo events
+            #generar varios events dependiendo del modo selecionado
 
         for i in events:
             if i['bannerPrincipalSelector']=='rssVideo':
@@ -88,9 +93,11 @@ class Event(models.Model):
                             if content.tag.rsplit('}',1)[1]=='content':
                                 container.append(self.filter(content.attrib['url']))
                                 #_logger.info(str(content.attrib['url'])+" 500")
+                                #posible implementacion de expresiones regulares stby
         
         enlaceCompleto += container[0] + "?autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist="
 
+        #mejorar
         for urlId in container:
             enlaceCompleto+=urlId+","
         return enlaceCompleto
@@ -102,7 +109,8 @@ class Event(models.Model):
         #_logger.info(str(url.rsplit('/v/',1)[1].rsplit('?',1)[0])+" 500")
         return url.rsplit('/v/',1)[1].rsplit('?',1)[0]
         pass
-
+    
+    #extrar filtro
     @api.onchange('urlVid', 'urlVidId')
     def _onchange_(self):
         if self.urlVid is not False:
@@ -118,6 +126,8 @@ class Event(models.Model):
         if self.urlWeb is False:
             self.urlWeb = self.qr
         pass
+    #adaptar a los cambios implementados en el banner selector
+     #lvid eliminado y reemplazado por el rss
 
     @api.multi
     def write(self, vals):

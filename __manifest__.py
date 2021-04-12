@@ -27,7 +27,7 @@
         'security/ir.model.access.csv',
         'views/MainView.xml',
         'views/EventView.xml',
-        'views/SliderView.xml',
+        #'views/SliderView.xml',
         'views/ControllerView.xml',
         #'views/ScreenView.xml',
         'views/web_assets_backend.xml',
