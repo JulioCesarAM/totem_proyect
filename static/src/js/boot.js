@@ -166,13 +166,13 @@ odoo.define('totem_proyect.prueba', function (require) {
             self.eventimeout = new Timer(function(){ // Recursividad, llamar al siguiente evento en un lapso de tiempo
                 clearTimeout(self.carrousel);
                 self.next();
-            },  Number(self.configuration.mainSlider*1000));
+            },  Number(self.configuration.mainSlider*1000))
         },
 
         comprobarEvento: function(nb){ // Elimina evento del array allevents
             var self = this;
-            fetch(`/web/image/event.totem/${self.event.id}/bannerImg`) // Comprobar que existe la imagen (El evento no haya sido borrado)
-                .then(response => {
+            fetch(`/web/image/event.totem/${self.event.id}/bannerImg`)
+                .then(response => { // Comprobar que existe la imagen (El evento no haya sido borrado)
                     if(!response.ok){ // Si el evento fue eliminado
                         if(nb){ // Cuando es llamado del next()
                             self.allevents.splice(self.allevents.indexOf(self.event), 1); // Eliminar el evento del array
