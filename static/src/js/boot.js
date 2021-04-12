@@ -63,6 +63,8 @@ odoo.define('totem_proyect.prueba', function (require) {
         start: function(){
             var self = this;
 
+            // Traer de la base de datos los eventos
+
             var def = this._rpc({
                 model: 'event.totem',
                 method: 'get_events',
@@ -70,9 +72,11 @@ odoo.define('totem_proyect.prueba', function (require) {
             })
             .then(function (res) {
                 
+                // Limpiar slider de imagenes cada tasa de refresco
+
                 clearTimeout(self.carrousel);
 
-                ////////////////////
+                // Controlar que anuncios guardar dependiendo de los margenes de tiempo
 
                 var eventsInTime = []
                 for(let iterator=0; iterator<res.length; iterator++)
@@ -83,48 +87,53 @@ odoo.define('totem_proyect.prueba', function (require) {
                             eventsInTime.push(res[iterator]);
                     }
                 
-
-                ////////////////////
-
                 self.allevents = eventsInTime;
+
+                /////////////////////////////////////////////////////////////////////////
+
                 if(self.i > self.allevents.length-1) // i = 0 si sobrepasa el numero de anuncios por eliminación
                     self.i = 0;
-                self.event = self.allevents[self.i];
+
+                self.event = self.allevents[self.i]; // Seleccionar el evento a mostrar
                 console.log(self.event);
+
+                // Traer de la base de datos la configuración del administrador
+
                 var dur = self._rpc({
                     model: 'res.company',
                     method: 'search_read',
                     args: [[],['mainSlider', 'secundarySlider', 'description', 'companyQr', 'refreshTime', 'redirectionTime']],
                 })
-                if(eventsInTime.length == 0)
+                if(eventsInTime.length == 0) // Handler cuando NO hay eventos
                     return "No hay eventos";
-                else
+                else                         // Handler cuando SI hay eventos
                     return dur
             })
             .then(function (res){
-                if(res != "No hay eventos"){
-                    self.configuration = res[0];
-                    self.$el.html(QWeb.render("EventView", {widget: self}));
-                    setTimeout(() => {self.showslider();},0);
-                    self.eventimeout = new Timer(function(){
+                if(res != "No hay eventos"){ // Handler cuando SI hay eventos
+                    self.configuration = res[0]; // Guardar la configuración en una variable
+                    self.$el.html(QWeb.render("EventView", {widget: self})); // Renderizar la vista en el xml
+                    setTimeout(() => {self.showslider();},0); // Iniciar el slider de imagenes
+                    self.eventimeout = new Timer(function(){ // Llamar al siguiente evento  en un lapso de tiempo
                         clearTimeout(self.carrousel);
                         self.next();
                     },  Number(self.configuration.mainSlider*1000));
                 }
-                else{
+                else{ // Handler cuando NO hay eventos
                     alert(res);
                 }
-                self.backup(Number(self.configuration.refreshTime*60*1000))
+
+                self.backup(Number(self.configuration.refreshTime*60*1000)) // Llamar a la tasa de refresco
             });
         },
 
         showslider: function(){
             var self = this;
-            let car = $(".mySlides")
-            if(car.length > 1){
-                for( let iterator=1; iterator<car.length; iterator++)
-                    car[iterator].classList.remove("active");
-                self.carrousel = $(".slideshow-container").carousel({
+            let car = $(".mySlides") // Guardar el contenedor de las imagenes
+            if(car.length > 1){ // Siempre que sea mayor que uno, se hace el carrousel
+                for( let iterator=1; iterator<car.length; iterator++) // Recorrer todas las imagenes
+                    car[iterator].classList.remove("active"); // Dejar solo una imagen activa
+                self.carrousel = $(".slideshow-container").carousel({ //Iniciar la animación del carrousel de imagenes
                     interval:Number(self.configuration.secundarySlider*1000)
                 });
             }
@@ -132,14 +141,14 @@ odoo.define('totem_proyect.prueba', function (require) {
 
         next: function(){
             var self = this;
-            self.i++;
-            if(self.i >= self.allevents.length)
+            self.i++; // incrementar el iterador del array de eventos
+            if(self.i >= self.allevents.length) // Controlar que no salga del rango
                 self.i=0;
-            self.event = self.allevents[self.i];
-            self.comprobarEvento(true)
-            self.$el.html(QWeb.render("EventView", {widget: self}));
-            setTimeout(() => {self.showslider();},0);
-            self.eventimeout = new Timer(function(){
+            self.event = self.allevents[self.i]; // Incrementar el evento
+            self.comprobarEvento(true) // Comprobar si el evento no ha sido borrado
+            self.$el.html(QWeb.render("EventView", {widget: self})); // Renderizar la vista en el xml
+            setTimeout(() => {self.showslider();},0); // Iniciar el slider de imagenes
+            self.eventimeout = new Timer(function(){ // Recursividad, llamar al siguiente evento en un lapso de tiempo
                 clearTimeout(self.carrousel);
                 self.next();
             },  Number(self.configuration.mainSlider*1000));
@@ -147,31 +156,31 @@ odoo.define('totem_proyect.prueba', function (require) {
 
         back: function(){
             var self = this;
-            self.i--;
-            if(self.i < 0)
+            self.i--; // Decrementar el iterador del array de eventos
+            if(self.i < 0) // Controlar que no salga del rango
                self.i=self.allevents.length-1;
-            self.event = self.allevents[self.i];
-            self.comprobarEvento(false)
-            self.$el.html(QWeb.render("EventView", {widget: self}));
-            setTimeout(() => {self.showslider();},0);
-            self.eventimeout = new Timer(function(){
+            self.event = self.allevents[self.i]; // Incrementar el evento
+            self.comprobarEvento(false) // Comprobar si el evento no ha sido borrado
+            self.$el.html(QWeb.render("EventView", {widget: self})); // Renderizar la vista en el xml
+            setTimeout(() => {self.showslider();},0); // Iniciar el slider de imagenes
+            self.eventimeout = new Timer(function(){ // Recursividad, llamar al siguiente evento en un lapso de tiempo
                 clearTimeout(self.carrousel);
                 self.next();
-            },  Number(self.configuration.mainSlider*1000))
+            },  Number(self.configuration.mainSlider*1000));
         },
 
         comprobarEvento: function(nb){ // Elimina evento del array allevents
             var self = this;
-            fetch(`/web/image/event.totem/${self.event.id}/bannerImg`)
+            fetch(`/web/image/event.totem/${self.event.id}/bannerImg`) // Comprobar que existe la imagen (El evento no haya sido borrado)
                 .then(response => {
-                    if(!response.ok){
-                        if(nb){
-                            self.allevents.splice(self.allevents.indexOf(self.event), 1);
-                            self.next();
+                    if(!response.ok){ // Si el evento fue eliminado
+                        if(nb){ // Cuando es llamado del next()
+                            self.allevents.splice(self.allevents.indexOf(self.event), 1); // Eliminar el evento del array
+                            self.next(); // Siguiente evento
                         }
-                        else{
-                            self.allevents.splice(self.allevents.indexOf(self.event), 1);
-                            self.back();
+                        else{ // Cuando es llamado del back()
+                            self.allevents.splice(self.allevents.indexOf(self.event), 1); // Eliminar el evento del array
+                            self.back(); // Anterior evento
                         }
                     }
                 });
@@ -220,8 +229,6 @@ odoo.define('totem_proyect.prueba', function (require) {
         this.clearTimeout = function() {
             window.clearTimeout(timerId);
         }
-
-        //get_remainingTime()
     
         this.resume();
     }
