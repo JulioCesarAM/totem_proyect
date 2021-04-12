@@ -7,8 +7,4 @@ class mainConfigValues(models.Model):
     companyQr = fields.Text()
     refreshTime = fields.Integer(string='')
     redirectionTime = fields.Integer(string='')
-
-
-
-
-   
+    backGroundImg = fields.Binary(string=_(''))

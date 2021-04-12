@@ -7,6 +7,7 @@ class TotemConfigSettings(models.TransientModel):
     companyQr = fields.Text(string=_(''),related="company_id.companyQr",readonly=False)
     refreshTime = fields.Integer(string='',related="company_id.refreshTime",readonly=False)
     redirectionTime = fields.Integer(string='',related="company_id.redirectionTime",readonly=False)
+    backGroundImg = fields.Binary(string='',related ="company_id.backGroundImg",readonly=False)
     @api.constrains('main_slider_control')  
     def _constrains_main_slider_control(self):
         if self.main_slider_control<1:
