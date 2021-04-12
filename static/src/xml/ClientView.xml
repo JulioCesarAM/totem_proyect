@@ -38,7 +38,7 @@
                 <div class="linea"></div>
                 <div id="footerPage">
                     <div class="column" id="companyDesc" ><t t-esc="widget.configuration.description"/></div>
-                    <div class="column" id="companyCode"><img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.configuration.companyQr + '&amp;width=150&amp;height=150'}}"/></div>
+                    <div class="column" id="companyCode"><img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.configuration.qr + '&amp;width=150&amp;height=150'}}"/></div>
                 </div>
             </div>
             <div id="atras" class="column slideIcon">
