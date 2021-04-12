@@ -66,6 +66,17 @@
                     </div>
                 </div>
 
+                <style id="ColorDeFondo">
+                    #bodyPage{
+                        background-image: url("/web/image/res.company/<t t-esc="widget.configuration.id"/>/backGroundImg");
+                        background-color: black;
+                    }
+                    .slideIcon{
+                        background-image: url("/web/image/res.company/<t t-esc="widget.configuration.id"/>/backGroundImg");
+                        background-color: black;
+                    }
+                </style>
+
                 <!-- CIERRE DEL MODAL -->
         </div>
     </t>
