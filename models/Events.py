@@ -42,25 +42,22 @@ class Event(models.Model):
     #metodo diseñado para devolver todos los eventos que peternecen al usuario que los controla
     @api.model
     def get_events(self, uid):
-        events_id= []
         events_ids = self.env['totem.controllers'].search_read([('admin','=',uid)])
-        _logger.info(str(events_ids)+" 500")
-      
-        _logger.info(str(events_ids)+" 500")
-        events = self.env['event.totem'].search_read([('id','in',events_ids[0]['events'])],[
-            'title','sliderImg','description','qr',
-            'bannerPrincipalSelector','urlVid','horaInicio'
-            ,'horaFin','fechaInicio','fechaFin','urlWeb'
-            ,'urlVidId','descriptionPopUp','titlePopUp','rssVideo'])
-        for i in events:
-            if i['bannerPrincipalSelector']=='rssVideo':
-                i['rssVideo']=self.getXmlData(i['rssVideo'])
-            i['horaInicio']=self.hourConverterToSeconds(i['horaInicio'])
-            i['horaFin']=self.hourConverterToSeconds(i['horaFin'])
-        return events
+        if len(events_ids)>0:
+            events = self.env['event.totem'].search_read([('id','in',events_ids[0]['events'])],[
+                'title','sliderImg','description','qr',
+                'bannerPrincipalSelector','urlVid','horaInicio'
+                ,'horaFin','fechaInicio','fechaFin','urlWeb'
+                ,'urlVidId','descriptionPopUp','titlePopUp','rssVideo'])
+            for i in events:
+                if i['bannerPrincipalSelector']=='rssVideo':
+                    i['rssVideo']=self.getXmlData(i['rssVideo'])
+                i['horaInicio']=self.hourConverterToSeconds(i['horaInicio'])
+                i['horaFin']=self.hourConverterToSeconds(i['horaFin'])
+            return events
+        else:
+            return []
 
-        
-        pass
 
 
         #upgrades
