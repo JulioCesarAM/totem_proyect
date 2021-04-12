@@ -166,7 +166,7 @@ odoo.define('totem_proyect.prueba', function (require) {
             self.eventimeout = new Timer(function(){ // Recursividad, llamar al siguiente evento en un lapso de tiempo
                 clearTimeout(self.carrousel);
                 self.next();
-            },  Number(self.configuration.mainSlider*1000))
+            },  Number(self.configuration.mainSlider*1000));
         },
 
         comprobarEvento: function(nb){ // Elimina evento del array allevents

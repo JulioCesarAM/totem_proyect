@@ -10,13 +10,11 @@
                     <t t-if="widget.event.bannerPrincipalSelector=='img'">
                         <img id="imgbanner" t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/bannerImg'}}" style="width:864px;height:864px"/>
                     </t>
-                    <!--<t t-if="widget.event.bannerPrincipalSelector=='vid'">
-                        <video width="864" height="864">
-                            <source t-attf-src="{{'data:video/mp4;base64,' + widget.event.videoField}}" type="video/mp4"/>
-                        </video>
-                    </t>-->
                     <t t-if="widget.event.bannerPrincipalSelector=='lvid'">
                         <iframe id="videobanner" t-attf-src="{{widget.event.urlVid + '?autoplay=1&amp;mute=1&amp;controls=0&amp;rel=0&amp;loop=1&amp;playlist=' + widget.event.urlVidId}}" style="width:864px;height:864px"></iframe>
+                    </t>
+                    <t t-if="widget.event.bannerPrincipalSelector=='rssVideo'">
+                        <iframe id="videobanner" t-attf-src="{{widget.event.rssVideo}}" style="width:864px;height:864px"></iframe>
                     </t>
                     <img id="eventBarcode" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.qr + '&amp;width=120&amp;height=120'}}"/>
                 </div>
@@ -38,7 +36,7 @@
                 <div class="linea"></div>
                 <div id="footerPage">
                     <div class="column" id="companyDesc" ><t t-esc="widget.configuration.description"/></div>
-                    <div class="column" id="companyCode"><img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.configuration.qr + '&amp;width=150&amp;height=150'}}"/></div>
+                    <div class="column" id="companyCode"><img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.configuration.companyQr + '&amp;width=150&amp;height=150'}}"/></div>
                 </div>
             </div>
             <div id="atras" class="column slideIcon">
