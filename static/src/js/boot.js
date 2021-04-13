@@ -78,14 +78,24 @@ odoo.define('totem_proyect.prueba', function (require) {
 
                 // Controlar que anuncios guardar dependiendo de los margenes de tiempo
 
+                const HORAS24 = 86400000
                 var eventsInTime = []
-                for(let iterator=0; iterator<res.length; iterator++)
-                    if(Date.parse(res[iterator].fechaInicio)<=Date.now() && Date.now()<Date.parse(res[iterator].fechaFin)){
-                        let todayTime = new Date(Date.now());
-                        todayTime = todayTime.getHours()*60*60*1000+todayTime.getMinutes()*60*1000;
-                        if(res[iterator].horaInicio<=todayTime && todayTime<res[iterator].horaFin)
-                            eventsInTime.push(res[iterator]);
-                    }
+                for(let iterator=0; iterator<res.length; iterator++){ // Recorrer eventos
+                    let dentro=false;
+                    res[iterator].fechas.forEach(fechas => { // Recorrer fechas dentro de eventos
+                        var eventFecha = Date.parse(fechas.fecha);
+                        if(eventFecha<=Date.now() && Date.now()<eventFecha+HORAS24){ // Entra dentro del dia actual
+                            var todayTime = new Date(Date.now());
+                            todayTime = (todayTime.getHours()*60*60*1000)+(todayTime.getMinutes()*60*1000); // Hora actual en milisegundos
+                            for(let j=0; j<fechas.rangoHoras.length && dentro==false; j++){ // Recorrer rangos horarios dentro de las fechas
+                                if(fechas.rangoHoras[j].horaInicial<=todayTime && todayTime<fechas.rangoHoras[j].horaFinal){ // Entra en el rango horario
+                                    eventsInTime.push(res[iterator]);
+                                    dentro=true;
+                                }
+                            }
+                        }
+                    });
+                }
                 
                 self.allevents = eventsInTime;
 
