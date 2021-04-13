@@ -105,12 +105,12 @@ odoo.define('totem_proyect.prueba', function (require) {
                     args: [[],['mainSlider', 'secundarySlider', 'description', 'companyQr', 'refreshTime', 'redirectionTime']],
                 })
                 if(eventsInTime.length == 0) // Handler cuando NO hay eventos
-                    return "No hay eventos";
+                    return "No hay eventos, dele a \"aceptar\" y vuelva atrás";
                 else                         // Handler cuando SI hay eventos
                     return dur
             })
             .then(function (res){
-                if(res != "No hay eventos"){ // Handler cuando SI hay eventos
+                if(res != "No hay eventos, dele a \"aceptar\" y vuelva atrás"){ // Handler cuando SI hay eventos
                     self.configuration = res[0]; // Guardar la configuración en una variable
                     self.$el.html(QWeb.render("EventView", {widget: self})); // Renderizar la vista en el xml
                     setTimeout(() => {self.showslider();},0); // Iniciar el slider de imagenes
@@ -118,12 +118,12 @@ odoo.define('totem_proyect.prueba', function (require) {
                         clearTimeout(self.carrousel);
                         self.next();
                     },  Number(self.configuration.mainSlider*1000));
+                    self.backup(Number(self.configuration.refreshTime*60*1000)) // Llamar a la tasa de refresco
                 }
                 else{ // Handler cuando NO hay eventos
                     alert(res);
                 }
 
-                self.backup(Number(self.configuration.refreshTime*60*1000)) // Llamar a la tasa de refresco
             });
         },
 
