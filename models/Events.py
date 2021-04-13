@@ -60,19 +60,17 @@ class Event(models.Model):
                     i['fechas']=self.dateTimeProccessor(i['fechas'])
                     _logger.info(str(i['fechas'])+ " 500")
                     
-                        #aux=fecha['rangoHoras'][timeInDate.index(time)]=time['horaInicial']
-                            #_logger.info(str(timeInDate.index(time))+" 500" + str(fecha['fecha']))
-                            
-                
-                            #_logger.info(str(fechas)+ " 500"+ "bucle tiempo")
-
-                        #dateWithTime+="},"
-                        #falta darle formato json
-                    #_logger.info(str(dateWithTime)+ " 500")
-                #i['horaInicio']=self.hourConverterToSeconds(i['horaInicio'])
-                #i['horaFin']=self.hourConverterToSeconds(i['horaFin'])      
+        #aux=fecha['rangoHoras'][timeInDate.index(time)]=time['horaInicial']
+        #_logger.info(str(timeInDate.index(time))+" 500" + str(fecha['fecha']))   
+        #_logger.info(str(fechas)+ " 500"+ "bucle tiempo")
+        # #dateWithTime+="},"
+        #falta darle formato json
+        #_logger.info(str(dateWithTime)+ " 500")
+        #i['horaInicio']=self.hourConverterToSeconds(i['horaInicio'])
+        #i['horaFin']=self.hourConverterToSeconds(i['horaFin'])      
         return events
         pass
+
 
     def dateTimeProccessor(self,date):
         fechas=self.env['event.date'].search_read([('id','in',date)],['fecha','rangoHoras'])
@@ -88,7 +86,6 @@ class Event(models.Model):
 
 
         #upgrades
-            #implementar que se envie el enlace completo del video modo url vid
             #eliminar valores que no son necesarios del campo events
             #generar varios events dependiendo del modo selecionado
 
@@ -164,9 +161,9 @@ class Event(models.Model):
     def write(self, vals):
         if 'bannerPrincipalSelector' in vals.keys():
             if vals['bannerPrincipalSelector'] == 'img':
-                vals['videoField'] = False
+                vals['rssVideo'] = False
                 vals['urlVid'] = False
-            elif vals['bannerPrincipalSelector'] == "vid":
+            elif vals['bannerPrincipalSelector'] == "rssVideo":
                 vals['bannerImg'] = False
                 vals['urlVid'] = False
             elif vals['bannerPrincipalSelector'] == "lvid":
