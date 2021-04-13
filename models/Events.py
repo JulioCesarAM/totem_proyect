@@ -56,37 +56,34 @@ class Event(models.Model):
                     i['rssVideo']=self.getXmlData(i['rssVideo'])
                 if i['bannerPrincipalSelector']=='lvid':
                     i['urlVid']=self.urlVidProcessor(i['urlVid'])
-                
-
                 if i['fechas']!='':
-    
-                    fechas=self.env['event.date'].search_read([('id','in',i['fechas'])],['fecha','rangoHoras'])
-                    for fecha in fechas:
-                        dateWithTime+=str(fecha['fecha'])
-
-                        timeInDate=self.env['event.time'].search_read([('id','in',fecha['rangoHoras'])],['horaInicial','horaFinal'])
-                        for time in timeInDate:
-                            #aux=fecha['rangoHoras'][timeInDate.index(time)]=time['horaInicial']
-                            fecha['rangoHoras'][timeInDate.index(time)]=time
-            
+                    i['fechas']=self.dateTimeProccessor(i['fechas'])
+                    _logger.info(str(i['fechas'])+ " 500")
+                    
+                        #aux=fecha['rangoHoras'][timeInDate.index(time)]=time['horaInicial']
                             #_logger.info(str(timeInDate.index(time))+" 500" + str(fecha['fecha']))
-                            _logger.info(str(fechas) +" 500 " + str(fecha['fecha']))
-                            dateWithTime+=str(time['horaInicial'])
-                            dateWithTime+=str(time['horaFinal'])
+                            
+                
                             #_logger.info(str(fechas)+ " 500"+ "bucle tiempo")
 
                         #dateWithTime+="},"
                         #falta darle formato json
                     #_logger.info(str(dateWithTime)+ " 500")
-
-
                 #i['horaInicio']=self.hourConverterToSeconds(i['horaInicio'])
                 #i['horaFin']=self.hourConverterToSeconds(i['horaFin'])      
         return events
         pass
 
     def dateTimeProccessor(self,date):
-        return  "{"+date+"}"
+        fechas=self.env['event.date'].search_read([('id','in',date)],['fecha','rangoHoras'])
+        for fecha in fechas:
+            timeInDate=self.env['event.time'].search_read([('id','in',fecha['rangoHoras'])],['horaInicial','horaFinal'])
+            for time in timeInDate:
+                time['horaInicial']=self.hourConverterToSeconds(time['horaInicial'])
+                time['horaFinal']=self.hourConverterToSeconds(time['horaFinal'])
+                fecha['rangoHoras'][timeInDate.index(time)]=time
+
+        return  fechas
         pass
 
 
