@@ -12,3 +12,4 @@ class Fechas(models.Model):
     name = fields.Text(string=_(''))
     fecha = fields.Date(string=_(''))
     rangoHoras = fields.Many2many('event.time', string='')
+    events = fields.Many2one('event.totem', string='')

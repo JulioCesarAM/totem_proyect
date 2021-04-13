@@ -39,12 +39,13 @@ class Event(models.Model):
     descriptionPopUp = fields.Text(string=_(''))
     titlePopUp = fields.Text(string=_(''))
     popUpImg = fields.Binary(string=_(''))
-    fechas = fields.One2many('event.date', 'name', string=_(''))
+    fechas = fields.One2many('event.date', 'events', string=_(''))
     #metodo diseñado para devolver todos los eventos que peternecen al usuario que los controla
     @api.model
     def get_events(self, uid):
         events_ids = self.env['totem.controllers'].search_read([('admin','=',uid)])
         events = []
+
         if len(events_ids)>0:
             events = self.env['event.totem'].search_read([('id','in',events_ids[0]['events'])],[
                 'title','sliderImg','description','qr',
@@ -55,22 +56,28 @@ class Event(models.Model):
                     i['rssVideo']=self.getXmlData(i['rssVideo'])
                 if i['bannerPrincipalSelector']=='lvid':
                     i['urlVid']=self.urlVidProcessor(i['urlVid'])
-                _logger.info("antes de la funcion "+ " 500")
+                
+
                 if i['fechas']!='':
-                    dateWithTime=''
+    
                     fechas=self.env['event.date'].search_read([('id','in',i['fechas'])],['fecha','rangoHoras'])
                     for fecha in fechas:
                         dateWithTime+=str(fecha['fecha'])
-                        timeInDate=self.env['event.time'].search_read([('id','in',fecha['rangoHoras'])],['horaInicial','horaFinal'])
 
+                        timeInDate=self.env['event.time'].search_read([('id','in',fecha['rangoHoras'])],['horaInicial','horaFinal'])
                         for time in timeInDate:
+                            #aux=fecha['rangoHoras'][timeInDate.index(time)]=time['horaInicial']
+                            fecha['rangoHoras'][timeInDate.index(time)]=time
+            
+                            #_logger.info(str(timeInDate.index(time))+" 500" + str(fecha['fecha']))
+                            _logger.info(str(fechas) +" 500 " + str(fecha['fecha']))
                             dateWithTime+=str(time['horaInicial'])
                             dateWithTime+=str(time['horaFinal'])
-                            #_logger.info(str(time)+ " 500"+ "bucle tiempo")
+                            #_logger.info(str(fechas)+ " 500"+ "bucle tiempo")
 
                         #dateWithTime+="},"
                         #falta darle formato json
-                    _logger.info(str(dateWithTime)+ " 500")
+                    #_logger.info(str(dateWithTime)+ " 500")
 
 
                 #i['horaInicio']=self.hourConverterToSeconds(i['horaInicio'])
@@ -78,7 +85,7 @@ class Event(models.Model):
         return events
         pass
 
-    def dateTimeFormatter(self,date):
+    def dateTimeProccessor(self,date):
         return  "{"+date+"}"
         pass
 
