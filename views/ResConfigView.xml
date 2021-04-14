@@ -12,8 +12,9 @@
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">Control Eventos</span>
                             <div class="text-muted">
-                           		tiempo que tarda en cambiar los eventos en segundos 
+                           		tiempo que tarda en cambiar los eventos (Segundos)
                             </div>
+                           
                         </div>
                         <div class="o_setting_left_pane">
                             <field name="main_slider_control"/>
@@ -25,7 +26,7 @@
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">Control slider imagenes</span>
                             <div class="text-muted">
-                           		introducir valor en segundos de la velocidad del slider
+                           		tiempo que tarda en pasar las imagenes del slider (Segundos)
                             </div>
                         </div>
                         <div class="o_setting_left_pane">
@@ -64,7 +65,7 @@
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">Tiempo de Refresco</span>
                             <div class="text-muted">
-                                tiempo que se refrescan los anuncios
+                                tiempo que se refrescan los anuncios (Minutos)
                             </div>
                         </div>
                         <div class="o_setting_left_pane">
@@ -78,7 +79,7 @@
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">Tiempo del pop up</span>
                             <div class="text-muted">
-                                 tiempo que se mostrara el pop up al pulsar en la pantalla
+                                 tiempo que se mostrara el pop up al pulsar en la pantalla(Segundos)
                             </div>
                         </div>
                         <div class="o_setting_left_pane">
