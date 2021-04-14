@@ -18,5 +18,8 @@
         <field name="res_model">event.time</field>
         <field name="view_mode">tree,form</field>
     </record>
-    <menuitem id="event_view_time" name="Rango horarios" parent="mainMenu" action="action_events_time" />
+
+   <!-- <menuitem id="event_view_time" name="Rango horarios" parent="mainMenu" action="action_events_time" />
+-->
+
 </odoo>

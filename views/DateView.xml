@@ -1,5 +1,5 @@
 <odoo>
-    <record model="ir.ui.view" id="view_id_tree_pantalla">
+    <record model="ir.ui.view" id="view_id_tree_pantallaFecha">
         <field name="name">event.date.tree</field>
         <field name="model">event.date</field>
         <field name="priority" eval="16"/>
@@ -11,11 +11,35 @@
             </tree>
         </field>
     </record>
+    <record model="ir.ui.view" id="view_id_form_pantallaFecha">
+        <field name="name">event.date.form</field>
+        <field name="model">event.date</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <form string="event form">
+                <group colspan="4">
+  
+                    <group colspan="4" col="2">
+                        <separator string="Configuracion Fechas" colspan="2"/>
+                        <field name="name"  string="Nombre"/>
+                        <field name="fecha"  string="Fecha"/>
+                        <field name="rangoHoras" string="Rango de horas"/>
+                        <field name="events" attrs="{'invisible':1}" string="Insertar url de Rss"/>
+
+                    </group>
+
+
+                </group>
+            </form>
+        </field>
+    </record>
 
     <record model="ir.actions.act_window" id="action_events_date">
         <field name="name">event.date.img</field>
         <field name="res_model">event.date</field>
         <field name="view_mode">tree,form</field>
     </record>
-    <menuitem id="event_view_date" name="Fechas" parent="mainMenu" action="action_events_date" />
+
+   <!--  <menuitem id="event_view_date" name="Fechas" parent="mainMenu" action="action_events_date" />
+-->
 </odoo>

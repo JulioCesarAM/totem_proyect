@@ -1,5 +1,4 @@
-<!--
-    implementacion removida por peticion del cliente
+
 <odoo>
     <record model="ir.ui.view" id="view_id_tree_slider">
         <field name="name">slider.totem.tree</field>
@@ -13,13 +12,38 @@
             </tree>
         </field>
     </record>
+    
+
+     <record model="ir.ui.view" id="view_id_form_slider">
+        <field name="name">slider.totem.form</field>
+        <field name="model">slider.totem</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <form string="event form">
+                <group colspan="4">
+  
+                    <group colspan="4" col="2">
+                        <separator string="Configuracion slider imagenes" colspan="2"/>
+                        <field name="name"  string="Nombre"/>
+                        <field name="image_rute"  string="imagen"/>
+                        <field name="event_id_fk" attrs="{'invisible':1}" string="enlaceTabla"/>
+
+                    </group>
+
+
+                </group>
+            </form>
+        </field>
+    </record>
 
     <record model="ir.actions.act_window" id="action_events_slider">
         <field name="name">images</field>
         <field name="res_model">slider.totem</field>
         <field name="view_mode">tree,form</field>
     </record>
+<!--
     <menuitem id="test_two" name="Lista de imagenes" parent="mainMenu" action="action_events_slider" />
+-->
 </odoo>
 
--->
+
