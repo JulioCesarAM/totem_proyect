@@ -45,7 +45,7 @@ class Event(models.Model):
     def get_events(self, uid):
         events_ids = self.env['totem.controllers'].search_read([('admin','=',uid)])
         events = []
-
+        
         if len(events_ids)>0:
             events = self.env['event.totem'].search_read([('id','in',events_ids[0]['events'])],[
                 'title','sliderImg','description','qr',

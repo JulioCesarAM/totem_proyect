@@ -1,7 +1,19 @@
 #bodyPage {
     display: table;
     width: 100%;
-    height: 1920px;
+    height: 100%;
+}
+
+.o_main, .o_main_content, .o_content {
+    width: 100%;
+    height: 100%;
+}
+
+.o_content{
+    > div{
+        width: 100%;
+        height: 100%;
+    }
 }
 
 #footerPage{
@@ -27,6 +39,7 @@
     text-align: center;
     top: 50%;
     left: 20%;
+    height: 100%;
     color: white;
 }
 
@@ -51,7 +64,7 @@
     position: relative;
     margin: auto;
     width: 100%;
-    height: 864px;
+    height: 45%;
 }
 
 #videobanner {
@@ -79,13 +92,15 @@
 
 #resto{
     margin-top: 30px;
+    height: 44.2%;
+    width: 100%;
 }
 
 #description{
     margin-left: 5%;
     margin-right: 5%;
     padding: 12px;
-    height: 300px;
+    height: 35.5%;
     font-size: 180%;
     text-align: justify;
     color: white
@@ -94,4 +109,6 @@
 .slideshow-container{
     margin-top: 30px;
     text-align: center;
+    width:100%;
+    height:54.2%;
 }

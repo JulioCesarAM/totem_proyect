@@ -8,7 +8,7 @@
             <div id="content" class="column">
                 <div id="banner">
                     <t t-if="widget.event.bannerPrincipalSelector=='img'">
-                        <img id="imgbanner" t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/bannerImg'}}" style="width:1026px;height:864px"/>
+                        <img id="imgbanner" t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/bannerImg'}}" style="width:100%;height:100%"/>
                     </t>
                     <t t-if="widget.event.bannerPrincipalSelector=='lvid'">
                         <iframe id="videobanner" t-attf-src="{{widget.event.urlVid}}" style="width:1026px;height:864px"></iframe>
@@ -24,10 +24,10 @@
                     <h1 id="titulo"><t t-esc="widget.event.title"/></h1>
                     <div id="description"><t t-esc="widget.event.description"/></div>
                     <div class="slideshow-container carousel slide">
-                        <div class="carousel-inner">
+                        <div class="carousel-inner" style="width:100%;height:100%">
                             <t t-foreach="widget.event.sliderImg" t-as="i">
-                                <div class="mySlides carousel-item active">
-                                    <img class="d-block" t-attf-src="{{'/web/image/slider.totem/' + i + '/image_rute'}}" style="width:1026px;height:460px"/>
+                                <div class="mySlides carousel-item active" style="width:100%;height:100%">
+                                    <img class="d-block" t-attf-src="{{'/web/image/slider.totem/' + i + '/image_rute'}}" style="width:100%;height:100%"/>
                                 </div>
                             </t>
                         </div>

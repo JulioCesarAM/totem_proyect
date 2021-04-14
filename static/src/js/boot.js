@@ -9,51 +9,50 @@ odoo.define('totem_proyect.prueba', function (require) {
 
 
     var banners = AbstractAction.extend({
-        carrousel: null,
-        eventimeout: null,
-        i: 0,
-        allevents: {},
-        slideIndex: 0,
-        configuration: {},
-        event: null,
-        modalBool: false,
-        modalTimer: null,
+        carrousel: null, // Carrousel de imagenes
+        eventimeout: null, // Timeout del slider de eventos
+        allevents: {}, // Todos los eventos que se van a mostrar
+        i: 0, // Index que recorre allevents
+        configuration: {}, // Datos de la configuración
+        event: null, // Evento a mostrar
+        modalBool: false, // Modal abierto o no
+        modalTimer: null, // Timeout del modal abierto
         events:{
-            "click #siguiente": _.debounce(function() {
+            "click #siguiente": _.debounce(function() { // Siguiente evento
                 clearTimeout(this.carrousel);
                 this.eventimeout.clearTimeout();
-                this.next();
+                this.next(); // Pasar al siguiente evento
             }, 200, true),
 
-            "click #atras": _.debounce(function() {
+            "click #atras": _.debounce(function() { // Anterior evento
                 clearTimeout(this.carrousel);
                 this.eventimeout.clearTimeout();
-                this.back();
+                this.back(); // Volver al evento anterior
             }, 200, true),
             
-            "click #content": _.debounce(function() {
+            "click #content": _.debounce(function() { // Abrir el modal
                 var self = this;
-                setTimeout(function(){self.modalBool = true;},0);
-                self.eventimeout.pause();
-                $("#mymodal").modal({show: true});
-                self.modalTimer = setTimeout(function(){
-                    if(self.modalBool){
-                        $("#mymodal").modal('hide');
-                        $("#mymodal").on('hidden.bs.modal', function(e){
-                            self.eventimeout.resume()
+                setTimeout(function(){self.modalBool = true;},0); // Requiere del setTimeout 0 para que no se ejecute a la vez que el evento de abajo
+                self.eventimeout.pause(); // Pausar el slider de eventos mientras el modal esta abierto
+                $("#mymodal").modal({show: true}); // Mostrar modal
+                self.modalTimer = setTimeout(function(){ // Timeout para cerrar modal
+                    if(self.modalBool){ // Si ya esta abierto
+                        $("#mymodal").modal('hide'); // Se cierra el modal
+                        $("#mymodal").on('hidden.bs.modal', function(e){ // Una vez acabe la animación
+                            self.eventimeout.resume() // Renaudar timer de slider de eventos
                             self.modalBool = false;
                         });
                     }
                 }, self.configuration.redirectionTime * 1000)
             }, 200, true),
             
-            "click #bodyPage #mymodal": _.debounce(function() {
+            "click #bodyPage #mymodal": _.debounce(function() { // Cerrar el modal
                 var self = this;
-                if(self.modalBool){
-                    $("#mymodal").modal('hide');
-                        $("#mymodal").on('hidden.bs.modal', function(e){
-                        self.eventimeout.resume()
-                        clearTimeout(self.modalTimer);
+                if(self.modalBool){ // Si ya esta abierto
+                    $("#mymodal").modal('hide'); // Se cierra el modal
+                        $("#mymodal").on('hidden.bs.modal', function(e){ // Una vez acabe la animación
+                        self.eventimeout.resume() // Renaudar timer de slider de eventos
+                        clearTimeout(self.modalTimer); // Eliminar timer de modal
                         self.modalBool = false;
                     });
                 }
@@ -75,7 +74,6 @@ odoo.define('totem_proyect.prueba', function (require) {
                 // Limpiar slider de imagenes cada tasa de refresco
 
                 clearTimeout(self.carrousel);
-
                 // Controlar que anuncios guardar dependiendo de los margenes de tiempo
 
                 const HORAS24 = 86400000
@@ -198,31 +196,29 @@ odoo.define('totem_proyect.prueba', function (require) {
 
         backup: function(tasa_refresco){
             var self = this;
-            setTimeout(() => {
-                if(self.modalBool){
-                    $("#mymodal").modal('hide');
-                    $("#mymodal").on('hidden.bs.modal', function(e){
-                        console.log("Refresco");
+            setTimeout(() => { // Cuando venza la tasa de refresco
+                if(self.modalBool){ // Si el modal esta abierto
+                    $("#mymodal").modal('hide'); // Se cierra el modal
+                    $("#mymodal").on('hidden.bs.modal', function(e){ // Una vez acabe la animación
                         if(self.eventimeout!=null)
-                            self.eventimeout.clearTimeout();
-                        clearTimeout(self.modalTimer);
+                            self.eventimeout.clearTimeout(); // Se elimina el timer del slider de eventos
+                        clearTimeout(self.modalTimer); // Se elimina el timer del slider de imagenes
                         self.modalBool = false;
-                        self.start();
+                        self.start(); // Reinicio
                     });
                 }
                 else {
-                    console.log("Refresco");
                     if(self.eventimeout!=null)
-                        self.eventimeout.clearTimeout();
-                    clearTimeout(self.modalTimer);
+                        self.eventimeout.clearTimeout(); // Se elimina el timer del slider de eventos
+                    clearTimeout(self.modalTimer); // Se elimina el timer del slider de imagenes
                     self.modalBool = false;
-                    self.start();
+                    self.start(); // Reinicio
                 }
             }, tasa_refresco);
         },
     });
 
-    function Timer(callback, delay) {
+    function Timer(callback, delay) { // Función setTimeout pero con pausa
         var timerId, start, remaining = delay;
     
         this.pause = function() {
