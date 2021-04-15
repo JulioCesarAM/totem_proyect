@@ -12,9 +12,10 @@ _logger = logging.getLogger(__name__)
 
 class Event(models.Model):
     _name = 'event.totem'
-    _order='sequence,id'
-    name = fields.Text(string=_(''))
-    sequence = fields.Text(string='')
+    _order='sequence'
+    name = fields.Char(string='')
+    sequence = fields.Integer(string='')
+    #name = fields.Text(string=_(''))
     title = fields.Text(string=_(''))
     bannerImg = fields.Binary(string=_(''))
     sliderImg = fields.One2many('slider.totem', 'event_id_fk', string=_(''),ondelete='cascade')
@@ -168,16 +169,24 @@ class Event(models.Model):
 
     @api.multi
     def write(self, vals):
-        if 'bannerPrincipalSelector' in vals.keys():
-            if vals['bannerPrincipalSelector'] == 'img':
-                vals['rssVideo'] = False
-                vals['urlVid'] = False
-            elif vals['bannerPrincipalSelector'] == "rssVideo":
-                vals['bannerImg'] = False
-                vals['urlVid'] = False
-            elif vals['bannerPrincipalSelector'] == "lvid":
-                vals['bannerImg'] = False
-                vals['videoField'] = False
+        try:
+            if vals['title']!='':
+                vals['name']=vals['title']
+            else:
+                vals['name']=self['title']
+
+            if 'bannerPrincipalSelector' in vals.keys():
+                if vals['bannerPrincipalSelector'] == 'img':
+                    vals['rssVideo'] = False
+                    vals['urlVid'] = False
+                elif vals['bannerPrincipalSelector'] == "rssVideo":
+                    vals['bannerImg'] = False
+                    vals['urlVid'] = False
+                elif vals['bannerPrincipalSelector'] == "lvid":
+                    vals['bannerImg'] = False
+                    vals['videoField'] = False
+        except:
+            _logger.info("error write")
 
         # if 'qr' in vals.keys() and 'urlWeb' not in vals.keys():
         #    vals['urlWeb'] = vals['qr']
