@@ -12,8 +12,9 @@ _logger = logging.getLogger(__name__)
 
 class Event(models.Model):
     _name = 'event.totem'
-    _order='name,title'
+    _order='sequence,id'
     name = fields.Text(string=_(''))
+    sequence = fields.Text(string='')
     title = fields.Text(string=_(''))
     bannerImg = fields.Binary(string=_(''))
     sliderImg = fields.One2many('slider.totem', 'event_id_fk', string=_(''),ondelete='cascade')
@@ -164,9 +165,9 @@ class Event(models.Model):
     #adaptar a los cambios implementados en el banner selector
      #lvid eliminado y reemplazado por el rss
 
+
     @api.multi
     def write(self, vals):
-        vals['name']=vals['title']
         if 'bannerPrincipalSelector' in vals.keys():
             if vals['bannerPrincipalSelector'] == 'img':
                 vals['rssVideo'] = False
