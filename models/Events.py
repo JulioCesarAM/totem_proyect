@@ -166,6 +166,7 @@ class Event(models.Model):
 
     @api.multi
     def write(self, vals):
+        vals['name']=vals['title']
         if 'bannerPrincipalSelector' in vals.keys():
             if vals['bannerPrincipalSelector'] == 'img':
                 vals['rssVideo'] = False

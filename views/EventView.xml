@@ -27,6 +27,7 @@
 
                     <group colspan="4" col="2">
                         <separator string="Informacion del producto/evento" colspan="2"/>
+                        <field name="name" attrs="{'invisible':1}" />
                         <field name="title" required="1" string="Titulo"/>
                         <field name="description" required="1"/>
                         <field name="bannerPrincipalSelector" required="1" string="Selector contenido del banner principal"/>
