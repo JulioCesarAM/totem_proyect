@@ -12,7 +12,7 @@ _logger = logging.getLogger(__name__)
 
 class Event(models.Model):
     _name = 'event.totem'
-    _order='id,name'
+    _order='id'
     title = fields.Text(string=_(''))
     bannerImg = fields.Binary(string=_(''))
     sliderImg = fields.One2many('slider.totem', 'event_id_fk', string=_(''),ondelete='cascade')
@@ -61,6 +61,10 @@ class Event(models.Model):
                     i['fechas']=self.dateTimeProccessor(i['fechas'])
                     _logger.info(str(i['fechas'])+ " 500")
                     
+        imgId=self.sliderImg
+        dateId=self.fechas
+        _logger.info(str(imgId)+ " 500")
+        _logger.info(str(dateId)+ " 500")
         #aux=fecha['rangoHoras'][timeInDate.index(time)]=time['horaInicial']
         #_logger.info(str(timeInDate.index(time))+" 500" + str(fecha['fecha']))   
         #_logger.info(str(fechas)+ " 500"+ "bucle tiempo")
@@ -87,7 +91,8 @@ class Event(models.Model):
 
     @api.multi
     def unlink(self):
-   
+        #self.env['slider.totem'].unlink([('id','in',imgId)])
+        #self.env['event.date'].unlink([('id','in',dateId)])
         return super().unlink()
 
 

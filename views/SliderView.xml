@@ -40,8 +40,10 @@
         <field name="res_model">slider.totem</field>
         <field name="view_mode">tree,form</field>
     </record>
-
+<!--
     <menuitem id="test_two" name="Lista de imagenes" parent="mainMenu" action="action_events_slider" />
+
+-->
 </odoo>
 
 
