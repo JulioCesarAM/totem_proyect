@@ -12,7 +12,8 @@ _logger = logging.getLogger(__name__)
 
 class Event(models.Model):
     _name = 'event.totem'
-    _order='title,id'
+    _order='name,title'
+    name = fields.Text(string=_(''))
     title = fields.Text(string=_(''))
     bannerImg = fields.Binary(string=_(''))
     sliderImg = fields.One2many('slider.totem', 'event_id_fk', string=_(''),ondelete='cascade')
