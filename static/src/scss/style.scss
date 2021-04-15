@@ -19,23 +19,22 @@
 #footerPage{
     display: table;
     width: 100%;
-    height: 8%;
+    height: 7.65%;
     border: 1px solid white;
 
     #companyDesc{
         width: 85%;
         height: 100%;
-        margin-top: 20%;
-        text-align: center;
-        vertical-align: text-bottom;
+        text-align: justify;
         font-size: 180%;
-        color: white
+        color: white;
+        padding-bottom: 5px;
+        padding-top: 20px;
     }
 
     #companyCode{
         width: 15%;
         height: 100%;
-        text-align: right;
         position: relative;
         overflow: hidden;
     }
@@ -55,7 +54,6 @@
     text-align: center;
     top: 50%;
     left: 20%;
-    height: 100%;
     color: white;
 }
 
@@ -71,7 +69,7 @@
     font-size: x-large;
     font-weight: bolder;
     text-align: center;
-    margin-bottom: 3%;
+    margin-bottom: 7px;;
     color: white;
 }
 
@@ -124,24 +122,26 @@
 }
 
 #resto{
-    margin-top: 5.9%;
-    height: 44.2%;
+    margin-top: 15px;
+    height: 46.55%;
     width: 100%;
 }
 
 #description{
     margin-left: 5%;
     margin-right: 5%;
+    margin-bottom: 15px;
     padding: 1%;
-    height: 35.5%;
+    height: 36.9%;
     font-size: 180%;
     text-align: justify;
     color: white;
+    overflow: scroll;
 }
 
 .slideshow-container{
-    margin-top: 3%;
+    //margin-top: 3%;
     text-align: center;
     width:100%;
-    height:54.2%;
+    height:57.5%;
 }
