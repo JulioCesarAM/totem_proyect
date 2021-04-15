@@ -12,9 +12,10 @@ _logger = logging.getLogger(__name__)
 
 class Event(models.Model):
     _name = 'event.totem'
+    _order='id,name'
     title = fields.Text(string=_(''))
     bannerImg = fields.Binary(string=_(''))
-    sliderImg = fields.One2many('slider.totem', 'event_id_fk', string=_(''))
+    sliderImg = fields.One2many('slider.totem', 'event_id_fk', string=_(''),ondelete='cascade')
     description = fields.Text(string=_(''))
     qr = fields.Text()
     bannerPrincipalSelector = fields.Selection([
@@ -84,10 +85,10 @@ class Event(models.Model):
         return  fechas
         pass
 
-
-        #upgrades
-            #eliminar valores que no son necesarios del campo events
-            #generar varios events dependiendo del modo selecionado
+    @api.multi
+    def unlink(self):
+   
+        return super().unlink()
 
 
         

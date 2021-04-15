@@ -5,7 +5,7 @@
         <field name="priority" eval="16"/>
         <field name="arch" type="xml">
             <tree string="event list">
-                <field name="name"/>
+                <field name="name" widget='handle'/>
                 
             </tree>
         </field>
@@ -16,5 +16,8 @@
         <field name="res_model">pantallas.totem</field>
         <field name="view_mode">tree,form</field>
     </record>
+    <!--
     <menuitem id="test_three" name="pantalla" parent="mainMenu" action="action_events_pantalla" />
+
+-->
 </odoo>

@@ -4,7 +4,7 @@
         <field name="model">event.date</field>
         <field name="priority" eval="16"/>
         <field name="arch" type="xml">
-            <tree string="Fechas">
+            <tree string="Fechas" default_order='create_date'>
                 <field name="name" />
                 <field name="fecha"/>
 

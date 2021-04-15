@@ -6,8 +6,9 @@
         <field name="model">event.totem</field>
         <field name="priority" eval="16"/>
         <field name="arch" type="xml">
-            <tree string="event list">
+            <tree string="event list" default_order='create_date'>
                 <field name="title"/>
+                <field name="id"  widget="handle" />
 
 
             </tree>

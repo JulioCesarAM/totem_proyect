@@ -5,10 +5,9 @@
         <field name="model">slider.totem</field>
         <field name="priority" eval="16"/>
         <field name="arch" type="xml">
-            <tree string="event list">
+            <tree string="event list" default_order='create_date'>
                 <field name="name"/>
-                <field name="event_id_fk" readonly="1">
-                </field>
+              
             </tree>
         </field>
     </record>
@@ -41,9 +40,8 @@
         <field name="res_model">slider.totem</field>
         <field name="view_mode">tree,form</field>
     </record>
-<!--
+
     <menuitem id="test_two" name="Lista de imagenes" parent="mainMenu" action="action_events_slider" />
--->
 </odoo>
 
 
