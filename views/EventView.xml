@@ -7,8 +7,8 @@
         <field name="priority" eval="16"/>
         <field name="arch" type="xml">
             <tree string="event list" default_order='create_date'>
-                <field name="title"/>
-                <field name="id"  widget="handle" />
+                <field name="title" widget="handle"/>
+                
 
 
             </tree>
