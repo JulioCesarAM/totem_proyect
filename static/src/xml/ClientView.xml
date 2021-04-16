@@ -18,7 +18,7 @@
                     </t>
                     <div id="abajoDerecha">
                         <div class="containbarcode">
-                            <img id="eventBarcode" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.qr}}" style="width:130%;height:130%"/>
+                            <img id="eventBarcode" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.qr + '&amp;width=155&amp;height=170'}}"/>
                         </div>
                     </div>
                 </div>
@@ -26,20 +26,25 @@
 
                 <div id="resto">
                     <h1 id="titulo"><t t-esc="widget.event.title"/></h1>
-                    <div id="description"><t t-esc="widget.event.description"/></div>
-                    <div class="slideshow-container carousel slide">
-                        <div class="carousel-inner" style="width:100%;height:100%">
-                            <t t-foreach="widget.event.sliderImg" t-as="i">
-                                <div class="mySlides carousel-item active" style="width:100%;height:100%">
-                                    <img class="d-block" t-attf-src="{{'/web/image/slider.totem/' + i + '/image_rute'}}" style="width:100%;height:100%"/>
-                                </div>
-                            </t>
+                    <t t-if="widget.event.sliderImg.length > 0">
+                        <div class="description" style="height:37.9%;"><t t-esc="widget.event.description"/></div>
+                        <div class="slideshow-container carousel slide">
+                            <div class="carousel-inner" style="width:100%;height:100%">
+                                <t t-foreach="widget.event.sliderImg" t-as="i">
+                                    <div class="mySlides carousel-item active" style="width:100%;height:100%">
+                                        <img class="d-block" t-attf-src="{{'/web/image/slider.totem/' + i + '/image_rute'}}" style="width:100%;height:100%"/>
+                                    </div>
+                                </t>
+                            </div>
                         </div>
-                    </div>
+                    </t>
+                    <t t-if="widget.event.sliderImg.length == 0">
+                        <div class="description" style="height:93.4%;padding-bottom:10px;"><t t-esc="widget.event.description"/></div>
+                    </t>
                 </div>
                 <div id="footerPage">
                     <div class="column" id="companyDesc" ><t t-esc="widget.configuration.description"/></div>
-                    <div class="column" id="companyCode" ><img id="barfooter" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.configuration.companyQr}}" style="width:130%;height:130%"/></div> 
+                    <div class="column" id="companyCode" ><img id="barfooter" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.configuration.companyQr + '&amp;width=200&amp;height=192'}}"/></div> 
                 </div>
             </div>
             <div id="atras" class="column slideIcon">

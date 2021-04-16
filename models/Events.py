@@ -195,8 +195,8 @@ class Event(models.Model):
 
     @api.constrains('description')
     def _constrains_description(self):
-        if len(self.description) > 461:
-            raise exceptions.ValidationError(_("limite de caracteres 461"))
+        if len(self.description) > 40000:
+            raise exceptions.ValidationError(_("limite de caracteres 40000"))
         pass
 
     @api.constrains('title')

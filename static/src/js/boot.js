@@ -30,8 +30,11 @@ odoo.define('totem_proyect.prueba', function (require) {
                 this.back(); // Volver al evento anterior
             }, 200, true),
             
-            "click #content": _.debounce(function() { // Abrir el modal
+            "click #banner": _.debounce(function() { // Abrir el modal
                 var self = this;
+                if((self.event.titlePopUp==false||self.event.titlePopUp=="")&&(self.event.descriptionPopUp==false||self.event.descriptionPopUp=="")){
+                    return 
+                }
                 setTimeout(function(){self.modalBool = true;},0); // Requiere del setTimeout 0 para que no se ejecute a la vez que el evento de abajo
                 self.eventimeout.pause(); // Pausar el slider de eventos mientras el modal esta abierto
                 $("#mymodal").modal({show: true}); // Mostrar modal
