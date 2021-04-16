@@ -8,3 +8,4 @@ class mainConfigValues(models.Model):
     refreshTime = fields.Integer(string=_(''))
     redirectionTime = fields.Integer(string=_(''))
     backGroundImg = fields.Binary(string=_(''))
+    
