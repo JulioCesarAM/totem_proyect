@@ -85,7 +85,10 @@ odoo.define('totem_proyect.prueba', function (require) {
                     let dentro=false;
                     res[iterator].fechas.forEach(fechas => { // Recorrer fechas dentro de eventos
                         var eventFecha = Date.parse(fechas.fecha);
-                        if(eventFecha<=Date.now() && Date.now()<eventFecha+HORAS24){ // Entra dentro del dia actual
+                        var fechaFin = eventFecha;
+                        if(fechas.fechaFinal!=false)
+                            fechaFin = Date.parse(fechas.fechaFinal);
+                        if(eventFecha<=Date.now() && Date.now()<fechaFin+HORAS24){ // Entra dentro del dia actual
                             var todayTime = new Date(Date.now());
                             todayTime = (todayTime.getHours()*60*60*1000)+(todayTime.getMinutes()*60*1000); // Hora actual en milisegundos
                             for(let j=0; j<fechas.rangoHoras.length && dentro==false; j++){ // Recorrer rangos horarios dentro de las fechas
