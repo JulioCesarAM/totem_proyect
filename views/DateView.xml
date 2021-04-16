@@ -5,7 +5,7 @@
         <field name="priority" eval="16"/>
         <field name="arch" type="xml">
             <tree string="Fechas" default_order='create_date'>
-                <field name="name" />
+                <field name="name" string="Descripcion" />
                 <field name="fecha"/>
 
             </tree>
@@ -21,8 +21,9 @@
   
                     <group colspan="4" col="2">
                         <separator string="Configuracion Fechas" colspan="2"/>
-                        <field name="name"  string="Nombre"/>
+                        <field name="name"  string="Descripcion"/>
                         <field name="fecha"  string="Fecha"/>
+                        <field name="fechaFinal"  string="Fecha final"/>
                         <field name="rangoHoras" string="Rango de horas"/>
                         <field name="events" attrs="{'invisible':1}" string="Insertar url de Rss"/>
 

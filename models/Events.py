@@ -15,7 +15,6 @@ class Event(models.Model):
     _order='sequence'
     name = fields.Char(string='')
     sequence = fields.Integer(string='')
-    #name = fields.Text(string=_(''))
     title = fields.Text(string=_(''))
     bannerImg = fields.Binary(string=_(''))
     sliderImg = fields.One2many('slider.totem', 'event_id_fk', string=_(''),ondelete='cascade')
@@ -31,13 +30,10 @@ class Event(models.Model):
     audioField = fields.Binary(string=_(''))
     videoField = fields.Binary(string=_(''))
     urlVid = fields.Text(string=_(''))
-    #horaInicio = fields.Float(string=_(''),digits=(12,2))
-    #horaFin = fields.Float(string=_(''),digits=(12,2))
     urlWeb = fields.Text(string=_(''))
-    #fechaInicio = fields.Date(string=_(''))
-    #fechaFin = fields.Date(string=_(''))
+ 
     rssVideo = fields.Text(string=_(''))
-    # RSS datos
+  
     urlVidId = fields.Text(string=_(''))
     logo = fields.Binary(string=_(''))
     descriptionPopUp = fields.Text(string=_(''))
@@ -68,26 +64,20 @@ class Event(models.Model):
         dateId=self.fechas
         _logger.info(str(imgId)+ " 500")
         _logger.info(str(dateId)+ " 500")
-        #aux=fecha['rangoHoras'][timeInDate.index(time)]=time['horaInicial']
-        #_logger.info(str(timeInDate.index(time))+" 500" + str(fecha['fecha']))   
-        #_logger.info(str(fechas)+ " 500"+ "bucle tiempo")
-        # #dateWithTime+="},"
-        #falta darle formato json
-        #_logger.info(str(dateWithTime)+ " 500")
-        #i['horaInicio']=self.hourConverterToSeconds(i['horaInicio'])
-        #i['horaFin']=self.hourConverterToSeconds(i['horaFin'])      
+    
         return events
         pass
 
 
     def dateTimeProccessor(self,date):
-        fechas=self.env['event.date'].search_read([('id','in',date)],['fecha','rangoHoras'])
+        fechas=self.env['event.date'].search_read([('id','in',date)],['fecha','rangoHoras','fechaFinal'])
         for fecha in fechas:
             timeInDate=self.env['event.time'].search_read([('id','in',fecha['rangoHoras'])],['horaInicial','horaFinal'])
             for time in timeInDate:
                 time['horaInicial']=self.hourConverterToSeconds(time['horaInicial'])
                 time['horaFinal']=self.hourConverterToSeconds(time['horaFinal'])
                 fecha['rangoHoras'][timeInDate.index(time)]=time
+        _logger.info(str(fechas) + " 500")
 
         return  fechas
         pass
@@ -163,9 +153,7 @@ class Event(models.Model):
         if self.urlWeb is False:
             self.urlWeb = self.qr
         pass
-    #adaptar a los cambios implementados en el banner selector
-     #lvid eliminado y reemplazado por el rss
-
+ 
 
     @api.multi
     def write(self, vals):
@@ -188,8 +176,7 @@ class Event(models.Model):
         except:
             _logger.info("error write")
 
-        # if 'qr' in vals.keys() and 'urlWeb' not in vals.keys():
-        #    vals['urlWeb'] = vals['qr']
+  
 
         return super(Event, self).write(vals)
 
