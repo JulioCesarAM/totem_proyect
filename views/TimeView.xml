@@ -5,13 +5,35 @@
         <field name="priority" eval="16"/>
         <field name="arch" type="xml">
             <tree string="rango horas">
-                <field name="name" />
-                <field name="horaInicial"/>
-                <field name="horaFinal"/>
+                <field name="name" string="Descripcion"/>
+                <field name="horaInicial" string="Hora inicial"/>
+                <field name="horaFinal" string="Hora final"/>
 
             </tree>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="view_id_form_pantallaTime">
+        <field name="name">event.time.form</field>
+        <field name="model">event.time</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <form string="event form">
+                <group colspan="4">
+  
+                    <group colspan="4" col="2">
+                        <separator string="Configuracion de rangos horarios" colspan="2"/>
+                        <field name="name" string="Descripcion"/>
+                        <field name="horaInicial" string="Hora inicial"/>
+                        <field name="horaFinal" string="Hora final"/>
+                    </group>
+
+
+                </group>
+            </form>
+        </field>
+    </record>
+
 
     <record model="ir.actions.act_window" id="action_events_time">
         <field name="name">event.time.launch</field>

@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <tree string="event list" default_order='create_date'>
                 <field name="sequence" widget='handle' />
-                <field name="title" />
+                <field name="title" string="Titulo"/>
                 
 
 
@@ -29,13 +29,13 @@
                         <separator string="Informacion del producto/evento" colspan="2"/>
                         <field name="name" attrs="{'invisible':1}" />
                         <field name="title" required="1" string="Titulo"/>
-                        <field name="description" required="1"/>
+                        <field name="description" string="Descripcion"/>
                         <field name="bannerPrincipalSelector" required="1" string="Selector contenido del banner principal"/>
                         <field name="bannerImg" attrs="{'invisible':[('bannerPrincipalSelector','!=','img')]}" string="Insertar imagen" />
                         <field name="videoField" attrs="{'invisible':[('bannerPrincipalSelector','!=','vid')]}" string="Insertar video"/>
                         <field name="urlVid" attrs="{'invisible':[('bannerPrincipalSelector','!=','lvid')]}" string="Insertar url video"/>
                         <field name="rssVideo" attrs="{'invisible':[('bannerPrincipalSelector','!=','rssVideo')]}" string="Insertar url de Rss"/>
-                        <field name="qr" required="1" string = "Codigo QR"/>
+                        <field name="qr" string = "Codigo QR"/>
                         <!-- <field name="fechaInicio" string='Fecha inicial' />
                         <field name="fechaFin" string='Fecha final' />
                         <field name="horaInicio" string='Hora inicio' />
@@ -52,8 +52,8 @@
                             <group colspan="4" col="2">
                                 <field name="titlePopUp" string="Titulo pop up"/>
                                 <field name="urlWeb" string='Código QR pop up' />
-                                <field name="descriptionPopUp" string="Descripcion del pop up"/>
-                                <field name="logo" string="logo"/>
+                                <field name="descriptionPopUp" string="Descripcion pop up"/>
+                                <field name="logo" string="Logo"/>
                                 <field name="popUpImg" string="Imagen Pop Up"/>
                             </group>
                         </page>

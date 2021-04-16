@@ -12,7 +12,7 @@
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">Control Eventos</span>
                             <div class="text-muted">
-                           		tiempo que tarda en cambiar los eventos (Segundos)
+                           		Tiempo que tarda en cambiar los eventos (Segundos)
                             </div>
                            
                         </div>
@@ -26,7 +26,7 @@
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">Control slider imagenes</span>
                             <div class="text-muted">
-                           		tiempo que tarda en pasar las imagenes del slider (Segundos)
+                           		Tiempo que tarda en pasar las imagenes del slider (Segundos)
                             </div>
                         </div>
                         <div class="o_setting_left_pane">
@@ -39,7 +39,7 @@
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">Descripcion</span>
                             <div class="text-muted">
-                                Descripcion de la compañia...
+                                Descripcion de la compañia
                             </div>
                         </div>
                         <div class="o_setting_left_pane">
@@ -52,7 +52,7 @@
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">QR</span>
                             <div class="text-muted">
-                                enlace para generar direccion qr
+                                Enlace para generar direccion QR
                             </div>
                         </div>
                         <div class="o_setting_left_pane">
@@ -65,7 +65,7 @@
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">Tiempo de Refresco</span>
                             <div class="text-muted">
-                                tiempo que se refrescan los anuncios (Minutos)
+                                Tiempo que se refrescan los anuncios (Minutos)
                             </div>
                         </div>
                         <div class="o_setting_left_pane">
@@ -79,7 +79,7 @@
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">Tiempo del pop up</span>
                             <div class="text-muted">
-                                 tiempo que se mostrara el pop up al pulsar en la pantalla(Segundos)
+                                 Tiempo que se mostrara el pop up al pulsar en la pantalla (Segundos)
                             </div>
                         </div>
                         <div class="o_setting_left_pane">
@@ -91,29 +91,13 @@
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">Imagen de fondo</span>
                             <div class="text-muted">
-                                la imagen que se mostrara de fondo en la vista
+                                Imagen que se mostrara de fondo en la vista
                             </div>
                         </div>
                         <div class="o_setting_left_pane">
                             <field name="backGroundImg"/>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
             </xpath>
         </field>
@@ -129,5 +113,5 @@
     </record>
 
 
-    <menuitem id="config_settings" name="Configuration" parent="mainMenu" action="action_totem_settings"/>
+    <menuitem id="config_settings" name="Configuracion" parent="mainMenu" action="action_totem_settings"/>
 </odoo>

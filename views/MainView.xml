@@ -1,8 +1,8 @@
 <odoo>
   <data>
 
-    <menuitem id="mainMenu" name="Controlador Principal" />
-   
+    <menuitem id="mainMenu" name="Totem" />
+        <menuitem id="icono" name="Totem" web_icon="totem_proyect,static/description/icon.png"/>
 
   </data>
 </odoo>

@@ -6,9 +6,30 @@
         <field name="priority" eval="16"/>
         <field name="arch" type="xml">
             <tree string="Controlador eventos">
-                <field name="name">
+                <field name="name" string="Nombre">
                 </field>
             </tree>
+        </field>
+    </record>
+
+        <record model="ir.ui.view" id="view_id_form_controller">
+        <field name="name">totem.controllers.form</field>
+        <field name="model">totem.controllers</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <form string="event form">
+                <group colspan="4">
+  
+                    <group colspan="4" col="2">
+                        <separator string="Configuracion de pantallas" colspan="2"/>
+                        <field name="name" string="Nombre"/>
+                        <field name="admin" string="Usuario"/>
+                        <field name="events" string="Eventos asignados"/>
+                    </group>
+
+
+                </group>
+            </form>
         </field>
     </record>
 
@@ -19,38 +40,3 @@
     </record>
     <menuitem id="controladorPantalla" name="Controlador Pantalla" parent="mainMenu" action="action_events_controller" />
 </odoo>
-
-
-<!--
-<odoo>
-
-    <record id="screen_view_form" model="ir.ui.view">
-        <field name="name">res.users.view.form.inherit.totem.proyect</field>
-        <field name="model">res.users</field>
-        <field name="type" >form</field>
-        <field name="inherit_id" ref="base.view_users_form"/>
-        <field name="arch" type="xml">
-        <xpath expr="//form/sheet/field[@name='image']" position="after">
-            <field name="pantallas" />
-            
-        </xpath>
-     
-
-        </field>
-    </record>
-
-    <record id="action_screens" model="ir.actions.act_window">
-        <field name="name">Settings</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">res.users</field>
-        <field name="view_mode">form</field>
-        <field name="target">inline</field>
-        <field name="context">{'module' : 'totem_proyect'}</field>
-    </record>
-
-
-    <menuitem id="screenMenu" name="Usuarios" parent="mainMenu" action="action_screens"/>
-    
-    
-</odoo>
--->
