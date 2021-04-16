@@ -137,6 +137,12 @@ class Event(models.Model):
         return url.rsplit('/v/',1)[1].rsplit('?',1)[0]
         pass
     
+    @api.model
+    def create(self,vals):
+        vals['name']=vals['title']
+        record = super(Event,self).create(vals)
+        _logger.info(str(vals['title'])+" 500")
+        return record
     #extrar filtro
     @api.onchange('urlVid', 'urlVidId')
     def _onchange_(self):
@@ -158,6 +164,8 @@ class Event(models.Model):
     @api.multi
     def write(self, vals):
         try:
+            _logger.info(str(vals['title'])+" 500")
+            _logger.info(str(self['title'])+" 500")
             if vals['title']!='':
                 vals['name']=vals['title']
             else:
