@@ -12,8 +12,8 @@ _logger = logging.getLogger(__name__)
 
 class Event(models.Model):
     _name = 'event.totem'
-    _order='sequence,id'
-    name = fields.Text(string=_(''))
+    #_order='sequence,id'
+    #name = fields.Text(string=_(''))
     sequence = fields.Text(string='')
     title = fields.Text(string=_(''))
     bannerImg = fields.Binary(string=_(''))
