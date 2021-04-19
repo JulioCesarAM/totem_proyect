@@ -16,6 +16,7 @@ odoo.define('totem_proyect.prueba', function (require) {
         configuration: {}, // Datos de la configuración
         event: null, // Evento a mostrar
         modalBool: false, // Modal abierto o no
+        sliderBool: true, // Mostrar slider cuando hay internet
         modalTimer: null, // Timeout del modal abierto
         events:{
             "click #siguiente": _.debounce(function() { // Siguiente evento
@@ -110,7 +111,7 @@ odoo.define('totem_proyect.prueba', function (require) {
                 self.i = 0;
                 
                 self.event = self.allevents[self.i]; // Seleccionar el evento a mostrar
-                //console.log(self.event);
+                console.log(self.event);
                 
                 // Traer de la base de datos la configuración del administrador
 
@@ -209,7 +210,11 @@ odoo.define('totem_proyect.prueba', function (require) {
                             self.back(); // Anterior evento
                         }
                     }
-                });
+                    self.sliderBool = true;
+                })
+                .catch(err => {
+                    self.sliderBool = false;
+                })
         },
 
         backup: function(tasa_refresco){
