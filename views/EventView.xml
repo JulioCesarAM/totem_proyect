@@ -2,83 +2,96 @@
 
     <!-- vista arbol eventos -->
     <record model="ir.ui.view" id="view_id_tree">
-        <field name="name">event.totem.tree</field>
-        <field name="model">event.totem</field>
+        <field name="name">event.event.tree</field>
+        <field name="model">event.event</field>
         <field name="priority" eval="16"/>
+        <field name="inherit_id" ref="event.view_event_tree"/>
         <field name="arch" type="xml">
-            <tree string="event list" default_order='create_date'>
+            <xpath expr="//field[@name]" position="after">
                 <field name="sequence" widget='handle' />
                 <field name="title" string="Titulo"/>
-                
-
-
-            </tree>
+            </xpath>
         </field>
     </record>
 
     <!-- vista formulario eventos -->
     <record model="ir.ui.view" id="view_id_form">
-        <field name="name">event.totem.form</field>
-        <field name="model">event.totem</field>
+        <field name="name">event.event.form</field>
+        <field name="model">event.event</field>
         <field name="priority" eval="16"/>
+        <field name="inherit_id" ref="event.view_event_form"/>
         <field name="arch" type="xml">
-            <form string="event form">
-                <group colspan="4">
+            <xpath expr="//field[@name='organizer_id']" position="before">
+                <field name="visualizationType" string="Tipo Evento" required="1"/>
+            </xpath>
+            <xpath expr="//field[@name='date_begin']" position="replace">
+                <field name="date_begin" string="Tipo Evento" required="0"/>
+            </xpath>
+            <xpath expr="//field[@name='date_end']" position="replace">
+                <field name="date_end" string="Tipo Evento" required="0"/>
+            </xpath>
+            <xpath expr="//field[@name='date_tz']" position="replace">
+                <field name="date_tz" string="Tipo Evento" required="0"/>
+            </xpath>
+            <xpath expr="//page" position="after">
+                <form string="Insertar Evento totem" 
+                attrs="{'invisible':[('visualizationType','!=','wbTm'),('visualizationType','!=','totem')]}">
+                    <group colspan="4">
 
-                    <group colspan="4" col="2">
-                        <separator string="Informacion del producto/evento" colspan="2"/>
-                        <field name="name" attrs="{'invisible':1}" />
-                        <field name="title" required="1" string="Titulo"/>
-                        <field name="description" string="Descripcion"/>
-                        <field name="bannerPrincipalSelector" required="1" string="Selector contenido del banner principal"/>
-                        <field name="bannerImg" attrs="{'invisible':[('bannerPrincipalSelector','!=','img')]}" string="Insertar imagen" />
-                        <field name="videoField" attrs="{'invisible':[('bannerPrincipalSelector','!=','vid')]}" string="Insertar video"/>
-                        <field name="urlVid" attrs="{'invisible':[('bannerPrincipalSelector','!=','lvid')]}" string="Insertar url video"/>
-                        <field name="rssVideo" attrs="{'invisible':[('bannerPrincipalSelector','!=','rssVideo')]}" string="Insertar url de Rss"/>
-                        <field name="qr" string = "Codigo QR"/>
-                        <!-- <field name="fechaInicio" string='Fecha inicial' />
-                        <field name="fechaFin" string='Fecha final' />
-                        <field name="horaInicio" string='Hora inicio' />
-                        <field name="horaFin" string='Hora Fin' />
-                        -->
-                        <field name="urlVidId" attrs="{'invisible':[('bannerPrincipalSelector','!=','Nunca_existira')]}"/>
+                        <group colspan="4" col="2">
+                            <field name="title"  string="Titulo"/>
+                            <separator string="Informacion del producto/evento" colspan="2"/>
+                            <field name="name" attrs="{'invisible':1}" />
+
+                            <field name="description" string="Descripcion"/>
+                            <field name="bannerPrincipalSelector"  string="Selector contenido del banner principal"/>
+                            <field name="bannerImg" attrs="{'invisible':[('bannerPrincipalSelector','!=','img')]}" string="Insertar imagen" />
+                            <field name="videoField" attrs="{'invisible':[('bannerPrincipalSelector','!=','vid')]}" string="Insertar video"/>
+                            <field name="urlVid" attrs="{'invisible':[('bannerPrincipalSelector','!=','lvid')]}" string="Insertar url video"/>
+                            <field name="rssVideo" attrs="{'invisible':[('bannerPrincipalSelector','!=','rssVideo')]}" string="Insertar url de Rss"/>
+                            <field name="qr" string = "Codigo QR"/>
+
+
+                            <field name="urlVidId" attrs="{'invisible':[('bannerPrincipalSelector','!=','Nunca_existira')]}"/>
+
+
+                        </group>
+
+                        <notebook colspan="4" col="2">
+
+                            <page name="PopUp" string="Pop Up">
+                                <group colspan="4" col="2">
+                                    <field name="titlePopUp" string="Titulo pop up"/>
+                                    <field name="urlWeb" string='Código QR pop up' />
+                                    <field name="descriptionPopUp" string="Descripcion pop up"/>
+                                    <field name="logo" string="Logo"/>
+                                    <field name="popUpImg" string="Imagen Pop Up"/>
+                                </group>
+                            </page>
+
+
+                            <page name="image list" string="Slider de imagenes" >
+                                <field name="sliderImg" />
+
+                            </page>
+
+                            <page name="Configuracion fechas" string="configuracion de fechas" >
+                                <field name="fechas" />
+
+                            </page>
+                        </notebook>
 
 
                     </group>
+                </form>
 
-                    <notebook colspan="4" col="2">
-
-                        <page name="PopUp" string="Pop Up">
-                            <group colspan="4" col="2">
-                                <field name="titlePopUp" string="Titulo pop up"/>
-                                <field name="urlWeb" string='Código QR pop up' />
-                                <field name="descriptionPopUp" string="Descripcion pop up"/>
-                                <field name="logo" string="Logo"/>
-                                <field name="popUpImg" string="Imagen Pop Up"/>
-                            </group>
-                        </page>
-
-
-                        <page name="image list" string="Slider de imagenes" required="1">
-                            <field name="sliderImg" />
-
-                        </page>
-
-                        <page name="Configuracion fechas" string="configuracion de fechas" required="1">
-                             <field name="fechas" />  
-                            
-                        </page>
-                    </notebook>
-
-
-                </group>
-            </form>
+            </xpath>
         </field>
     </record>
 
     <record model="ir.actions.act_window" id="action_events_totem">
-        <field name="name">events</field>
-        <field name="res_model">event.totem</field>
+        <field name="name">Listado-eventos</field>
+        <field name="res_model">event.event</field>
         <field name="view_mode">tree,form</field>
     </record>
 

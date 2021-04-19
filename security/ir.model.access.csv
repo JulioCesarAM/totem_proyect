@@ -1,5 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_events_totem,totem_proyect,model_event_totem,,1,1,1,1
 access_slider_images_totem,slider,model_slider_totem,,1,1,1,1
 access_controladores,controladores,model_totem_controllers,,1,1,1,1
 access_date,fechas,model_event_date,,1,1,1,1
