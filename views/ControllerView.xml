@@ -34,9 +34,9 @@
     </record>
 
     <record model="ir.actions.act_window" id="action_events_controller">
-        <field name="name">totem.controllers</field>
+        <field name="name">Asignar usuario-pantalla</field>
         <field name="res_model">totem.controllers</field>
         <field name="view_mode">tree,form</field>
     </record>
-    <menuitem id="controladorPantalla" name="Controlador Pantalla" parent="mainMenu" action="action_events_controller" />
+    <menuitem id="controladorPantalla" name="Usuario-pantalla" parent="mainMenu" action="action_events_controller" />
 </odoo>
