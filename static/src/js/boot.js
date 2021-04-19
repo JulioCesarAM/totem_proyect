@@ -100,17 +100,18 @@ odoo.define('totem_proyect.prueba', function (require) {
                         }
                     });
                 }
+
                 
-                self.allevents = eventsInTime;
-
+                self.allevents = eventsInTime;    
+                
                 /////////////////////////////////////////////////////////////////////////
-
+                
                 if(self.i > self.allevents.length-1) // i = 0 si sobrepasa el numero de anuncios por eliminación
-                    self.i = 0;
-
+                self.i = 0;
+                
                 self.event = self.allevents[self.i]; // Seleccionar el evento a mostrar
-                console.log(self.event);
-
+                //console.log(self.event);
+                
                 // Traer de la base de datos la configuración del administrador
 
                 var dur = self._rpc({
@@ -126,6 +127,7 @@ odoo.define('totem_proyect.prueba', function (require) {
             .then(function (res){
                 if(res != "No hay eventos, dele a \"aceptar\" y vuelva atrás"){ // Handler cuando SI hay eventos
                     self.configuration = res[0]; // Guardar la configuración en una variable
+                    //self.offlineController();
                     self.$el.html(QWeb.render("EventView", {widget: self})); // Renderizar la vista en el xml
                     setTimeout(() => {self.showslider();},0); // Iniciar el slider de imagenes
                     self.eventimeout = new Timer(function(){ // Llamar al siguiente evento  en un lapso de tiempo
@@ -151,6 +153,16 @@ odoo.define('totem_proyect.prueba', function (require) {
                     interval:Number(self.configuration.secundarySlider*1000)
                 });
             }
+        },
+
+        offlineController: function(){
+            var self = this;
+            self.allevents.forEach(element => {
+                console.log(element.title)
+                self.event = self.allevents[self.allevents.indexOf(element)];
+                self.$el.html(QWeb.render("EventView", {widget: self}))
+            })
+            self.event = self.allevents[0];
         },
 
         next: function(){
