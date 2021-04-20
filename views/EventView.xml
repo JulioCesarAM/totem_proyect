@@ -9,7 +9,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name]" position="after">
                 <field name="sequence" widget='handle' />
-                <field name="title" string="Titulo"/>
+                <field name="name" string="Titulo"/>
             </xpath>
         </field>
     </record>
@@ -27,6 +27,16 @@
             <xpath expr="//field[@name='date_begin']" position="replace">
                 <field name="date_begin" string="Fecha inicio" required="0"/>
             </xpath>
+            <!--
+
+             <xpath expr="//field[@name='date_begin']" position="attributes">
+            <attribute name="required">{'required':0}</attribute>
+            <attribute name="required">False</attribute>
+                 <field name="date_begin" string="Fecha inicio" required="0"/> 
+            </xpath>
+
+
+            -->
             <xpath expr="//field[@name='date_end']" position="replace">
                 <field name="date_end" string="Fecha final" required="0"/>
             </xpath>
@@ -34,17 +44,16 @@
                 <field name="date_tz" string="Zona horario" required="0"/>
             </xpath>
             <xpath expr="//page" position="after">
-                <form string="Insertar Evento totem" 
-                attrs="{'invisible':[('visualizationType','!=','wbTm'),('visualizationType','!=','totem')]}">
+                <form string="Insertar Evento totem" attrs="{'invisible':[('visualizationType','!=','wbTm'),('visualizationType','!=','totem')]}">
                     <group colspan="4">
 
                         <group colspan="4" col="2">
-                            <field name="title"  string="Titulo"/>
                             <separator string="Informacion del producto/evento" colspan="2"/>
-                            <field name="name" attrs="{'invisible':1}" />
+                            <!--<field name="title" string="Titulo" attrs="{'invisible':1}"/>-->
+                            <!-- <field name="name" attrs="{'invisible':1}" /> -->
 
                             <field name="description" string="Descripcion"/>
-                            <field name="bannerPrincipalSelector"  string="Selector contenido del banner principal"/>
+                            <field name="bannerPrincipalSelector" string="Selector contenido del banner principal"/>
                             <field name="bannerImg" attrs="{'invisible':[('bannerPrincipalSelector','!=','img')]}" string="Insertar imagen" />
                             <field name="videoField" attrs="{'invisible':[('bannerPrincipalSelector','!=','vid')]}" string="Insertar video"/>
                             <field name="urlVid" attrs="{'invisible':[('bannerPrincipalSelector','!=','lvid')]}" string="Insertar url video"/>
@@ -70,12 +79,12 @@
                             </page>
 
 
-                            <page name="image list" string="Slider de imagenes" >
+                            <page name="image list" string="Slider de imagenes">
                                 <field name="sliderImg" />
 
                             </page>
 
-                            <page name="Configuracion fechas" string="configuracion de fechas" >
+                            <page name="Configuracion fechas" string="configuracion de fechas">
                                 <field name="fechas" />
 
                             </page>

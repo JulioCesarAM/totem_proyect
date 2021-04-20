@@ -24,7 +24,7 @@
                         <separator string="Configuracion de pantallas" colspan="2"/>
                         <field name="name" string="Nombre"/>
                         <field name="admin" string="Usuario"/>
-                       <!-- <field name="events" string="Eventos asignados"/> -->
+                        <field name="events" string="Eventos asignados"/> 
                     </group>
 
 

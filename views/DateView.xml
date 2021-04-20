@@ -25,7 +25,7 @@
                         <field name="fecha"  string="Fecha inicial"/>
                         <field name="fechaFinal"  string="Fecha final"/>
                         <field name="rangoHoras" string="Rango de horas"/>
-                     <!--  <field name="events" attrs="{'invisible':1}" string="Insertar url de Rss"/> --> 
+                        <field name="events" attrs="{'invisible':1}" />
 
                     </group>
 

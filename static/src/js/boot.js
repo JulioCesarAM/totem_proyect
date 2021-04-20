@@ -109,7 +109,7 @@ odoo.define('totem_proyect.prueba', function (require) {
                     self.i = 0;
 
                 self.event = self.allevents[self.i]; // Seleccionar el evento a mostrar
-                console.log(self.event);
+                console.log(res);
 
                 // Traer de la base de datos la configuración del administrador
 
@@ -185,7 +185,7 @@ odoo.define('totem_proyect.prueba', function (require) {
 
         comprobarEvento: function(nb){ // Elimina evento del array allevents
             var self = this;
-            fetch(`/web/image/event.totem/${self.event.id}/bannerImg`)
+            fetch(`/web/image/event.event/${self.event.id}/bannerImg`)
                 .then(response => { // Comprobar que existe la imagen (El evento no haya sido borrado)
                     if(!response.ok){ // Si el evento fue eliminado
                         if(nb){ // Cuando es llamado del next()

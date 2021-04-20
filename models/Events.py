@@ -15,7 +15,7 @@ class Event(models.Model):
     _order='sequence'
     #name = fields.Char(string='')
     sequence = fields.Integer(string='')
-    title = fields.Text(string=_(''))
+    #title = fields.Text(string=_(''))
     bannerImg = fields.Binary(string=_(''))
     sliderImg = fields.One2many('slider.totem', 'event_id_fk', string=_(''),ondelete='cascade')
     description = fields.Text(string=_(''))
@@ -43,17 +43,17 @@ class Event(models.Model):
         #('totem', 'Totem'),
         ('wbTm', 'Totem + Web')
     ], string=_(''),default='wbTm')
+ 
     #metodo diseñado para devolver todos los eventos que peternecen al usuario que los controla
     
     @api.model
     def get_events(self, uid):
-        #events_ids = self.env['totem.controllers'].search_read([('admin','=',uid)])
+        events_ids = self.env['totem.controllers'].search_read([('admin','=',uid)])
         events = []
-        events_ids=0
         
-        if len(events_ids)>999999999:
-            events = self.env['event.totem'].search_read([('id','in',events_ids[0]['events'])],[
-                'title','sliderImg','description','qr',
+        if len(events_ids)>0:
+            events = self.env['event.event'].search_read([('id','in',events_ids[0]['events'])],[
+                'name','sliderImg','description','qr',
                 'bannerPrincipalSelector','urlVid','fechas','urlWeb'
                 ,'urlVidId','descriptionPopUp','titlePopUp','rssVideo'])
             for i in events:
@@ -71,8 +71,8 @@ class Event(models.Model):
                     
         #imgId=self.sliderImg
         #dateId=self.fechas
-        #_logger.info(str(imgId)+ " 500")
-        #_logger.info(str(dateId)+ " 500")
+        _logger.info(str(events_ids)+ " 500")
+        _logger.info(str(events)+ " 500")
     
         return events
         pass
@@ -145,13 +145,15 @@ class Event(models.Model):
         #_logger.info(str(url.rsplit('/v/',1)[1].rsplit('?',1)[0])+" 500")
         return url.rsplit('/v/',1)[1].rsplit('?',1)[0]
         pass
-    
+    """
     @api.model
     def create(self,vals):
-        #vals['name']=vals['title']
-        #record = super(Event,self).create(vals)
+        vals['title']=vals['title']
+        record = super(Event,self).create(vals)
         _logger.info(str(vals['title'])+" 500")
         return record
+        """
+    
     #extrar filtro
     @api.onchange('urlVid', 'urlVidId')
     def _onchange_(self):
