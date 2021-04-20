@@ -52,13 +52,8 @@ class Event(models.Model):
         events = []
         
         if len(events_ids)>0:
-<<<<<<< HEAD
-            events = self.env['event.totem'].search_read([('id','in',events_ids[0]['events'])],[
-                'title','sliderImg','description','qr','bannerImg',
-=======
             events = self.env['event.event'].search_read([('id','in',events_ids[0]['events'])],[
                 'name','sliderImg','description','qr',
->>>>>>> ff7b884c005643cbcb1298bc53435a245c992b23
                 'bannerPrincipalSelector','urlVid','fechas','urlWeb'
                 ,'urlVidId','descriptionPopUp','titlePopUp','rssVideo'])
             for i in events:
