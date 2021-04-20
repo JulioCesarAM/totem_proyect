@@ -1,3 +1,4 @@
+<!--
 <odoo>
     <record model="ir.ui.view" id="view_id_tree_pantalla">
         <field name="name">pantallas.totem.tree</field>
@@ -16,8 +17,10 @@
         <field name="res_model">pantallas.totem</field>
         <field name="view_mode">tree,form</field>
     </record>
-    <!--
+    
     <menuitem id="test_three" name="pantalla" parent="mainMenu" action="action_events_pantalla" />
 
--->
+
 </odoo>
+
+-->

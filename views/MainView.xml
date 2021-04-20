@@ -1,8 +1,7 @@
 <odoo>
-  <data>
+ 
 
-    <menuitem id="mainMenu" name="Totem" />
-    <menuitem id="icono" name="Totem" web_icon="totem_proyect,static/description/icon.png"/>
+    <menuitem id="mainMenu" name="Totem" parent="event.event_main_menu" /> 
+    <!--<menuitem id="icono" name="Totem" web_icon="totem_proyect,static/description/icon.png" parent="event.event.event_main_menu"/>-->
 
-  </data>
 </odoo>
