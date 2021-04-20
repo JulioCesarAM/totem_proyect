@@ -9,7 +9,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name]" position="after">
                 <field name="sequence" widget='handle' />
-                <field name="name" string="Titulo"/>
+                <!--<field name="name" string="Titulo"/>-->
             </xpath>
         </field>
     </record>
