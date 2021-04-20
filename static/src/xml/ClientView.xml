@@ -19,7 +19,7 @@
                         </t>
                         <div id="abajoDerecha">
                             <div class="containbarcode">
-                                <img id="eventBarcode" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.qr + '&amp;width=155&amp;height=170'}}"/>
+                                <img id="eventBarcode" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.qr + '&amp;width=155&amp;height=165'}}"/>
                             </div>
                         </div>
                     </t>
