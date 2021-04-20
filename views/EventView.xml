@@ -25,13 +25,13 @@
                 <field name="visualizationType" string="Tipo Evento" required="1"/>
             </xpath>
             <xpath expr="//field[@name='date_begin']" position="replace">
-                <field name="date_begin" string="Tipo Evento" required="0"/>
+                <field name="date_begin" string="Fecha inicio" required="0"/>
             </xpath>
             <xpath expr="//field[@name='date_end']" position="replace">
-                <field name="date_end" string="Tipo Evento" required="0"/>
+                <field name="date_end" string="Fecha final" required="0"/>
             </xpath>
             <xpath expr="//field[@name='date_tz']" position="replace">
-                <field name="date_tz" string="Tipo Evento" required="0"/>
+                <field name="date_tz" string="Zona horario" required="0"/>
             </xpath>
             <xpath expr="//page" position="after">
                 <form string="Insertar Evento totem" 

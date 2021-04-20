@@ -68,7 +68,7 @@ odoo.define('totem_proyect.prueba', function (require) {
             // Traer de la base de datos los eventos
 
             var def = this._rpc({
-                model: 'event.totem',
+                model: 'event.event',
                 method: 'get_events',
                 args: [this.getSession().uid, ],
             })
