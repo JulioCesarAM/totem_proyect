@@ -112,6 +112,17 @@ odoo.define('totem_proyect.prueba', function (require) {
                 
                 self.event = self.allevents[self.i]; // Seleccionar el evento a mostrar
                 console.log(self.event);
+
+                if(self.event.rssText == true){
+                    var auxJSON = self.event.description;
+                    self.event.description = '';
+                    for(let i=0;i<auxJSON.title.length;i++){
+                        self.event.description += auxJSON.title[i] +"\n\n";
+                        self.event.description += auxJSON.description[i]+"\n";
+                        self.event.description += auxJSON.pubDate[i]+"\n";
+                        self.event.description += auxJSON.creator[i]+"\n";
+                    }
+                }
                 
                 // Traer de la base de datos la configuración del administrador
 

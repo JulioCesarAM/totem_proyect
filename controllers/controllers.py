@@ -12,8 +12,9 @@ class TotemProyect(http.Controller):
 
     @http.route('/totem_proyect/totem_proyect/objects/', auth='public')
     def list(self, **kw):
+        #events = self.env['event.event'].search_read()
 
-        return 'hola'
+        return "hola"
 
     @http.route('/totem_proyect/totem_proyect/objects/<model("totem_proyect.totem_proyect"):obj>/', auth='public')
     def object(self, obj, **kw):

@@ -51,8 +51,9 @@
                             <separator string="Informacion del producto/evento" colspan="2"/>
                             <!--<field name="title" string="Titulo" attrs="{'invisible':1}"/>-->
                             <!-- <field name="name" attrs="{'invisible':1}" /> -->
-
-                            <field name="description" string="Descripcion"/>
+                            <field name="rssText" widget="checkbox" string="Admitir RSS de texto" />
+                            <field name="rssTextUrl" string="Insertar RSS de texto" attrs="{'invisible':[('rssText','!=',True)]}"/>
+                            <field name="description" string="Descripcion" attrs="{'invisible':[('rssText','=',True)]}"/>
                             <field name="bannerPrincipalSelector" string="Selector contenido del banner principal"/>
                             <field name="bannerImg" attrs="{'invisible':[('bannerPrincipalSelector','!=','img')]}" string="Insertar imagen" />
                             <field name="videoField" attrs="{'invisible':[('bannerPrincipalSelector','!=','vid')]}" string="Insertar video"/>
