@@ -53,7 +53,7 @@ class Event(models.Model):
         
         if len(events_ids)>0:
             events = self.env['event.event'].search_read([('id','in',events_ids[0]['events'])],[
-                'name','sliderImg','description','qr',
+                'name','sliderImg','description','qr', 'bannerImg',
                 'bannerPrincipalSelector','urlVid','fechas','urlWeb'
                 ,'urlVidId','descriptionPopUp','titlePopUp','rssVideo'])
             for i in events:

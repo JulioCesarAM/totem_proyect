@@ -8,6 +8,9 @@ class TotemConfigSettings(models.TransientModel):
     refreshTime = fields.Integer(string='',related="company_id.refreshTime",readonly=False)
     redirectionTime = fields.Integer(string='',related="company_id.redirectionTime",readonly=False)
     backGroundImg = fields.Binary(string='',related ="company_id.backGroundImg",readonly=False)
+    lostConnectionImg = fields.Binary(string=_(''),related ="company_id.lostConnectionImg",readonly=False)
+    colorBar = fields.Text(string=_(''),related="company_id.colorBar",readonly=False)
+    colorLines = fields.Text(string=_(''),related="company_id.colorLines",readonly=False)
     @api.constrains('main_slider_control')  
     def _constrains_main_slider_control(self):
         if self.main_slider_control<1:
@@ -23,8 +26,8 @@ class TotemConfigSettings(models.TransientModel):
     def _constrains_description(self):
         if len(self.description) > 118:
             raise exceptions.ValidationError(_("limite de caracteres 118")) 
-        pass
-       
+        pass   
+
     
    
     

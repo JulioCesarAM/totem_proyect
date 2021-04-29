@@ -7,7 +7,6 @@ odoo.define('totem_proyect.prueba', function (require) {
     var QWeb = core.qweb;
     var _t = core._t;
 
-
     var banners = AbstractAction.extend({
         carrousel: null, // Carrousel de imagenes
         eventimeout: null, // Timeout del slider de eventos
@@ -18,6 +17,7 @@ odoo.define('totem_proyect.prueba', function (require) {
         modalBool: false, // Modal abierto o no
         sliderBool: true, // Mostrar slider cuando hay internet
         modalTimer: null, // Timeout del modal abierto
+        lostConection: "",
         events:{
             "click #siguiente": _.debounce(function() { // Siguiente evento
                 clearTimeout(this.carrousel);
@@ -118,7 +118,7 @@ odoo.define('totem_proyect.prueba', function (require) {
                 var dur = self._rpc({
                     model: 'res.company',
                     method: 'search_read',
-                    args: [[],['mainSlider', 'secundarySlider', 'description', 'companyQr', 'refreshTime', 'redirectionTime']],
+                    args: [[],['mainSlider', 'secundarySlider', 'description', 'companyQr', 'refreshTime', 'redirectionTime','lostConnectionImg','colorBar','colorLines']],
                 })
                 if(eventsInTime.length == 0) // Handler cuando NO hay eventos
                     return "No hay eventos, dele a \"aceptar\" y vuelva atrás";
@@ -128,7 +128,6 @@ odoo.define('totem_proyect.prueba', function (require) {
             .then(function (res){
                 if(res != "No hay eventos, dele a \"aceptar\" y vuelva atrás"){ // Handler cuando SI hay eventos
                     self.configuration = res[0]; // Guardar la configuración en una variable
-                    //self.offlineController();
                     self.$el.html(QWeb.render("EventView", {widget: self})); // Renderizar la vista en el xml
                     setTimeout(() => {self.showslider();},0); // Iniciar el slider de imagenes
                     self.eventimeout = new Timer(function(){ // Llamar al siguiente evento  en un lapso de tiempo

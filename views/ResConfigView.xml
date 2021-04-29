@@ -98,6 +98,42 @@
                             <field name="backGroundImg"/>
                         </div>
                     </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box" title="Set Temperature required for check.">
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Imagen de perdida de conexion</span>
+                            <div class="text-muted">
+                                Imagen que se mostrara cuando no haya conexion a internet
+                            </div>
+                        </div>
+                        <div class="o_setting_left_pane">
+                            <field name="lostConnectionImg"/>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box" title="Set Temperature required for check.">
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Color del scroll</span>
+                            <div class="text-muted">
+                                Color asignado a los scrolls en la descripcion (color en hexadecimal, ejemplo #FFFFFF)
+                            </div>
+                        </div>
+                        <div class="o_setting_left_pane">
+                            <field name="colorBar"/>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box" title="Set Temperature required for check.">
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Color de las lineas separatorias</span>
+                            <div class="text-muted">
+                                Color asignado a las líneas separatorias del totem (color en hexadecimal, ejemplo #FFFFFF)
+                            </div>
+                        </div>
+                        <div class="o_setting_left_pane">
+                            <field name="colorLines"/>
+                        </div>
+                    </div>
                 </div>
             </xpath>
         </field>

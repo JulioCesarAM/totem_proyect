@@ -19,20 +19,20 @@
                         </t>
                         <div id="abajoDerecha">
                             <div class="containbarcode">
-                                <img id="eventBarcode" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.qr + '&amp;width=155&amp;height=165'}}"/>
+                                <img id="eventBarcode" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.qr + '&amp;width=186&amp;height=177'}}"/>
                             </div>
                         </div>
                     </t>
                     <t t-if="widget.sliderBool == false &amp;&amp; widget.event.bannerPrincipalSelector!='img'">
-                        <img id="imgbanner" src="/totem_proyect/static/src/img/connection-lost.png" style="width:1026px;height:864px"/>
+                        <img id="imgbanner" t-attf-src="{{'data:image/png;base64, ' + widget.configuration.lostConnectionImg}}" style="width:1026px;height:864px"/>
                     </t>
                 </div>
 
 
                 <div id="resto">
                     <h1 id="titulo"><t t-esc="widget.event.name"/></h1>
-                    <t t-if="widget.event.sliderImg.length > 0">
-                        <div class="description" style="height:37.9%;"><t t-esc="widget.event.description"/></div>
+                    <t t-if="widget.event.sliderImg.length > 0 &amp;&amp; widget.sliderBool == true">
+                        <div class="description" style="height:339px;"><t t-esc="widget.event.description"/></div>
                         <div class="slideshow-container carousel slide">
                             <div class="carousel-inner" style="width:100%;height:100%">
                                 <t t-foreach="widget.event.sliderImg" t-as="i">
@@ -44,7 +44,7 @@
                         </div>
                     </t>
                     <t t-if="widget.event.sliderImg.length == 0 || widget.sliderBool == false">
-                        <div class="description" style="height:93.4%;padding-bottom:10px;"><t t-esc="widget.event.description"/></div>
+                        <div class="description" style="height:843px;padding-bottom:10px;"><t t-esc="widget.event.description"/></div>
                     </t>
                 </div>
                 <div id="footerPage">
@@ -64,7 +64,7 @@
                             <div class="modal-header">
                                 <h3 class="modal-title" id="exampleModalLongTitle">
                                     <t t-if="widget.sliderBool == true">
-                                        <img t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/logo'}}" style="width:40px;height:40px;margin-right:10px;"/>
+                                        <img t-attf-src="{{'/web/image/event.event/' + widget.event.id + '/logo'}}" style="width:40px;height:40px;margin-right:10px;"/>
                                     </t>
                                     <t t-esc="widget.event.titlePopUp"/>
                                 </h3>
@@ -72,7 +72,7 @@
                             <div class="modal-body" style="display:table;">
                                 <p style="font-size:180%;text-align:justify;"><t t-esc="widget.event.descriptionPopUp"/></p>
                                 <t t-if="widget.sliderBool == true">
-                                    <img t-attf-src="{{'/web/image/event.totem/' + widget.event.id + '/popUpImg'}}" style="width:100%;height:300px;"/>
+                                    <img t-attf-src="{{'/web/image/event.event/' + widget.event.id + '/popUpImg'}}" style="width:100%;height:300px;"/>
                                 </t>    
                             </div>
                             <div class="modal-footer" style="position:relative;height:120px">
@@ -85,14 +85,25 @@
                     </div>
                 </div>
 
-                <style id="ColorDeFondo">
-                    #bodyPage{
+                <style id="estilosDeConfiguracion">
+                    #bodyPage, .slideIcon{
                         background-image: url("/web/image/res.company/<t t-esc="widget.configuration.id"/>/backGroundImg");
                         background-color: black;
                     }
-                    .slideIcon{
-                        background-image: url("/web/image/res.company/<t t-esc="widget.configuration.id"/>/backGroundImg");
-                        background-color: black;
+                    .flecha{
+                        color: white;
+                        color: <t t-esc="widget.configuration.colorLines"/>;
+                    }
+                    #footerPage, .slideIcon{
+                        border: 1px solid white;
+                        border: 1px solid <t t-esc="widget.configuration.colorLines"/>;
+                    }
+                    .description::-webkit-scrollbar {
+                        background-color: transparent;
+                    }
+                    .description::-webkit-scrollbar-thumb {
+                        background-color: #CCCCCC;
+                        background-color: <t t-esc="widget.configuration.colorBar"/>;
                     }
                 </style>
 
