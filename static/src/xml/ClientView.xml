@@ -30,7 +30,26 @@
 
 
                 <div id="resto">
-                    <t t-if="widget.event.rssText == False">
+                    <t t-if="widget.event.rssText == true">
+                        <t t-if="widget.event.sliderImg.length > 0 &amp;&amp; widget.sliderBool == true">
+                            <div class="description" style="height:374px;"><t t-set="i" t-value="0"/><t t-foreach="widget.event.description.title" t-as="nonsense"><div style="font-size: 120%;font-weight: bolder;text-align:center;"><t t-esc="widget.event.description.title[i]"/></div>
+                                    <div style="white-space:normal;"><t t-esc="widget.event.description.description[i]"/></div>
+                                    <div style="text-align:right"><t t-esc="widget.event.description.pubDate[i]"/></div><div style="text-align:right"><t t-esc="widget.event.description.creator[i]"/></div>
+                                    <t t-set="i" t-value="i+1"/>
+                                </t>
+                            </div>
+                            <div class="slideshow-container carousel slide">
+                                <div class="carousel-inner" style="width:100%;height:100%">
+                                    <t t-foreach="widget.event.sliderImg" t-as="i">
+                                        <div class="mySlides carousel-item active" style="width:100%;height:100%">
+                                            <img class="d-block" t-attf-src="{{'/web/image/slider.totem/' + i + '/image_rute'}}" style="width:100%;height:100%"/>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-if="widget.event.rssText == false">
                         <h1 id="titulo"><t t-esc="widget.event.name"/></h1>
                         <t t-if="widget.event.sliderImg.length > 0 &amp;&amp; widget.sliderBool == true">
                             <div class="description" style="height:339px;"><t t-esc="widget.event.description"/></div>
@@ -46,7 +65,14 @@
                         </t>
                     </t>
                     <t t-if="widget.event.sliderImg.length == 0 || widget.sliderBool == false">
-                        <div class="description" style="height:843px;padding-bottom:10px;"><t t-esc="widget.event.description"/></div>
+                        <t t-if="widget.event.rssText == false">
+                            <div class="description" style="height:843px;padding-bottom:10px;"><t t-esc="widget.event.description"/></div>
+                        </t>
+                        <t t-if="widget.event.rssText == true">
+                            <div class="description" style="height:339px;">
+                                <div>dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfdvv v vdfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfddfhviahfodhddfsdfd dfhviahfodhddfsdfd v v v dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfd v dfhviahfodhddfsdfd</div>
+                            </div>
+                        </t>
                     </t>
                 </div>
                 <div id="footerPage">

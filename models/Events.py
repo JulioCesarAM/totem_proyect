@@ -76,7 +76,7 @@ class Event(models.Model):
                     i['urlVid'] = self.urlVidProcessor(i['urlVid'])
                 if i['fechas'] != '':
                     i['fechas'] = self.dateTimeProccessor(i['fechas'])
-                    _logger.info(str(i['fechas']) + " 500")
+                    #_logger.info(str(i['fechas']) + " 500")
 
         # imgId=self.sliderImg
         # dateId=self.fechas
@@ -136,19 +136,25 @@ class Event(models.Model):
         pass
 
     def processRssText(self, xml):
-        container = {'title': [], 'description': [], 'pubDate': [], 'creator': []}
+        container = {'title': [], 'description': [], 'pubDate': [], 'creator': [], 'img': []}
         root = xml.getroot()
+        u=0
         for titles in root.findall("./channel/item/title"):
             container['title'].append(titles.text)
-        for titles in root.findall("./channel/item/description"):
-            container['description'].append(titles.text)
-            _logger.info(str(container['description']) + '  500')
-        for titles in root.findall("./channel/item/pubDate"):
-            container['pubDate'].append(titles.text)
-            _logger.info(str(container['pubDate']) + '  500')
-        for titles in root.findall("./channel/item/{http://purl.org/dc/elements/1.1/}creator"):
-            container['creator'].append(titles.text)
-            _logger.info(str(container['creator']) + '  500')
+            #_logger.info(str(container['title']) + '  500')
+        for descriptions in root.findall("./channel/item/description"):
+            auxDescription = str(descriptions.text)
+            if re.search('">',auxDescription):
+                container['description'].append(str(auxDescription.rsplit('">',1)[1]))
+                container['img'].append(str(auxDescription.rsplit('">',1)[0]).rsplit('src="',1)[1])
+            else:
+                container['description'].append(str(auxDescription))
+                container['img'].append("false")
+            _logger.info(str(container['img']) + '  500')
+        for pubDates in root.findall("./channel/item/pubDate"):
+            container['pubDate'].append(pubDates.text)
+        for creators in root.findall("./channel/item/{http://purl.org/dc/elements/1.1/}creator"):
+            container['creator'].append(creators.text)
 
                         
                 
