@@ -33,8 +33,13 @@
                     <t t-if="widget.event.rssText == true">
                         <t t-if="widget.event.sliderImg.length > 0 &amp;&amp; widget.sliderBool == true">
                             <div class="description" style="height:374px;"><t t-set="i" t-value="0"/><t t-foreach="widget.event.description.title" t-as="nonsense"><div style="font-size: 120%;font-weight: bolder;text-align:center;"><t t-esc="widget.event.description.title[i]"/></div>
-                                    <div style="white-space:normal;"><t t-esc="widget.event.description.description[i]"/></div>
+                                    <t t-if="widget.event.description.img[i] != 'false'">
+                                        <img t-attf-src="{{widget.event.description.img[i]}}" style="width:100%;"/>
+                                    </t>
+                                    <div><t t-esc="widget.event.description.description[i]"/></div>
+                                    <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.description.link[i] + '&amp;width=186&amp;height=177'}}"/>
                                     <div style="text-align:right"><t t-esc="widget.event.description.pubDate[i]"/></div><div style="text-align:right"><t t-esc="widget.event.description.creator[i]"/></div>
+                                    <div></div><div></div>
                                     <t t-set="i" t-value="i+1"/>
                                 </t>
                             </div>
@@ -69,8 +74,18 @@
                             <div class="description" style="height:843px;padding-bottom:10px;"><t t-esc="widget.event.description"/></div>
                         </t>
                         <t t-if="widget.event.rssText == true">
-                            <div class="description" style="height:339px;">
-                                <div>dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfdvv v vdfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfddfhviahfodhddfsdfd dfhviahfodhddfsdfd v v v dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfd dfhviahfodhddfsdfd v dfhviahfodhddfsdfd</div>
+                            <div class="description" style="height:878px;padding-bottom:10px;"><t t-set="i" t-value="0"/><t t-foreach="widget.event.description.title" t-as="nonsense"><div style="font-size: 120%;font-weight: bolder;text-align:center;"><t t-esc="widget.event.description.title[i]"/></div>
+                                    <t t-if="widget.event.description.img[i] != 'false'">
+                                        <img t-attf-src="{{widget.event.description.img[i]}}" style="width:100%;"/>
+                                    </t>
+                                    <div><t t-esc="widget.event.description.description[i]"/></div>
+                                    <div style="display: table;width: 100%;">
+                                        <div class="column"><img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.description.link[i] + '&amp;width=186&amp;height=177'}}"/></div>
+                                        <div class="column"><div style="text-align:right"><t t-esc="widget.event.description.pubDate[i]"/></div><div style="text-align:right"><t t-esc="widget.event.description.creator[i]"/></div></div>
+                                    </div>
+                                    <div></div><div></div>
+                                    <t t-set="i" t-value="i+1"/>
+                                </t>
                             </div>
                         </t>
                     </t>

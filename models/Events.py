@@ -136,7 +136,7 @@ class Event(models.Model):
         pass
 
     def processRssText(self, xml):
-        container = {'title': [], 'description': [], 'pubDate': [], 'creator': [], 'img': []}
+        container = {'title': [], 'description': [], 'pubDate': [], 'creator': [], 'img': [], 'link': []}
         root = xml.getroot()
         u=0
         for titles in root.findall("./channel/item/title"):
@@ -150,11 +150,13 @@ class Event(models.Model):
             else:
                 container['description'].append(str(auxDescription))
                 container['img'].append("false")
-            _logger.info(str(container['img']) + '  500')
         for pubDates in root.findall("./channel/item/pubDate"):
             container['pubDate'].append(pubDates.text)
         for creators in root.findall("./channel/item/{http://purl.org/dc/elements/1.1/}creator"):
             container['creator'].append(creators.text)
+        for links in root.findall("./channel/item/link"):
+            container['link'].append(links.text)
+            _logger.info(str(container['link']) + '  500')
 
                         
                 
